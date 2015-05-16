@@ -54,7 +54,7 @@ public class Student {
 	public int passedCoursesAmount() {
 		return _passed_courses.size();
 	}
-	
+
 	public int passedCredits() {
 		return _passed_credits;
 	}
@@ -74,10 +74,11 @@ public class Student {
 		return _current_year == 1 && _current_quarter == 1
 				&& _passed_courses.size() == 0;
 	}
-	
+
 	public void promote(Carreer carreer) {
 		boolean passed_all_courses = true;
-		for (Integer course_code : carreer.courses(_current_year).get(_current_quarter).keySet()) {
+		for (Integer course_code : carreer.courses(_current_year)
+				.get(_current_quarter).keySet()) {
 			passed_all_courses &= _passed_courses.contains(course_code);
 			if (!passed_all_courses) {
 				return;
@@ -91,6 +92,17 @@ public class Student {
 		}
 	}
 
+	public boolean canCourse(Course course) {
+		boolean passed_correlatives = true;
+		for (int correlative : course.correlatives()) {
+			passed_correlatives &= _passed_courses.contains(correlative);
+			if (passed_correlatives == false) {
+				return false;
+			}
+		}
+		return !passedCourse(course.code()) && passed_correlatives;
+	}
+
 	public String toString() {
 		String ans = "Legajo: \t\t" + _id + "\nAño: \t\t\t" + _current_year
 				+ "\nCuatrimestre: \t\t" + _current_quarter
@@ -99,6 +111,6 @@ public class Student {
 			ans += passed_course + "\n\t\t\t";
 		}
 		return ans;
-		
+
 	}
 }

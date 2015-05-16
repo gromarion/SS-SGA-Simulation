@@ -35,9 +35,7 @@ public class StudentsCreator {
 		int total_credits = calculateCredits(carreer, student);
 		List<Course> courses = fetchCourses(carreer, student, total_credits);
 		for (Course course : courses) {
-			if (!student.passedCourse(course.code())) {
-				student.course(course);
-			}
+			student.course(course);
 		}
 		student.promote(carreer);
 	}
@@ -54,8 +52,8 @@ public class StudentsCreator {
 			Map<Integer, Course> possible_courses = carreer.courses(
 					current_year).get(current_quarter);
 			for (Integer course_code : possible_courses.keySet()) {
-				if (!student.passedCourse(course_code)) {
-					Course possible_course = possible_courses.get(course_code);
+				Course possible_course = possible_courses.get(course_code);
+				if (student.canCourse(possible_course)) {
 					courses.add(possible_course);
 					credits += possible_course.credits();
 				}
