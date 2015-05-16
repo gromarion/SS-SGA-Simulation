@@ -57,6 +57,11 @@ public class CarreerParser {
 							String carreer_course_name = course_element
 									.getElementsByTagName("name").item(0)
 									.getTextContent();
+							double repeating_course_probability = Double
+									.parseDouble(course_element
+											.getElementsByTagName(
+													"repeating_course_probability")
+											.item(0).getTextContent());
 							int carreer_course_credits = Integer
 									.parseInt(course_element
 											.getElementsByTagName("credits")
@@ -78,9 +83,10 @@ public class CarreerParser {
 								}
 							}
 							Course carreer_course = new Course(
-									carreer_course_name, 0, carreer_year,
+									carreer_course_name, 0,
 									carreer_course_code,
-									carreer_course_credits, 0.0f,
+									carreer_course_credits,
+									repeating_course_probability,
 									carreer_course_correlatives);
 							quarter_courses.put(carreer_course_code,
 									carreer_course);

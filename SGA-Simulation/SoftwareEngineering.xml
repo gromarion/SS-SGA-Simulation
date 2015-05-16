@@ -5,7 +5,7 @@
 			<course id="3108">
 				<name>Sistemas de Representacion</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.05</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -13,7 +13,7 @@
 			<course id="7203">
 				<name>Introduccion a la Informatica</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -21,7 +21,7 @@
 			<course id="9326">
 				<name>Analisis Matematico I</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.6</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 				</correlatives>
@@ -29,7 +29,7 @@
 			<course id="9358">
 				<name>Algebra</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.6</repeating_course_probability>
 				<credits>9</credits>
 				<correlatives>
 				</correlatives>
@@ -37,7 +37,7 @@
 			<course id="9424">
 				<name>Metodologia del Aprendizaje</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -47,7 +47,7 @@
 			<course id="7231">
 				<name>Programacion Imperativa</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.75</repeating_course_probability>
 				<credits>9</credits>
 				<correlatives>
 					<correlative id="7203">
@@ -59,7 +59,7 @@
 			<course id="9328">
 				<name>Analisis Matematico II</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.5</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9326">
@@ -71,7 +71,7 @@
 			<course id="9341">
 				<name>Fisica I</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.6</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9326">
@@ -81,7 +81,7 @@
 			<course id="9359">
 				<name>Matematica Discreta</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.25</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9358">
@@ -95,7 +95,7 @@
 			<course id="1209">
 				<name>Quimica</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.3</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -103,7 +103,7 @@
 			<course id="7232">
 				<name>Diseño y Procesamiento de Doc Xml</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="7231">
@@ -113,7 +113,7 @@
 			<course id="7233">
 				<name>Programacion Orientada a Objetos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.4</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7231">
@@ -123,7 +123,7 @@
 			<course id="9335">
 				<name>Logica Computacional</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.2</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9358">
@@ -133,7 +133,7 @@
 			<course id="9343">
 				<name>Fisica III</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.8</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9328">
@@ -147,7 +147,7 @@
 			<course id="7208">
 				<name>Arquitectura de Computadoras</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.4</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7231">
@@ -157,7 +157,7 @@
 			<course id="7234">
 				<name>Estructura de Datos y Algoritmos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7233">
@@ -169,7 +169,7 @@
 			<course id="9324">
 				<name>Probabil. y Estadistica</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.3</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9328">
@@ -179,7 +179,7 @@
 			<course id="9342">
 				<name>Fisica II</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.6</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9328">
@@ -193,7 +193,7 @@
 			<course id="7211">
 				<name>Sistemas Operativos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7234">
@@ -205,7 +205,7 @@
 			<course id="7235">
 				<name>Ingenieria del Software I</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7233">
@@ -215,7 +215,7 @@
 			<course id="7236">
 				<name>Interaccion Hombre-computadora (HCI)</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7233">
@@ -227,7 +227,7 @@
 			<course id="7237">
 				<name>Base de Datos I</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.3</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7234">
@@ -241,7 +241,7 @@
 			<course id="7207">
 				<name>Protocolos de Comunicacion</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.4</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9324">
@@ -253,7 +253,7 @@
 			<course id="7238">
 				<name>Proyecto de Aplicaciones Web</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7237">
@@ -269,7 +269,7 @@
 			<course id="7239">
 				<name>Automatas, Teoria de Lenguajes y Compiladores</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7234">
@@ -279,7 +279,7 @@
 			<course id="9307">
 				<name>Metodos Numericos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="9328">
@@ -289,7 +289,7 @@
 			<course id="9421">
 				<name>Formacion General I</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -301,7 +301,7 @@
 			<course id="6124">
 				<name>Economia para Ingenieros</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="9324">
@@ -311,7 +311,7 @@
 			<course id="6132">
 				<name>Derecho para Ingenieros</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -319,7 +319,7 @@
 			<course id="7240">
 				<name>Ingenieria del Software II</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="7211">
@@ -331,7 +331,7 @@
 			<course id="7241">
 				<name>Base de Datos II</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7237">
@@ -343,7 +343,7 @@
 			<course id="7242">
 				<name>Programacion de Objetos Distribuidos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="7238">
@@ -355,7 +355,7 @@
 			<course id="9375">
 				<name>Metodos Numericos Avanzados</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.5</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9307">
@@ -367,7 +367,7 @@
 			<course id="7225">
 				<name>Simulacion de Sistemas</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="9375">
@@ -377,7 +377,7 @@
 			<course id="7227">
 				<name>Sistemas de Inteligencia Artificial</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7234">
@@ -389,7 +389,7 @@
 			<course id="7243">
 				<name>Gestion de Proyectos Informaticos</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 					<correlative id="6124">
@@ -401,7 +401,7 @@
 			<course id="7244">
 				<name>Criptografia y Seguridad</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7238">
@@ -417,7 +417,7 @@
 			<course id="1283">
 				<name>Seguridad Ocupacional y Ambiental</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.01</repeating_course_probability>
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
@@ -425,7 +425,7 @@
 			<course id="7245">
 				<name>Proyecto Final</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>12</credits>
 				<correlatives>
 					<correlative id="7243">
@@ -437,7 +437,7 @@
 			<course id="7220">
 				<name>Redes de Informacion</name>
 				<room></room>
-				<repeating_course_probability></repeating_course_probability>
+				<repeating_course_probability>0.1</repeating_course_probability>
 				<credits>6</credits>
 				<correlatives>
 					<correlative id="7207">
