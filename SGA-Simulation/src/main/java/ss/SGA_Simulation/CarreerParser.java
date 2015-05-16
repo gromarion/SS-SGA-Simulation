@@ -28,48 +28,67 @@ public class CarreerParser {
 
 			NodeList years = doc.getElementsByTagName("year");
 
-			Map<Integer, Map<Integer, Course>> plan = new HashMap<Integer, Map<Integer, Course>>();
+			Map<Integer, Year> plan = new HashMap<Integer, Year>();
 
 			for (int y = 0; y < years.getLength(); y++) {
-				Node year = years.item(y);
-				NodeList courses = year.getChildNodes();
-				Map<Integer, Course> year_courses = new HashMap<Integer, Course>();
-				Element year_element = (Element) year;
+				Node year_node = years.item(y);
+				Element year_element = (Element) year_node;
+				NodeList quarters = year_element
+						.getElementsByTagName("quarter");
 				int carreer_year = Integer.parseInt(year_element
 						.getAttribute("id"));
+				Year year = new Year(carreer_year);
 
-				for (int c = 0; c < courses.getLength(); c++) {
-					Node course = courses.item(c);
+				for (int q = 0; q < quarters.getLength(); q++) {
+					Node quarter = quarters.item(q);
+					Element quarter_element = (Element) quarter;
+					NodeList courses = quarter.getChildNodes();
+					Map<Integer, Course> quarter_courses = new HashMap<Integer, Course>();
+					int year_quarter = Integer.parseInt(quarter_element
+							.getAttribute("id"));
 
-					if (course.getNodeType() == Node.ELEMENT_NODE) {
-						Element course_element = (Element) course;
-						int carreer_course_code = Integer
-								.parseInt(course_element.getAttribute("id"));
-						String carreer_course_name = course_element
-								.getElementsByTagName("name").item(0)
-								.getTextContent();
-						NodeList correlatives = ((Element) course_element
-								.getElementsByTagName("correlatives").item(0))
-								.getElementsByTagName("correlative");
+					for (int c = 0; c < courses.getLength(); c++) {
+						Node course = courses.item(c);
 
-						List<Integer> carreer_course_correlatives = new ArrayList<Integer>();
-						for (int cr = 0; cr < correlatives.getLength(); cr++) {
-							Node correlative = correlatives.item(cr);
+						if (course.getNodeType() == Node.ELEMENT_NODE) {
+							Element course_element = (Element) course;
+							int carreer_course_code = Integer
+									.parseInt(course_element.getAttribute("id"));
+							String carreer_course_name = course_element
+									.getElementsByTagName("name").item(0)
+									.getTextContent();
+							int carreer_course_credits = Integer
+									.parseInt(course_element
+											.getElementsByTagName("credits")
+											.item(0).getTextContent());
+							NodeList correlatives = ((Element) course_element
+									.getElementsByTagName("correlatives").item(
+											0))
+									.getElementsByTagName("correlative");
 
-							if (course.getNodeType() == Node.ELEMENT_NODE) {
-								Element correlative_element = (Element) correlative;
-								carreer_course_correlatives.add(Integer
-										.parseInt(correlative_element
-												.getAttribute("id")));
+							List<Integer> carreer_course_correlatives = new ArrayList<Integer>();
+							for (int cr = 0; cr < correlatives.getLength(); cr++) {
+								Node correlative = correlatives.item(cr);
+
+								if (course.getNodeType() == Node.ELEMENT_NODE) {
+									Element correlative_element = (Element) correlative;
+									carreer_course_correlatives.add(Integer
+											.parseInt(correlative_element
+													.getAttribute("id")));
+								}
 							}
+							Course carreer_course = new Course(
+									carreer_course_name, 0, carreer_year,
+									carreer_course_code,
+									carreer_course_credits, 0.0f,
+									carreer_course_correlatives);
+							quarter_courses.put(carreer_course_code,
+									carreer_course);
 						}
-						Course carreer_course = new Course(carreer_course_name,
-								0, carreer_year, carreer_course_code, 0.0f,
-								carreer_course_correlatives);
-						year_courses.put(carreer_course_code, carreer_course);
 					}
+					year.addQuarterPlan(year_quarter, quarter_courses);
+					plan.put(carreer_year, year);
 				}
-				plan.put(carreer_year, year_courses);
 			}
 			return new Carreer("SoftwareEngineering", plan);
 		} catch (Exception e) {
