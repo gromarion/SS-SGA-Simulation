@@ -77,18 +77,23 @@ public class Student {
 
 	public void promote(Carreer carreer) {
 		boolean passed_all_courses = true;
-		for (Integer course_code : carreer.courses(_current_year)
-				.get(_current_quarter).keySet()) {
-			passed_all_courses &= _passed_courses.contains(course_code);
-			if (!passed_all_courses) {
+		while (true) {
+			if (_passed_courses.size() == carreer.coursesAmount()) {
 				return;
 			}
-		}
-		if (_current_quarter == 2) {
-			_current_year++;
-			_current_quarter = 1;
-		} else {
-			_current_quarter++;
+			for (Integer course_code : carreer.courses(_current_year)
+					.get(_current_quarter).keySet()) {
+				passed_all_courses &= _passed_courses.contains(course_code);
+				if (!passed_all_courses) {
+					return;
+				}
+			}
+			if (_current_quarter == 2) {
+				_current_year++;
+				_current_quarter = 1;
+			} else {
+				_current_quarter++;
+			}
 		}
 	}
 
@@ -106,7 +111,7 @@ public class Student {
 	public String toString() {
 		String ans = "Legajo: \t\t" + _id + "\nAño: \t\t\t" + _current_year
 				+ "\nCuatrimestre: \t\t" + _current_quarter
-				+ "\nMaterias aprobadas: \t";
+				+ "\nMaterias aprobadas: " + _passed_courses.size() + "\t";
 		for (Integer passed_course : _passed_courses) {
 			ans += passed_course + "\n\t\t\t";
 		}
