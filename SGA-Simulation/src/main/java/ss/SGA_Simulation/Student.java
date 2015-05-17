@@ -8,7 +8,7 @@ public class Student {
 
 	private List<Integer> _passed_courses;
 	private int _passed_credits;
-	private List<Integer> _desired_courses;
+	private List<Course> _desired_courses;
 	private List<Integer> _matriculated_courses;
 	private List<Integer> _not_matriculated_courses;
 	private int _current_year;
@@ -16,10 +16,10 @@ public class Student {
 	private int _id;
 
 	public Student(int id) {
-		this(new ArrayList<Integer>(), 1, 1, id);
+		this(new ArrayList<Course>(), 1, 1, id);
 	}
 
-	public Student(List<Integer> desired_courses, int current_year,
+	public Student(List<Course> desired_courses, int current_year,
 			int current_quarter, int id) {
 		_desired_courses = desired_courses;
 		_passed_courses = new ArrayList<Integer>();
@@ -105,7 +105,17 @@ public class Student {
 				return false;
 			}
 		}
-		return !passedCourse(course.code()) && passed_correlatives;
+		return !passedCourse(course.code()) && passed_correlatives
+				&& !overlaps(course);
+	}
+	
+	private boolean overlaps(Course course) {
+		for (Course desired_course : _desired_courses) {
+			if (desired_course.overlaps(course)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String toString() {

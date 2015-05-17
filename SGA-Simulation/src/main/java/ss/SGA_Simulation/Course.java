@@ -10,6 +10,7 @@ public class Course {
 	private int _code;
 	private int _credits;
 	private double _repeating_course_probability;
+	private Schedule _schedule;
 	private List<Integer> _correlatives;
 
 	public Course(String name, int room, int code, int credits,
@@ -44,6 +45,10 @@ public class Course {
 
 	public int credits() {
 		return _credits;
+	}
+	
+	public boolean overlaps(Course course) {
+		return _schedule.overlaps(course._schedule);
 	}
 
 	public String toString() {
