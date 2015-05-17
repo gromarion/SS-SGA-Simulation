@@ -48,7 +48,8 @@ public class Course {
 	}
 	
 	public boolean overlaps(Course course) {
-		return _schedule.overlaps(course._schedule);
+		return false;
+//		return _schedule.overlaps(course._schedule);
 	}
 
 	public String toString() {

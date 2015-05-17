@@ -10,5 +10,9 @@ public class Simulator {
 		for (Student student : students) {
 			System.out.println(student);
 		}
+		Matriculation.prepareDesiredCourses(carreer, students);
+		StudentsQueue queue = new StudentsQueue(students);
+		queue.start();
+		new Server(500, 1000, queue).start();
 	}
 }

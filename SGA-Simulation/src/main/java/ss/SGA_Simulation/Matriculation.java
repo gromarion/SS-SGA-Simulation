@@ -9,6 +9,12 @@ public class Matriculation {
 	
 	private static int MIN_CREDITS = 15;
 	private static int MAX_CREDITS = 33;
+	
+	public static void prepareDesiredCourses(Carreer carreer, List<Student> students) {
+		for (Student student : students) {
+			student.addDesiredCourses(fetchCourses(carreer, student));
+		}
+	}
 
 	public static List<Course> fetchCourses(Carreer carreer, Student student) {
 		int credits = 0;

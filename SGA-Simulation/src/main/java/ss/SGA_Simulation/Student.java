@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Student {
+public class Student implements Comparable<Student>{
 
 	private List<Integer> _passed_courses;
 	private int _passed_credits;
@@ -14,6 +14,7 @@ public class Student {
 	private int _current_year;
 	private int _current_quarter;
 	private int _id;
+	private long _queue_time;
 
 	public Student(int id) {
 		this(new ArrayList<Course>(), 1, 1, id);
@@ -96,6 +97,17 @@ public class Student {
 			}
 		}
 	}
+	
+	public void addDesiredCourses(List<Course> courses) {
+		_desired_courses = courses;
+	}
+	
+	public Course getADesiredCourse() {
+		if (_desired_courses.size() > 0) {
+			return _desired_courses.remove(_desired_courses.size() - 1);			
+		}
+		return null;
+	}
 
 	public boolean canCourse(Course course) {
 		boolean passed_correlatives = true;
@@ -127,5 +139,25 @@ public class Student {
 		}
 		return ans;
 
+	}
+
+	public void addMatriculatedCourse(Course course) {
+		_matriculated_courses.add(course.code());
+	}
+
+	public void addNotMatriculatedCourse(Course course) {
+		_not_matriculated_courses.add(course.code());
+	}
+	
+	public void setQueueTime(long queue_time) {
+		_queue_time = queue_time;
+	}
+	
+	public long queueTime() {
+		return _queue_time;
+	}
+
+	public int compareTo(Student o) {
+		return 0;
 	}
 }
