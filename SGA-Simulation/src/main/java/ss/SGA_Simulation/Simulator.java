@@ -5,14 +5,15 @@ import java.util.List;
 public class Simulator {
 	public static void main(String[] args) {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
-		List<Student> students = StudentsCreator.create(carreer, 100);
+		List<Student> students = StudentsCreator.create(carreer, 10);
 		System.out.println(carreer);
 		for (Student student : students) {
 			System.out.println(student);
 		}
 		Matriculation.prepareDesiredCourses(carreer, students);
-		StudentsQueue queue = new StudentsQueue(students);
+		StudentsQueue queue = StudentsQueue.getInstance();
+		queue.initialize("QueueConfiguration.xml", students);
+		new Server("ServerConfiguration.xml").start();
 		queue.start();
-		new Server(500, 1000, queue).start();
 	}
 }

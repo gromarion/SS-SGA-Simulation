@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Student implements Comparable<Student>{
+public class Student implements Comparable<Student> {
 
 	private List<Integer> _passed_courses;
 	private int _passed_credits;
@@ -97,14 +97,17 @@ public class Student implements Comparable<Student>{
 			}
 		}
 	}
-	
+
 	public void addDesiredCourses(List<Course> courses) {
 		_desired_courses = courses;
 	}
-	
+
 	public Course getADesiredCourse() {
-		if (_desired_courses.size() > 0) {
-			return _desired_courses.remove(_desired_courses.size() - 1);			
+		for (Course course : _desired_courses) {
+			if (!_matriculated_courses.contains(course.code())
+					&& !_not_matriculated_courses.contains(course.code())) {
+				return course;
+			}
 		}
 		return null;
 	}
@@ -120,7 +123,7 @@ public class Student implements Comparable<Student>{
 		return !passedCourse(course.code()) && passed_correlatives
 				&& !overlaps(course);
 	}
-	
+
 	private boolean overlaps(Course course) {
 		for (Course desired_course : _desired_courses) {
 			if (desired_course.overlaps(course)) {
@@ -148,11 +151,11 @@ public class Student implements Comparable<Student>{
 	public void addNotMatriculatedCourse(Course course) {
 		_not_matriculated_courses.add(course.code());
 	}
-	
+
 	public void setQueueTime(long queue_time) {
 		_queue_time = queue_time;
 	}
-	
+
 	public long queueTime() {
 		return _queue_time;
 	}
