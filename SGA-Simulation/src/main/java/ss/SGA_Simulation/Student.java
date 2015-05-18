@@ -134,11 +134,23 @@ public class Student implements Comparable<Student> {
 	}
 
 	public String toString() {
-		String ans = "Legajo: \t\t" + _id + "\nAño: \t\t\t" + _current_year
-				+ "\nCuatrimestre: \t\t" + _current_quarter
-				+ "\nMaterias aprobadas: " + _passed_courses.size() + "\t";
+		String ans = "Legajo: \t\t\t" + _id + "\nAño: \t\t\t\t" + _current_year
+				+ "\nCuatrimestre: \t\t\t" + _current_quarter
+				+ "\nMaterias aprobadas: " + _passed_courses.size() + "\t\t";
 		for (Integer passed_course : _passed_courses) {
-			ans += passed_course + "\n\t\t\t";
+			ans += passed_course + "\n\t\t\t\t";
+		}
+		ans += "\nMaterias deseadas: " + _desired_courses.size() + "\t\t";
+		for (Course desired_course : _desired_courses) {
+			ans += desired_course.code() + "\n\t\t\t\t";
+		}
+		ans += "\nMaterias matriculadas: " + _matriculated_courses.size() + "\t";
+		for (Integer matriculated_course : _matriculated_courses) {
+			ans += matriculated_course + "\n\t\t\t\t";
+		}
+		ans += "\nMaterias no matriculadas: " + _not_matriculated_courses.size() + "\t";
+		for (Integer not_matriculated_course : _not_matriculated_courses) {
+			ans += not_matriculated_course + "\n\t\t\t\t";
 		}
 		return ans;
 

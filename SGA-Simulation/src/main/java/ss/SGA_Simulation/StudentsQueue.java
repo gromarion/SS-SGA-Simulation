@@ -20,8 +20,8 @@ public class StudentsQueue extends Thread {
 	private static StudentsQueue instance;
 	
 	public void initialize(String xml_file, List<Student> students) {
-		instance._queue = new PriorityBlockingQueue<Student>(students.size());
-		instance._students = students;
+		_queue = new PriorityBlockingQueue<Student>(students.size());
+		_students = students;
 		parseConfigurationFile(xml_file);
 	}
 	
@@ -36,7 +36,7 @@ public class StudentsQueue extends Thread {
 			doc.getDocumentElement().normalize();
 			Element server = (Element) doc.getElementsByTagName("queue").item(
 					0);
-			instance._student_arrival_time = getValue(server, "client-arrival-time");
+			_student_arrival_time = getValue(server, "client-arrival-time");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,38 +49,41 @@ public class StudentsQueue extends Thread {
 		return instance;
 	}
 	
+	private StudentsQueue() {
+	}
+	
 	public void run() {
 		Random random = new Random();
 		while(!finished()) {
 			try {
-				sleep(instance._student_arrival_time);
+				sleep(_student_arrival_time);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			double probability = random.nextDouble();
-			if (instance._students.size() > 0 && probability > 0.5) {
-				int random_student_index = random.nextInt(instance._students.size());
-				Student student = instance._students.remove(random_student_index);
+			if (_students.size() > 0 && probability > 0.5) {
+				int random_student_index = random.nextInt(_students.size());
+				Student student = _students.remove(random_student_index);
 				add(student);
 			}			
 		}
 	}
 	
 	public boolean isEmpty() {
-		return instance._queue.isEmpty();
+		return _queue.isEmpty();
 	}
 	
 	public boolean finished() {
-		return instance._queue.size() == 0 && instance._students.size() == 0;
+		return _queue.size() == 0 && _students.size() == 0;
 	}
 	
 	public Student poll() {
-		return instance._queue.poll();
+		return _queue.poll();
 	}
 
 	public boolean add(Student student) {
 		student.setQueueTime(System.currentTimeMillis());
-		return instance._queue.add(student);
+		return _queue.add(student);
 	}
 	
 	private Integer getValue(Element server, String attribute) {

@@ -34,7 +34,9 @@ public class Server extends Thread {
 		System.out.println("SGA Matriculation has finished!!!");
 		System.out.println("Matriculated students = "
 				+ _matriculated_students.size());
-		System.out.println(_matriculated_students);
+		for (Student student : _matriculated_students) {
+			System.out.println(student);			
+		}
 	}
 
 	private void attendRequest() throws InterruptedException {

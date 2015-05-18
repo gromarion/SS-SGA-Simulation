@@ -6,10 +6,6 @@ public class Simulator {
 	public static void main(String[] args) {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
 		List<Student> students = StudentsCreator.create(carreer, 10);
-		System.out.println(carreer);
-		for (Student student : students) {
-			System.out.println(student);
-		}
 		Matriculation.prepareDesiredCourses(carreer, students);
 		StudentsQueue queue = StudentsQueue.getInstance();
 		queue.initialize("QueueConfiguration.xml", students);
