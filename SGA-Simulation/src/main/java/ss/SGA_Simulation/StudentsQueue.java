@@ -17,6 +17,7 @@ public class StudentsQueue extends Thread {
 	private Queue<Student> _queue;
 	private List<Student> _students;
 	private int _student_arrival_time;
+	private boolean _log_enabled;
 	private static StudentsQueue instance;
 	
 	public void initialize(String xml_file, List<Student> students) {
@@ -36,7 +37,8 @@ public class StudentsQueue extends Thread {
 			doc.getDocumentElement().normalize();
 			Element server = (Element) doc.getElementsByTagName("queue").item(
 					0);
-			_student_arrival_time = getValue(server, "client-arrival-time");
+			_student_arrival_time = getIntValue(server, "client-arrival-time");
+			_log_enabled = getBoolValue(server, "log-enabled");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -83,11 +85,19 @@ public class StudentsQueue extends Thread {
 
 	public boolean add(Student student) {
 		student.setQueueTime(System.currentTimeMillis());
+		if (_log_enabled) {
+			System.out.println("QUEUE> Legajo:" + student.id() + " Agregado a la cola.");			
+		}
 		return _queue.add(student);
 	}
 	
-	private Integer getValue(Element server, String attribute) {
+	private Integer getIntValue(Element server, String attribute) {
 		return Integer.parseInt(server.getElementsByTagName(attribute).item(0)
+				.getTextContent());
+	}
+
+	private boolean getBoolValue(Element server, String attribute) {
+		return Boolean.parseBoolean(server.getElementsByTagName(attribute).item(0)
 				.getTextContent());
 	}
 }

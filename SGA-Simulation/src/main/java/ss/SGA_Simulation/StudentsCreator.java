@@ -6,10 +6,15 @@ import java.util.List;
 public class StudentsCreator {
 
 	public static List<Student> create(Carreer carreer, int students_amount) {
+		System.out.println("Creando alumnos...");
 		List<Student> students = new ArrayList<Student>();
 		for (int i = 0; i < students_amount; i++) {
 			students.add(new Student(i));
+			if (i % 10 == 0) {
+				System.out.print(".");				
+			}
 		}
+		System.out.println("\n" + students_amount + " alumnos creados.");
 		return simulateCarreer(carreer, students);
 	}
 

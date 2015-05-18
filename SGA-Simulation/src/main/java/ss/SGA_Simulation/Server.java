@@ -15,6 +15,7 @@ public class Server extends Thread {
 	private StudentsQueue _queue;
 	private long _time_per_request;
 	private long _timeout;
+	private boolean _log_enabled;
 	private List<Student> _matriculated_students;
 
 	public Server(String xml_path) {
@@ -24,6 +25,7 @@ public class Server extends Thread {
 	}
 
 	public void run() {
+		log("SERVER> Empezando simulación...");
 		while (!_queue.finished()) {
 			try {
 				attendRequest();
@@ -31,32 +33,39 @@ public class Server extends Thread {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("SGA Matriculation has finished!!!");
-		System.out.println("Matriculated students = "
-				+ _matriculated_students.size());
+		log("SERVER> Matriculación SGA completada.");
+		log("SERVER> Alumnos matriculados: "
+					+ _matriculated_students.size());			
 		for (Student student : _matriculated_students) {
-			System.out.println(student);			
+			System.out.println(student);
 		}
 	}
 
 	private void attendRequest() throws InterruptedException {
 		if (_queue.isEmpty()) {
 			sleep(1000);
-			System.out.print(".");
+			log("SERVER> DESOCUPADO--");				
 			return;
 		} else {
 			Student student = _queue.poll();
-			System.out.print("\nAttending " + student.id());
+			log("SERVER> Atendiendo legajo:" + student.id());
 			sleep(_time_per_request);// Demora un tiempo _time_per_request
 										// en
 			// atender la solicitud
 			// del estudiante
 			if (System.currentTimeMillis() - student.queueTime() > _timeout) {
 				_queue.add(student);
-				System.out.println(student.id() + " TIMEOUT");
+				
+				log("SERVER> Legajo:" + student.id() + " >> TIMEOUT--");
 			} else {
 				attend(student);
 			}
+		}
+	}
+
+	private void log(String message) {
+		if (_log_enabled) {
+			System.out.println(message);
 		}
 	}
 
@@ -72,8 +81,7 @@ public class Server extends Thread {
 				_queue.add(student);
 			} else {
 				_matriculated_students.add(student);
-				System.out.print("\nStudent " + student.id()
-						+ " finished matriculating!!!");
+				log("SERVER> Legajo:" + student.id() + " >> TERMINO--");
 			}
 		}
 	}
@@ -89,15 +97,21 @@ public class Server extends Thread {
 			doc.getDocumentElement().normalize();
 			Element server = (Element) doc.getElementsByTagName("server").item(
 					0);
-			_timeout = getValue(server, "timeout");
-			_time_per_request = getValue(server, "time-per-request");
+			_timeout = getIntValue(server, "timeout");
+			_time_per_request = getIntValue(server, "time-per-request");
+			_log_enabled = getBoolValue(server, "log-enabled");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Integer getValue(Element server, String attribute) {
+	private Integer getIntValue(Element server, String attribute) {
 		return Integer.parseInt(server.getElementsByTagName(attribute).item(0)
+				.getTextContent());
+	}
+	
+	private boolean getBoolValue(Element server, String attribute) {
+		return Boolean.parseBoolean(server.getElementsByTagName(attribute).item(0)
 				.getTextContent());
 	}
 }

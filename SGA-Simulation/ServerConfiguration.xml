@@ -2,4 +2,5 @@
 <server>
 	<time-per-request>500</time-per-request>
 	<timeout>10000</timeout>
+	<log-enabled>true</log-enabled>
 </server>
