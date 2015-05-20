@@ -13,15 +13,17 @@ import org.w3c.dom.Element;
 public class Server extends Thread {
 
 	private StudentsQueue _queue;
+	private Stats _stats;
 	private long _time_per_request;
 	private long _timeout;
 	private boolean _log_enabled;
 	private List<Student> _matriculated_students;
 
-	public Server(String xml_path) {
-		parseConfigurationFile(xml_path);
+	public Server(String xml_path, int speed) {
+		parseConfigurationFile(xml_path, speed);
 		_matriculated_students = new ArrayList<Student>();
 		_queue = StudentsQueue.getInstance();
+		_stats = Stats.getInstance();
 	}
 
 	public void run() {
@@ -34,17 +36,14 @@ public class Server extends Thread {
 			}
 		}
 		log("SERVER> Matriculación SGA completada.");
-		log("SERVER> Alumnos matriculados: "
-					+ _matriculated_students.size());			
-		for (Student student : _matriculated_students) {
-			System.out.println(student);
-		}
+		log("SERVER> Alumnos matriculados: " + _matriculated_students.size());
+//		for (Student student : _matriculated_students) {
+//			System.out.println(student);
+//		}
 	}
 
 	private void attendRequest() throws InterruptedException {
 		if (_queue.isEmpty()) {
-			sleep(1000);
-			log("SERVER> DESOCUPADO--");				
 			return;
 		} else {
 			Student student = _queue.poll();
@@ -55,7 +54,7 @@ public class Server extends Thread {
 			// del estudiante
 			if (System.currentTimeMillis() - student.queueTime() > _timeout) {
 				_queue.add(student);
-				
+
 				log("SERVER> Legajo:" + student.id() + " >> TIMEOUT--");
 			} else {
 				attend(student);
@@ -80,13 +79,20 @@ public class Server extends Thread {
 			if (!student.hasFinishedMatriculating()) {
 				_queue.add(student);
 			} else {
-				_matriculated_students.add(student);
-				log("SERVER> Legajo:" + student.id() + " >> TERMINO--");
+				addMatriculatedStudent(student);
 			}
+		} else {
+			addMatriculatedStudent(student);
 		}
 	}
+	
+	private void addMatriculatedStudent(Student student) {
+		_matriculated_students.add(student);
+		log("SERVER> Legajo:" + student.id() + " >> TERMINO--");
+		_stats.addMatriculatedStudent();
+	}
 
-	private void parseConfigurationFile(String xml_path) {
+	private void parseConfigurationFile(String xml_path, int speed) {
 		try {
 			File fXmlFile = new File(xml_path);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
@@ -97,8 +103,8 @@ public class Server extends Thread {
 			doc.getDocumentElement().normalize();
 			Element server = (Element) doc.getElementsByTagName("server").item(
 					0);
-			_timeout = getIntValue(server, "timeout");
-			_time_per_request = getIntValue(server, "time-per-request");
+			_timeout = getIntValue(server, "timeout") / speed;
+			_time_per_request = getIntValue(server, "time-per-request") / speed;
 			_log_enabled = getBoolValue(server, "log-enabled");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,9 +115,9 @@ public class Server extends Thread {
 		return Integer.parseInt(server.getElementsByTagName(attribute).item(0)
 				.getTextContent());
 	}
-	
+
 	private boolean getBoolValue(Element server, String attribute) {
-		return Boolean.parseBoolean(server.getElementsByTagName(attribute).item(0)
-				.getTextContent());
+		return Boolean.parseBoolean(server.getElementsByTagName(attribute)
+				.item(0).getTextContent());
 	}
 }

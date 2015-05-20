@@ -9,6 +9,14 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+					<day id="lu">
+						<beginning>
+						</beginning>
+						<ending>
+						</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7203">
 				<name>Introduccion a la Informatica</name>
