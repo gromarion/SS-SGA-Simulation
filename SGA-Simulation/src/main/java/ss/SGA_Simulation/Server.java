@@ -17,10 +17,12 @@ public class Server extends Thread {
 	private long _time_per_request;
 	private long _timeout;
 	private boolean _log_enabled;
+	private int _speed;
 	private List<Student> _matriculated_students;
 
 	public Server(String xml_path, int speed) {
-		parseConfigurationFile(xml_path, speed);
+		_speed = speed;
+		parseConfigurationFile(xml_path);
 		_matriculated_students = new ArrayList<Student>();
 		_queue = StudentsQueue.getInstance();
 		_stats = Stats.getInstance();
@@ -28,6 +30,7 @@ public class Server extends Thread {
 
 	public void run() {
 		log("SERVER> Empezando simulación...");
+		long start = System.currentTimeMillis();
 		while (!_queue.finished()) {
 			try {
 				attendRequest();
@@ -37,9 +40,12 @@ public class Server extends Thread {
 		}
 		log("SERVER> Matriculación SGA completada.");
 		log("SERVER> Alumnos matriculados: " + _matriculated_students.size());
-//		for (Student student : _matriculated_students) {
-//			System.out.println(student);
-//		}
+		log("SERVER> Timeouts: " + _stats.timeouts());
+		_stats.setDuration((System.currentTimeMillis() - start) * _speed);
+		_stats.printDuration();
+		// for (Student student : _matriculated_students) {
+		// System.out.println(student);
+		// }
 	}
 
 	private void attendRequest() throws InterruptedException {
@@ -54,7 +60,7 @@ public class Server extends Thread {
 			// del estudiante
 			if (System.currentTimeMillis() - student.queueTime() > _timeout) {
 				_queue.add(student);
-
+				_stats.addTimeout();
 				log("SERVER> Legajo:" + student.id() + " >> TIMEOUT--");
 			} else {
 				attend(student);
@@ -85,14 +91,14 @@ public class Server extends Thread {
 			addMatriculatedStudent(student);
 		}
 	}
-	
+
 	private void addMatriculatedStudent(Student student) {
 		_matriculated_students.add(student);
 		log("SERVER> Legajo:" + student.id() + " >> TERMINO--");
 		_stats.addMatriculatedStudent();
 	}
 
-	private void parseConfigurationFile(String xml_path, int speed) {
+	private void parseConfigurationFile(String xml_path) {
 		try {
 			File fXmlFile = new File(xml_path);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
@@ -103,8 +109,9 @@ public class Server extends Thread {
 			doc.getDocumentElement().normalize();
 			Element server = (Element) doc.getElementsByTagName("server").item(
 					0);
-			_timeout = getIntValue(server, "timeout") / speed;
-			_time_per_request = getIntValue(server, "time-per-request") / speed;
+			_timeout = getIntValue(server, "timeout") / _speed;
+			_time_per_request = getIntValue(server, "time-per-request")
+					/ _speed;
 			_log_enabled = getBoolValue(server, "log-enabled");
 		} catch (Exception e) {
 			e.printStackTrace();

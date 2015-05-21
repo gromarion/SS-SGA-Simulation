@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <queue>
-	<client-arrival-time>1000</client-arrival-time>
 	<log-enabled>false</log-enabled>
+	<means>
+		<mean>0.25</mean>
+		<mean>0.35</mean>
+		<mean>0.2</mean>
+		<mean>0.1</mean>
+		<mean>0.1</mean>
+	</means>
 </queue>
