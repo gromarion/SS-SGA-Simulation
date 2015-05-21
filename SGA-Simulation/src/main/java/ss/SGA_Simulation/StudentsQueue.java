@@ -22,6 +22,7 @@ public class StudentsQueue extends Thread {
 	private int _daytime;
 	private double[] _lambdas;
 	private static final int MILLIS_IN_AN_HOUR = 3600000;
+	private static final int MILLIS_IN_A_MINUTE = 60000;
 	private int _speed;
 	private long _start;
 	private static StudentsQueue _instance;
@@ -90,8 +91,9 @@ public class StudentsQueue extends Thread {
 		while (_students.size() > 0) {
 			updateDaytime();
 			try {
-				long wait = (long) Math.ceil((exponentialDistributionGenerator() * 60000/_speed));
-				System.out.println(wait);
+				long wait = (long) Math
+						.ceil((exponentialDistributionGenerator()
+								* MILLIS_IN_A_MINUTE / _speed));
 				sleep(wait);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -149,7 +151,7 @@ public class StudentsQueue extends Thread {
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
 		double mean = 60 / (_lambdas[_daytime] * _students_amount);
-		double lambda = 1/mean;
+		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}
 }

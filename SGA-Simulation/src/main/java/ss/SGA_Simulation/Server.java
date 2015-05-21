@@ -43,9 +43,6 @@ public class Server extends Thread {
 		log("SERVER> Timeouts: " + _stats.timeouts());
 		_stats.setDuration((System.currentTimeMillis() - start) * _speed);
 		_stats.printDuration();
-		// for (Student student : _matriculated_students) {
-		// System.out.println(student);
-		// }
 	}
 
 	private void attendRequest() throws InterruptedException {
