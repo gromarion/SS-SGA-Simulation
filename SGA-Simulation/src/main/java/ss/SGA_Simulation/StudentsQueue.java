@@ -19,25 +19,21 @@ public class StudentsQueue extends Thread {
 	private CopyOnWriteArrayList<Student> _students;
 	private int _students_amount;
 	private boolean _log_enabled;
-	private int _daytime;
 	private double[] _lambdas;
-	private static final int MILLIS_IN_AN_HOUR = 3600000;
-	private static final int MILLIS_IN_A_MINUTE = 60000;
-	private int _speed;
-	private long _start;
+	private Stats _stats;
 	private static StudentsQueue _instance;
 
-	public void initialize(String xml_file, List<Student> students, int speed) {
+	public void initialize(String xml_file, List<Student> students) {
 		_queue = new ConcurrentLinkedQueue<Student>();
 		_students = new CopyOnWriteArrayList<Student>();
 		_students.addAll(students);
 		_students_amount = students.size();
-		parseConfigurationFile(xml_file, speed);
-		Stats.getInstance().setTotalStudents(_students.size());
-		_speed = speed;
+		parseConfigurationFile(xml_file);
+		_stats = Stats.getInstance();
+		_stats.setTotalStudents(_students.size());
 	}
 
-	private void parseConfigurationFile(String xml_file, int speed) {
+	private void parseConfigurationFile(String xml_file) {
 		try {
 			File fXmlFile = new File(xml_file);
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
@@ -87,13 +83,11 @@ public class StudentsQueue extends Thread {
 	// exponencial.
 	public void run() {
 		Random random = new Random();
-		_start = System.currentTimeMillis();
 		while (_students.size() > 0) {
-			updateDaytime();
+			_stats.updateDaytime(_lambdas.length);
 			try {
-				long wait = (long) Math
-						.ceil((exponentialDistributionGenerator()
-								* MILLIS_IN_A_MINUTE / _speed));
+				long wait = (long) Math.ceil(exponentialDistributionGenerator()
+						* Stats.MILLIS_IN_A_MINUTE / _stats.speed());
 				sleep(wait);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -103,8 +97,9 @@ public class StudentsQueue extends Thread {
 			add(student);
 			_students.remove(student);
 		}
+		System.out.println("hola");
 		while (!finished()) {
-			updateDaytime();
+			_stats.updateDaytime(_lambdas.length);
 		}
 	}
 
@@ -129,20 +124,6 @@ public class StudentsQueue extends Thread {
 		return _queue.add(student);
 	}
 
-	private void updateDaytime() {
-		int current_daytime = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR)
-				% _lambdas.length;
-		if (current_daytime != _daytime) {
-			_daytime = current_daytime;
-			System.out.println(_daytime + "hs. Alumnos restantes: "
-					+ (_queue.size() + _students.size()));
-		}
-	}
-
-	private long elapsedTime(long start) {
-		return (System.currentTimeMillis() - start) * _speed;
-	}
-
 	private boolean getBoolValue(Element server, String attribute) {
 		return Boolean.parseBoolean(server.getElementsByTagName(attribute)
 				.item(0).getTextContent());
@@ -150,7 +131,7 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		double mean = 60 / (_lambdas[_daytime] * _students_amount);
+		double mean = 60 / (_lambdas[_stats.daytime()] * _students_amount);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}

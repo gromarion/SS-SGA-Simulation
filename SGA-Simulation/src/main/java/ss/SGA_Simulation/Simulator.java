@@ -11,11 +11,13 @@ import org.w3c.dom.Document;
 public class Simulator {
 	public static void main(String[] args) {
 		 Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
-		 List<Student> students = StudentsCreator.create(carreer, 1);
+		 List<Student> students = StudentsCreator.create(carreer, 1000);
 		 Matriculation.prepareDesiredCourses(carreer, students);
 		 int speed = speed("SimulationConfiguration.xml");
+		 Stats stats = Stats.getInstance();
+		 stats.initialize(speed);
 		 StudentsQueue queue = StudentsQueue.getInstance();
-		 queue.initialize("QueueConfiguration.xml", students, speed);
+		 queue.initialize("QueueConfiguration.xml", students);
 		 new Server("ServerConfiguration.xml", speed).start();
 		 queue.start();
 	}

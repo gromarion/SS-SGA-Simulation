@@ -10,6 +10,12 @@ public class Stats {
 	private AtomicInteger _not_matriculated_students;
 	private AtomicInteger _timeouts;
 	private long _duration;
+	private long _start;
+	private int _daytime;
+	private int _day;
+	private static final int MILLIS_IN_AN_HOUR = 3600000;
+	public static final int MILLIS_IN_A_MINUTE = 60000;
+	private int _speed;
 	
 	public static Stats getInstance() {
 		if (_instance == null) {
@@ -19,10 +25,14 @@ public class Stats {
 	}
 	
 	private Stats() {
+	}
+	
+	public void initialize(int speed) {
 		_total_students = new AtomicInteger();
 		_matriculated_students = new AtomicInteger();
 		_not_matriculated_students = new AtomicInteger();
 		_timeouts = new AtomicInteger();
+		_speed = speed;
 	}
 	
 	public void setTotalStudents(int total_students) {
@@ -79,6 +89,35 @@ public class Stats {
 	
 	public int days() {
 		return hours() / 24;
+	}
+	
+	public void start() {
+		_start = System.currentTimeMillis();
+	}
+	
+	public void updateDaytime(int hours_in_a_day) {
+		int current_daytime = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR)
+				% hours_in_a_day;
+		if (current_daytime != _daytime) {
+			_day = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR) / 24;
+			_daytime = current_daytime;
+		}
+	}
+	
+	public int daytime() {
+		return _daytime;
+	}
+	
+	public int day() {
+		return _day;
+	}
+	
+	public int speed() {
+		return _speed;
+	}
+	
+	private long elapsedTime(long start) {
+		return (System.currentTimeMillis() - start) * _speed;
 	}
 	
 	public void printDuration() {
