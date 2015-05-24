@@ -1,4 +1,4 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -10,22 +10,24 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
+
 public class Server extends Thread {
 
 	private StudentsQueue _queue;
-	private Stats _stats;
+	private StatsService _stats;
 	private long _time_per_request;
 	private long _timeout;
 	private boolean _log_enabled;
 	private int _speed;
 	private List<Student> _matriculated_students;
 
-	public Server(String xml_path, int speed) {
+	public Server(StatsService stats, String xml_path, int speed) {
 		_speed = speed;
 		parseConfigurationFile(xml_path);
 		_matriculated_students = new ArrayList<Student>();
 		_queue = StudentsQueue.getInstance();
-		_stats = Stats.getInstance();
+		_stats = stats;
 	}
 
 	public void run() {

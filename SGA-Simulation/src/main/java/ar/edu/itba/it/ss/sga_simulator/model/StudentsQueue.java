@@ -1,4 +1,4 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.io.File;
 import java.util.List;
@@ -9,18 +9,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
+
+@Component
 public class StudentsQueue extends Thread {
 
+	@Autowired
+	private StatsService _stats;
+	
 	private ConcurrentLinkedQueue<Student> _queue;
 	private CopyOnWriteArrayList<Student> _students;
 	private int _students_amount;
 	private boolean _log_enabled;
 	private double[] _lambdas;
-	private Stats _stats;
 	private static StudentsQueue _instance;
 
 	public void initialize(String xml_file, List<Student> students) {
@@ -29,7 +36,6 @@ public class StudentsQueue extends Thread {
 		_students.addAll(students);
 		_students_amount = students.size();
 		parseConfigurationFile(xml_file);
-		_stats = Stats.getInstance();
 		_stats.setTotalStudents(_students.size());
 	}
 
@@ -87,7 +93,7 @@ public class StudentsQueue extends Thread {
 			_stats.updateDaytime(_lambdas.length);
 			try {
 				long wait = (long) Math.ceil(exponentialDistributionGenerator()
-						* Stats.MILLIS_IN_A_MINUTE / _stats.speed());
+						* StatsService.MILLIS_IN_A_MINUTE / _stats.speed());
 				sleep(wait);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

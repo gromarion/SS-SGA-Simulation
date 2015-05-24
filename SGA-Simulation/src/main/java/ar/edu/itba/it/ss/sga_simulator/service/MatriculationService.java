@@ -1,22 +1,29 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-public class Matriculation {
+import org.springframework.stereotype.Service;
+
+import ar.edu.itba.it.ss.sga_simulator.model.Carreer;
+import ar.edu.itba.it.ss.sga_simulator.model.Course;
+import ar.edu.itba.it.ss.sga_simulator.model.Student;
+
+@Service
+public class MatriculationService {
 	
-	private static int MIN_CREDITS = 15;
-	private static int MAX_CREDITS = 33;
+	private static final int MIN_CREDITS = 15;
+	private static final int MAX_CREDITS = 33;
 	
-	public static void prepareDesiredCourses(Carreer carreer, List<Student> students) {
+	public void prepareDesiredCourses(Carreer carreer, List<Student> students) {
 		for (Student student : students) {
 			student.addDesiredCourses(fetchCourses(carreer, student));
 		}
 	}
 
-	public static List<Course> fetchCourses(Carreer carreer, Student student) {
+	public List<Course> fetchCourses(Carreer carreer, Student student) {
 		int credits = 0;
 		int current_year = student.currentYear();
 		int current_quarter = student.currentQuarter();
@@ -48,7 +55,7 @@ public class Matriculation {
 	// en el 1er cuatrimestre del primer año y no recurso ninguna materia,
 	// entonces cursara todo el primer cuatrimestre. Si no, se estimara la
 	// cantidad de creditos que desea cursar.
-	private static int calculateCredits(Carreer carreer, Student student) {
+	private int calculateCredits(Carreer carreer, Student student) {
 		if (student.isFreshMan()) {
 			return carreer.creditsAmount(1, 1);
 		}

@@ -1,4 +1,4 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.util.HashMap;
 import java.util.Map;

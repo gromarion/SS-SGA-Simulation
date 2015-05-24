@@ -1,11 +1,22 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentsCreator {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-	public static List<Student> create(Carreer carreer, int students_amount) {
+import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
+
+@Component
+public enum StudentFactory {
+	
+	STUDENT_FACTORY;
+	
+	@Autowired
+	public MatriculationService matriculationService;	
+	
+	public List<Student> create(Carreer carreer, int students_amount) {
 		System.out.println("Creando alumnos...");
 		List<Student> students = new ArrayList<Student>();
 		for (int i = 0; i < students_amount; i++) {
@@ -18,7 +29,7 @@ public class StudentsCreator {
 		return simulateCarreer(carreer, students);
 	}
 
-	private static List<Student> simulateCarreer(Carreer carreer,
+	private List<Student> simulateCarreer(Carreer carreer,
 			List<Student> students) {
 		int batch = students.size() / carreer.quarters();
 		int carreer_quarter = 1;
@@ -31,8 +42,8 @@ public class StudentsCreator {
 		return students;
 	}
 
-	private static void simulateQuarter(Carreer carreer, Student student) {
-		List<Course> courses = Matriculation.fetchCourses(carreer, student);
+	private void simulateQuarter(Carreer carreer, Student student) {
+		List<Course> courses = matriculationService.fetchCourses(carreer, student);
 		for (Course course : courses) {
 			student.course(course);
 		}

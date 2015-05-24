@@ -1,4 +1,4 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,10 @@ public class Student implements Comparable<Student> {
 	private int _current_quarter;
 	private int _id;
 	private long _queue_time;
+	
+	public static StudentFactory getFactory() {
+		return StudentFactory.STUDENT_FACTORY;
+	}
 
 	public Student(int id) {
 		this(new ArrayList<Course>(), 1, 1, id);

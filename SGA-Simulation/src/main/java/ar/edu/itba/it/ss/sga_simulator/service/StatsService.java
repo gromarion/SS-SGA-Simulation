@@ -1,10 +1,12 @@
-package ss.SGA_Simulation;
+package ar.edu.itba.it.ss.sga_simulator.service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Stats {
+import org.springframework.stereotype.Service;
 
-	private static Stats _instance;
+@Service
+public class StatsService {
+
 	private AtomicInteger _total_students;
 	private AtomicInteger _matriculated_students;
 	private AtomicInteger _not_matriculated_students;
@@ -17,17 +19,7 @@ public class Stats {
 	public static final int MILLIS_IN_A_MINUTE = 60000;
 	private int _speed;
 	
-	public static Stats getInstance() {
-		if (_instance == null) {
-			_instance = new Stats();
-		}
-		return _instance;
-	}
-	
-	private Stats() {
-	}
-	
-	public void initialize(int speed) {
+	public void setSpeed(int speed) {
 		_total_students = new AtomicInteger();
 		_matriculated_students = new AtomicInteger();
 		_not_matriculated_students = new AtomicInteger();
