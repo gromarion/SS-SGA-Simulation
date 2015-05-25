@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="sgaSimulator" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="sgaSimulator" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="sgaSimulator" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="sgaSimulator" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SGA Simulator</title>
+
+  <link href="styles/css/app.css" rel="stylesheet">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body ng-controller="HeaderCtrl">
+
+  <div id="alertPlaceholder"></div>
+
+  <nav class="navbar navbar-inverse header navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div class="navbar-brand logo" ui-sref="home">
+          SGA Simulator
+        </div>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a data-toggle="collapse" href="#aboutSection" aria-expanded="false" aria-controls="aboutSection">About</a>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="collapse" id="aboutSection">
+    <div class="well text-center">
+      <h1>SGA Simulator</h1>
+      <p class="lead">Explicacion de que estamos haciendo e integrantes.</p>
+      <p class="lead">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+    </div>
+  </div>
+
+  <div ui-view class="main-view"></div>
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+  <script src="bower_components/underscore/underscore-min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+
+  <script src="app.js"></script>
+
+  <script src="components/api/resources.js"></script>
+
+  <script src="headerCtrl.js"></script>
+  <script src="home/homeCtrl.js"></script>
+</body>
+</html>

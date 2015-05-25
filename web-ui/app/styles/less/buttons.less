@@ -1,0 +1,28 @@
+button {
+  &.primary-btn {
+    color: @green;
+    border: 1px solid @green;
+    border-radius: 3px;
+    padding: 12px 17px;
+    background-color: transparent;
+
+    font-size: 13px;
+    font-family: brandon-grotesque,sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    line-height: 1em;
+
+    -webkit-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+    letter-spacing: .05em;
+
+    &:hover {
+      color: white;
+      background-color: @green;
+    }
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}

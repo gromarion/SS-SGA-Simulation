@@ -1,0 +1,21 @@
+<div class="home-main">
+    <div class="home-top">
+        <button class="primary-btn">Run simulation</button>
+    </div>
+
+    <div class="simulator">
+        <div class="days-graph">
+            <div ng-repeat="day in snapshot"
+                 class="day"
+                 ng-class="{selected: selected === day.title}">{{day.title}}</div>
+        </div>
+        <div class="students-graph">
+            <div ng-repeat="day in snapshot"
+                 class="students-per-day">
+                 <div class="matriculation-fail"></div>
+                 <div class="matriculation-conflict"></div>
+                 <div class="matriculation-success"></div>
+            </div>
+        </div>
+    </div>
+</div>

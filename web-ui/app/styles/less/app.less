@@ -1,0 +1,60 @@
+@green: #53b778;
+@lightGrey: #FAFAFA;
+@darkBlue: #072F38;
+@red:#f36;
+
+@backgroundColor: @lightGrey;
+@headerBackgroundColor: @darkBlue;
+@textColor: @darkBlue;
+
+@import 'buttons';
+@import 'simulator';
+
+html, body, .main-view {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: @backgroundColor;
+
+  color: @textColor;
+  font-family: 'Open Sans', open-sans, sans-serif;
+  font-size: 35px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+
+  #aboutSection {
+    top: 50px;
+    right: 0;
+    left: 0;
+    position: absolute;
+    z-index: 10000;
+  }
+
+  .navbar.navbar-inverse.header.navbar-fixed-top {
+    color: white;
+    background-color: @headerBackgroundColor;
+  }
+
+  .home-main {
+    height: 100%;
+    width: 100%;
+
+    .home-top {
+      margin-top: 65px;
+      margin-left: 40px;
+      margin-right: 70px;
+      text-align: center;
+
+      h3 {
+          display: inline-block;
+      }
+
+      button {
+        margin-top: 12px;
+        display: inline-block;
+      }
+    }
+  }
+}

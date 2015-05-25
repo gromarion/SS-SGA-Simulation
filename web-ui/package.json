@@ -1,0 +1,22 @@
+{
+  "name": "ss-sga-simulator-ui",
+  "private": false,
+  "version": "0.0.1",
+  "description": "ss-sga-simulator-ui",
+  "repository": "https://github.com/farolfo/ss-sga-simulator-ui",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.3.1",
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-connect": "^0.10.1",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "http-server": "^0.6.1",
+    "shelljs": "^0.2.6"
+  },
+  "scripts": {
+    "postinstall": "bower install"
+  }
+}

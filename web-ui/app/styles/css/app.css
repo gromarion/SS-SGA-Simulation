@@ -1,0 +1,122 @@
+button.primary-btn {
+  color: #53b778;
+  border: 1px solid #53b778;
+  border-radius: 3px;
+  padding: 12px 17px;
+  background-color: transparent;
+  font-size: 13px;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1em;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  letter-spacing: .05em;
+}
+button.primary-btn:hover {
+  color: white;
+  background-color: #53b778;
+}
+button.primary-btn:focus {
+  outline: 0;
+}
+.simulator {
+  margin: auto;
+  margin-top: 40px;
+  width: 490px;
+  font-size: 13px;
+  font-family: brandon-grotesque, sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1em;
+}
+.simulator .days-graph {
+  position: relative;
+  display: block;
+  text-align: center;
+}
+.simulator .days-graph .day {
+  display: inline-block;
+  padding: 20px;
+  border-bottom: 1px solid;
+  position: relative;
+  margin-left: 2px;
+  margin-right: 2px;
+  width: 66px;
+}
+.simulator .days-graph .day.selected {
+  border-bottom-color: #ff3366;
+}
+.simulator .days-graph .day.selected:after {
+  content: '';
+  position: absolute;
+  top: 60px;
+  left: 18px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid #ff3366;
+}
+.simulator .students-graph {
+  position: relative;
+  display: block;
+  text-align: center;
+  border-bottom: 1px solid;
+  margin-top: 230px;
+}
+html,
+body,
+.main-view {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: #fafafa;
+  color: #072f38;
+  font-family: 'Open Sans', open-sans, sans-serif;
+  font-size: 35px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 300;
+}
+html #aboutSection,
+body #aboutSection,
+.main-view #aboutSection {
+  top: 50px;
+  right: 0;
+  left: 0;
+  position: absolute;
+  z-index: 10000;
+}
+html .navbar.navbar-inverse.header.navbar-fixed-top,
+body .navbar.navbar-inverse.header.navbar-fixed-top,
+.main-view .navbar.navbar-inverse.header.navbar-fixed-top {
+  color: white;
+  background-color: #072f38;
+}
+html .home-main,
+body .home-main,
+.main-view .home-main {
+  height: 100%;
+  width: 100%;
+}
+html .home-main .home-top,
+body .home-main .home-top,
+.main-view .home-main .home-top {
+  margin-top: 65px;
+  margin-left: 40px;
+  margin-right: 70px;
+  text-align: center;
+}
+html .home-main .home-top h3,
+body .home-main .home-top h3,
+.main-view .home-main .home-top h3 {
+  display: inline-block;
+}
+html .home-main .home-top button,
+body .home-main .home-top button,
+.main-view .home-main .home-top button {
+  margin-top: 12px;
+  display: inline-block;
+}

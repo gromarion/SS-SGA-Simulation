@@ -1,0 +1,74 @@
+.simulator {
+
+  @totalWidth: 490px;
+
+  margin: auto;
+  margin-top: 40px;
+
+  width: @totalWidth;
+  font-size: 13px;
+  font-family: brandon-grotesque,sans-serif;
+  font-weight: 500;
+  text-transform: uppercase;
+  line-height: 1em;
+
+  .days-graph {
+    position: relative;
+    display: block;
+    text-align: center;
+
+    .day {
+        display: inline-block;
+        padding: 20px;
+        border-bottom: 1px solid;
+        position: relative;
+
+        margin-left: 2px;
+        margin-right: 2px;
+        width: @totalWidth / 7 - 4px;
+
+        &.selected{
+
+          border-bottom-color: @red;
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 60px;
+            left: 18px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-bottom: 15px solid @red;
+          }
+        }
+    }
+  }
+
+  .students-graph {
+
+    @max-height: 200px;
+
+    position: relative;
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid;
+    margin-top: @max-height + 30px;
+
+    .students-per-day {
+
+      .matriculation-fail {
+
+      }
+
+      .matriculation-success {
+
+      }
+
+      .matriculation-conflict {
+
+      }
+    }
+  }
+}
