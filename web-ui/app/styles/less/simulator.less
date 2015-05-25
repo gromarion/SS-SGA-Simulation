@@ -48,26 +48,33 @@
 
   .students-graph {
 
-    @max-height: 200px;
+    @max-height: 400px;
 
     position: relative;
     display: block;
     text-align: center;
-    border-bottom: 1px solid;
-    margin-top: @max-height + 30px;
+    margin-top: 1px;
+    padding-top: 30px;
+    height: @max-height;
+    width: 100%;
 
     .students-per-day {
 
-      .matriculation-fail {
+      margin-left: 2px;
+      margin-right: 2px;
+      width: @totalWidth / 7 - 4px;
+      display: inline-block;
 
+      .matriculation-fail {
+        background-color: #D9534F;
       }
 
       .matriculation-success {
-
+        background-color: #26B178;
       }
 
       .matriculation-conflict {
-
+        background-color: #F0AD4E;
       }
     }
   }

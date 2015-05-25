@@ -62,8 +62,25 @@ button.primary-btn:focus {
   position: relative;
   display: block;
   text-align: center;
-  border-bottom: 1px solid;
-  margin-top: 230px;
+  margin-top: 1px;
+  padding-top: 30px;
+  height: 400px;
+  width: 100%;
+}
+.simulator .students-graph .students-per-day {
+  margin-left: 2px;
+  margin-right: 2px;
+  width: 66px;
+  display: inline-block;
+}
+.simulator .students-graph .students-per-day .matriculation-fail {
+  background-color: #D9534F;
+}
+.simulator .students-graph .students-per-day .matriculation-success {
+  background-color: #26B178;
+}
+.simulator .students-graph .students-per-day .matriculation-conflict {
+  background-color: #F0AD4E;
 }
 html,
 body,
