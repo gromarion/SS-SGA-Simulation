@@ -58,6 +58,47 @@
     height: @max-height;
     width: 100%;
 
+    @reference-top-base: 130px;
+    @reference-left-base: -250px;
+
+    @margin-reference-top: 10px;
+
+    @reference-width: 160px;
+    @reference-height: 40px;
+
+    .matriculation-fail-reference {
+      background-color: @red;
+      color: white;
+       position: absolute;
+       top: @reference-top-base;
+       left: @reference-left-base;
+       width: @reference-width;
+       height: @reference-height;
+       padding-top: 7px;
+    }
+
+    .matriculation-conflict-reference {
+      background-color: @yellow;
+      color: white;
+       position: absolute;
+       top: @reference-top-base + @margin-reference-top + @reference-height;
+       left: @reference-left-base;
+       width: @reference-width;
+       height: @reference-height;
+       padding-top: 7px;
+    }
+
+    .matriculation-success-reference {
+      background-color: @green;
+      color: white;
+       position: absolute;
+       top: @reference-top-base + 2* @margin-reference-top + 2* @reference-height;
+       left: @reference-left-base;
+       width: @reference-width;
+       height: @reference-height;
+       padding-top: 7px;
+    }
+
     .students-per-day {
 
       margin-left: 2px;
@@ -65,16 +106,30 @@
       width: @totalWidth / 7 - 4px;
       display: inline-block;
 
+      @animation-time: 300ms;
+
       .matriculation-fail {
-        background-color: #D9534F;
+        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        background-color: @red; //#D9534F
       }
 
       .matriculation-success {
-        background-color: #26B178;
+        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        background-color: @green; //#26B178
       }
 
       .matriculation-conflict {
-        background-color: #F0AD4E;
+        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
+        background-color: @yellow;
       }
     }
   }

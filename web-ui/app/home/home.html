@@ -10,6 +10,9 @@
                  ng-class="{selected: selected === day.title}">{{day.title}}</div>
         </div>
         <div class="students-graph">
+            <div class="matriculation-success-reference">Successed matriculations</div>
+            <div class="matriculation-fail-reference">Failed matriculations</div>
+            <div class="matriculation-conflict-reference">Confliced matriculations</div>
             <div ng-repeat="day in snapshot.days"
                  class="students-per-day">
                  <div ng-attr-id="{{'#' + day.title + '-fail'}}" class="matriculation-fail"></div>

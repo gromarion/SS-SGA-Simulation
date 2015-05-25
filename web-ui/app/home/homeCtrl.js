@@ -2,7 +2,7 @@
 
 angular.module('sgaSimulator.controllers')
 
-.controller('HomeCtrl', ['$scope', '$state', '$timeout', function($scope, $state, $timeout) {
+.controller('HomeCtrl', ['$scope', '$state', '$timeout', '$interval', function($scope, $state, $timeout, $interval) {
 
     var maxPx = jQuery(document.getElementsByClassName('students-graph')[0]).height();
 
@@ -65,8 +65,8 @@ angular.module('sgaSimulator.controllers')
       },
       {
         title: 'FRI',
-        matriculationSuccess: 1,
-        matriculationConflict: 1,
+        matriculationSuccess: 0,
+        matriculationConflict: 0,
         matriculationFail: 0
       },
       {
@@ -85,7 +85,24 @@ angular.module('sgaSimulator.controllers')
 
     $scope.selected = 'FRI';
 
+    // Used for faking the simulation :D TODO: DELETE
+    $scope.addStudent = function() {
+        var random = Math.random();
+        if (random < 0.33) {
+          $scope.snapshot.days[4].matriculationSuccess ++;
+        } else if (random < 0.66){
+          $scope.snapshot.days[4].matriculationConflict ++;
+        } else {
+          $scope.snapshot.days[4].matriculationFail ++;
+        }
+
+        $scope.updateMatriculationGraph($scope.snapshot);
+    };
+
     $timeout(function() {
       $scope.updateMatriculationGraph($scope.snapshot);
+
+      // Used for faking the simulation :D TODO: DELETE
+      $interval($scope.addStudent, 1000, 8);
     }, 2000);
 }]);

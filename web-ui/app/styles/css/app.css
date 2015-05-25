@@ -67,6 +67,36 @@ button.primary-btn:focus {
   height: 400px;
   width: 100%;
 }
+.simulator .students-graph .matriculation-fail-reference {
+  background-color: #ff3366;
+  color: white;
+  position: absolute;
+  top: 130px;
+  left: -250px;
+  width: 160px;
+  height: 40px;
+  padding-top: 7px;
+}
+.simulator .students-graph .matriculation-conflict-reference {
+  background-color: #f0ad4e;
+  color: white;
+  position: absolute;
+  top: 180px;
+  left: -250px;
+  width: 160px;
+  height: 40px;
+  padding-top: 7px;
+}
+.simulator .students-graph .matriculation-success-reference {
+  background-color: #53b778;
+  color: white;
+  position: absolute;
+  top: 230px;
+  left: -250px;
+  width: 160px;
+  height: 40px;
+  padding-top: 7px;
+}
 .simulator .students-graph .students-per-day {
   margin-left: 2px;
   margin-right: 2px;
@@ -74,13 +104,25 @@ button.primary-btn:focus {
   display: inline-block;
 }
 .simulator .students-graph .students-per-day .matriculation-fail {
-  background-color: #D9534F;
+  -webkit-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  background-color: #ff3366;
 }
 .simulator .students-graph .students-per-day .matriculation-success {
-  background-color: #26B178;
+  -webkit-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  background-color: #53b778;
 }
 .simulator .students-graph .students-per-day .matriculation-conflict {
-  background-color: #F0AD4E;
+  -webkit-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  transition: width 300ms ease-in-out, height 300ms ease-in-out;
+  background-color: #f0ad4e;
 }
 html,
 body,
