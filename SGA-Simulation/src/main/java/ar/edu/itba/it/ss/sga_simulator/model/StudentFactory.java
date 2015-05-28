@@ -3,17 +3,20 @@ package ar.edu.itba.it.ss.sga_simulator.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.test.SpringApplicationContextLoader;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
 
-@Component
 public enum StudentFactory {
 	
 	STUDENT_FACTORY;
 	
-	@Autowired
 	public MatriculationService matriculationService;	
 	
 	public List<Student> create(Carreer carreer, int students_amount) {
@@ -48,5 +51,21 @@ public enum StudentFactory {
 			student.course(course);
 		}
 		student.promote(carreer);
+	}
+	
+	private void setMatriculationService(MatriculationService matriculationService) {
+		this.matriculationService = matriculationService;
+	}
+	
+	@Component
+	public static class StudentFactoryInjector {
+		
+		@Autowired
+		public MatriculationService matriculationService;
+		
+		@PostConstruct
+		public void postContruct() {
+			StudentFactory.STUDENT_FACTORY.setMatriculationService(matriculationService);
+		}
 	}
 }

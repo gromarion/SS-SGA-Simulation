@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -17,19 +18,21 @@ import org.w3c.dom.NodeList;
 
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
 
-@Component
 public class StudentsQueue extends Thread {
 
-	@Autowired
-	private StatsService _stats;
+	private static StudentsQueue _instance;
 	
 	private ConcurrentLinkedQueue<Student> _queue;
 	private CopyOnWriteArrayList<Student> _students;
+	private StatsService _stats;
 	private int _students_amount;
 	private boolean _log_enabled;
 	private double[] _lambdas;
-	private static StudentsQueue _instance;
 
+	private static void createInstance(StatsService stats) {
+		_instance = new StudentsQueue(stats);
+	}
+	
 	public void initialize(String xml_file, List<Student> students) {
 		_queue = new ConcurrentLinkedQueue<Student>();
 		_students = new CopyOnWriteArrayList<Student>();
@@ -69,12 +72,13 @@ public class StudentsQueue extends Thread {
 
 	public static StudentsQueue getInstance() {
 		if (_instance == null) {
-			_instance = new StudentsQueue();
+			throw new IllegalStateException("Should be instantiated");
 		}
 		return _instance;
 	}
 
-	private StudentsQueue() {
+	private StudentsQueue(StatsService stats) {
+		_stats = stats;
 	}
 
 	// Las medias están puestas en el archivo de configuración en unidades de
@@ -140,5 +144,19 @@ public class StudentsQueue extends Thread {
 		double mean = 60 / (_lambdas[_stats.daytime()] * _students_amount);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
+	}
+	
+	//TODO: esto no está bien! hay que reverlo! Seguramente la queue no debería ser un singleton. 
+	
+	@Component
+	public static class StudentsQueueInjector {
+		
+		@Autowired
+		private StatsService stats;
+		
+		@PostConstruct
+		public void postConstruct() {
+			StudentsQueue.createInstance(stats);
+		}
 	}
 }
