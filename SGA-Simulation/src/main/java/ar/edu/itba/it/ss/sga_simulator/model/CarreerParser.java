@@ -96,7 +96,9 @@ public class CarreerParser {
 					plan.put(carreer_year, year);
 				}
 			}
-			return new Carreer("SoftwareEngineering", plan);
+			return new Carreer("SoftwareEngineering", plan,
+					Integer.parseInt(doc.getElementsByTagName("students")
+							.item(0).getTextContent()));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

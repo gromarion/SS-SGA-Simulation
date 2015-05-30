@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <carreer>
+	<students>1000</students>
 	<year id="1">
 		<quarter id="1">
 			<course id="3108">

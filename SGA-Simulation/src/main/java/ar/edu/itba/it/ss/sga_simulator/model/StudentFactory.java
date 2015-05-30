@@ -13,23 +13,24 @@ import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
 public enum StudentFactory {
 
 	STUDENT_FACTORY;
-	
-	public MatriculationService matriculationService;	
 
-	public List<Student> create(Carreer carreer, int students_amount) {
-		if (students_amount % carreer.years() != 0) {
+	public MatriculationService matriculationService;
+
+	public List<Student> create(Carreer carreer) {
+		if (carreer.studentsAmount() % carreer.years() != 0) {
 			throw new IllegalArgumentException(
 					"Students amount must be a multiple of carreer years");
 		}
 		System.out.println("Creando alumnos...");
 		List<Student> students = new ArrayList<Student>();
-		for (int i = 0; i < students_amount; i++) {
+		for (int i = 0; i < carreer.studentsAmount(); i++) {
 			students.add(new Student(i));
 			if (i % 10 == 0) {
 				System.out.print(".");
 			}
 		}
-		System.out.println("\n" + students_amount + " alumnos creados.");
+		System.out.println("\n" + carreer.studentsAmount()
+				+ " alumnos creados.");
 		return simulateCarreer(carreer, students);
 	}
 
@@ -54,20 +55,22 @@ public enum StudentFactory {
 		}
 		student.promote(carreer);
 	}
-	
-	private void setMatriculationService(MatriculationService matriculationService) {
+
+	private void setMatriculationService(
+			MatriculationService matriculationService) {
 		this.matriculationService = matriculationService;
 	}
-	
+
 	@Component
 	public static class StudentFactoryInjector {
-		
+
 		@Autowired
 		public MatriculationService matriculationService;
-		
+
 		@PostConstruct
 		public void postContruct() {
-			StudentFactory.STUDENT_FACTORY.setMatriculationService(matriculationService);
+			StudentFactory.STUDENT_FACTORY
+					.setMatriculationService(matriculationService);
 		}
 	}
 }

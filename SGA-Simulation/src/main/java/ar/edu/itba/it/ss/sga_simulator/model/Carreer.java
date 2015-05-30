@@ -9,11 +9,13 @@ public class Carreer {
 	private Map<Integer, Year> _plan;
 	private int _courses_amount;
 	private static final int QUARTERS = 2;
+	private int _students_amount;
 
-	public Carreer(String name, Map<Integer, Year> plan) {
+	public Carreer(String name, Map<Integer, Year> plan, int students_amount) {
 		_name = name;
 		_plan = plan;
 		calculateCoursesAmount();
+		_students_amount = students_amount;
 	}
 
 	public Map<Integer, Map<Integer, Course>> courses(int year) {
@@ -57,6 +59,10 @@ public class Carreer {
 	
 	public int coursesAmount() {
 		return _courses_amount;
+	}
+	
+	public int studentsAmount() {
+		return _students_amount;
 	}
 
 	private void calculateCoursesAmount() {

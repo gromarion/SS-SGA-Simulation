@@ -29,7 +29,7 @@ public class SimulatorController {
 	@RequestMapping("/start")
 	public void start() {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
-		List<Student> students = Student.getFactory().create(carreer, 1000);
+		List<Student> students = Student.getFactory().create(carreer);
 		_matriculationService.prepareDesiredCourses(carreer, students);
 		SimulationConfiguration sc = new SimulationConfiguration("SimulationConfiguration.xml");
 		List<List<Student>> divided_students = divideStudentsByCriteria(
