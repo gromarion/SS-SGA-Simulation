@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Student implements Comparable<Student> {
+public class Student {
 
 	private List<Integer> _passed_courses;
 	private int _passed_credits;
 	private List<Course> _desired_courses;
 	private List<Integer> _matriculated_courses;
 	private List<Integer> _not_matriculated_courses;
+	private int _repeated_courses_amount;
 	private int _current_year;
 	private int _current_quarter;
 	private int _id;
@@ -71,8 +72,14 @@ public class Student implements Comparable<Student> {
 		if (student_passed_course) {
 			_passed_courses.add(course.code());
 			_passed_credits += course.credits();
+		} else {
+			_repeated_courses_amount++;
 		}
 		return student_passed_course;
+	}
+	
+	public int repeatedCoursesAmount() {
+		return _repeated_courses_amount;
 	}
 
 	public boolean isFreshMan() {
@@ -174,9 +181,5 @@ public class Student implements Comparable<Student> {
 
 	public long queueTime() {
 		return _queue_time;
-	}
-
-	public int compareTo(Student o) {
-		return 0;
 	}
 }

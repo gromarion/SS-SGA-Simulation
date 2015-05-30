@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
@@ -23,8 +22,8 @@ public class StudentsQueue extends Thread {
 	private static StudentsQueue _instance;
 	
 	private ConcurrentLinkedQueue<Student> _queue;
-	private CopyOnWriteArrayList<Student> _students;
 	private StatsService _stats;
+	private List<List<Student>> _students;
 	private int _students_amount;
 	private boolean _log_enabled;
 	private double[] _lambdas;
@@ -32,11 +31,10 @@ public class StudentsQueue extends Thread {
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
 	}
-	
-	public void initialize(String xml_file, List<Student> students) {
+
+	public void initialize(String xml_file, List<List<Student>> students) {
 		_queue = new ConcurrentLinkedQueue<Student>();
-		_students = new CopyOnWriteArrayList<Student>();
-		_students.addAll(students);
+		_students = students;
 		_students_amount = students.size();
 		parseConfigurationFile(xml_file);
 		_stats.setTotalStudents(_students.size());
@@ -102,10 +100,12 @@ public class StudentsQueue extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			int random_student_index = random.nextInt(_students.size());
-			Student student = _students.get(random_student_index);
+			int random_student_index = random.nextInt(_students.get(
+					_stats.day()).size());
+			Student student = _students.get(_stats.day()).get(
+					random_student_index);
 			add(student);
-			_students.remove(student);
+			_students.get(_stats.day()).remove(student);
 		}
 		System.out.println("hola");
 		while (!finished()) {

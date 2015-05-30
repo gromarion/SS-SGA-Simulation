@@ -9,7 +9,5 @@ public class SGASimulator {
 	
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SGASimulator.class, args);
-		
 	}
-
 }
