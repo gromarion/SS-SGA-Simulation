@@ -1,25 +1,20 @@
 package ar.edu.itba.it.ss.sga_simulator.web.api;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.w3c.dom.Document;
 
 import ar.edu.itba.it.ss.sga_simulator.model.Carreer;
 import ar.edu.itba.it.ss.sga_simulator.model.CarreerParser;
 import ar.edu.itba.it.ss.sga_simulator.model.Server;
+import ar.edu.itba.it.ss.sga_simulator.model.SimulationConfiguration;
 import ar.edu.itba.it.ss.sga_simulator.model.Student;
 import ar.edu.itba.it.ss.sga_simulator.model.StudentsQueue;
-import ar.edu.itba.it.ss.sga_simulator.model.YoungerStudentsFirst;
 import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
 
@@ -30,22 +25,19 @@ public class SimulatorController {
 	private MatriculationService _matriculationService;
 	@Autowired
 	private StatsService _stats;
-	private static final int DEFAULT_SPEED = 1;
 
 	@RequestMapping("/start")
 	public void start() {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
 		List<Student> students = Student.getFactory().create(carreer, 1000);
 		_matriculationService.prepareDesiredCourses(carreer, students);
-		// <NUEVO>
+		SimulationConfiguration sc = new SimulationConfiguration("SimulationConfiguration.xml");
 		List<List<Student>> divided_students = divideStudentsByCriteria(
-				students, new YoungerStudentsFirst(), carreer.years());
-		// </NUEVO>
-		int speed = speed("SimulationConfiguration.xml");
-		_stats.setSpeed(speed);
+				students, sc.criteria(), sc.matriculationDays());
+		_stats.setSpeed(sc.speed());
 		StudentsQueue queue = StudentsQueue.getInstance();
 		queue.initialize("QueueConfiguration.xml", divided_students);
-		new Server(_stats, "ServerConfiguration.xml", speed).start();
+		new Server(_stats, "ServerConfiguration.xml", sc.speed()).start();
 		queue.start();
 	}
 
@@ -63,22 +55,5 @@ public class SimulatorController {
 			ans.add(students_in_year_i);
 		}
 		return ans;
-	}
-
-	private int speed(String xml_file) {
-		try {
-			File fXmlFile = new File(xml_file);
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
-					.newInstance();
-			DocumentBuilder dBuilder;
-			dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
-			doc.getDocumentElement().normalize();
-			return Integer.parseInt(doc.getElementsByTagName("speed").item(0)
-					.getTextContent());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return DEFAULT_SPEED;
-		}
 	}
 }

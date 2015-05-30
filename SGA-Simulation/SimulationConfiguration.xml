@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<speed>10000</speed>
+<simulation>
+	<speed>10000</speed>
+	<matriculation-days>5</matriculation-days>
+	<!-- younger, older, onschedule, delayed -->
+	<criteria>older</criteria>
+</simulation>

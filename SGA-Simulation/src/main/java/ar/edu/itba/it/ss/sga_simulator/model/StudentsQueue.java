@@ -154,8 +154,8 @@ public class StudentsQueue extends Thread {
 		return _queue.add(student);
 	}
 
-	private boolean getBoolValue(Element server, String attribute) {
-		return Boolean.parseBoolean(server.getElementsByTagName(attribute)
+	private boolean getBoolValue(Element queue, String attribute) {
+		return Boolean.parseBoolean(queue.getElementsByTagName(attribute)
 				.item(0).getTextContent());
 	}
 
