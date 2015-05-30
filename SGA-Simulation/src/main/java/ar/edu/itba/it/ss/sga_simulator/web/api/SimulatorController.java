@@ -16,10 +16,10 @@ import org.w3c.dom.Document;
 
 import ar.edu.itba.it.ss.sga_simulator.model.Carreer;
 import ar.edu.itba.it.ss.sga_simulator.model.CarreerParser;
-import ar.edu.itba.it.ss.sga_simulator.model.OlderStudentsFirst;
 import ar.edu.itba.it.ss.sga_simulator.model.Server;
 import ar.edu.itba.it.ss.sga_simulator.model.Student;
 import ar.edu.itba.it.ss.sga_simulator.model.StudentsQueue;
+import ar.edu.itba.it.ss.sga_simulator.model.YoungerStudentsFirst;
 import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
 
@@ -39,7 +39,7 @@ public class SimulatorController {
 		_matriculationService.prepareDesiredCourses(carreer, students);
 		// <NUEVO>
 		List<List<Student>> divided_students = divideStudentsByCriteria(
-				students, new OlderStudentsFirst(), carreer.years());
+				students, new YoungerStudentsFirst(), carreer.years());
 		// </NUEVO>
 		int speed = speed("SimulationConfiguration.xml");
 		_stats.setSpeed(speed);
@@ -55,9 +55,9 @@ public class SimulatorController {
 		List<List<Student>> ans = new ArrayList<List<Student>>();
 		int batch_size = students.size() / carreer_years;
 		Collections.sort(students, criteria);
-		for (int i = 0; i < batch_size; i++) {
+		for (int i = 0; i < carreer_years; i++) {
 			List<Student> students_in_year_i = new ArrayList<Student>();
-			for (int j = 0; j < carreer_years; j++) {
+			for (int j = 0; j < batch_size; j++) {
 				students_in_year_i.add(students.get(i + j));
 			}
 			ans.add(students_in_year_i);

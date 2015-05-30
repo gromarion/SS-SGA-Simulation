@@ -31,6 +31,7 @@ public class Server extends Thread {
 	}
 
 	public void run() {
+		_stats.start();
 		log("SERVER> Empezando simulación...");
 		long start = System.currentTimeMillis();
 		while (!_queue.finished()) {

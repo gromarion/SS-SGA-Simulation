@@ -47,7 +47,6 @@ public enum StudentFactory {
 	}
 
 	private void simulateQuarter(Carreer carreer, Student student) {
-		System.out.println(matriculationService);
 		List<Course> courses = matriculationService.fetchCourses(carreer,
 				student);
 		for (Course course : courses) {

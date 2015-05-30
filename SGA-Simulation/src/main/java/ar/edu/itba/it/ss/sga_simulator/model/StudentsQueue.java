@@ -20,13 +20,15 @@ import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
 public class StudentsQueue extends Thread {
 
 	private static StudentsQueue _instance;
-	
+
 	private ConcurrentLinkedQueue<Student> _queue;
 	private StatsService _stats;
 	private List<List<Student>> _students;
-	private int _students_amount;
+	private int _students_amount_per_day;
 	private boolean _log_enabled;
 	private double[] _lambdas;
+
+	private static final int MAX_MATRICULATION_DAYS = 5;
 
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
@@ -35,7 +37,7 @@ public class StudentsQueue extends Thread {
 	public void initialize(String xml_file, List<List<Student>> students) {
 		_queue = new ConcurrentLinkedQueue<Student>();
 		_students = students;
-		_students_amount = students.size();
+		_students_amount_per_day = students.get(0).size();
 		parseConfigurationFile(xml_file);
 		_stats.setTotalStudents(_students.size());
 	}
@@ -91,23 +93,30 @@ public class StudentsQueue extends Thread {
 	// exponencial.
 	public void run() {
 		Random random = new Random();
-		while (_students.size() > 0) {
-			_stats.updateDaytime(_lambdas.length);
-			try {
-				long wait = (long) Math.ceil(exponentialDistributionGenerator()
-						* StatsService.MILLIS_IN_A_MINUTE / _stats.speed());
-				sleep(wait);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		while (_stats.day() < MAX_MATRICULATION_DAYS && thereAreStudentsLeft()) {
+			int current_day = _stats.day();
+			if (current_day >= MAX_MATRICULATION_DAYS) {
+				break;
 			}
-			int random_student_index = random.nextInt(_students.get(
-					_stats.day()).size());
-			Student student = _students.get(_stats.day()).get(
-					random_student_index);
-			add(student);
-			_students.get(_stats.day()).remove(student);
+			_stats.updateDaytime(_lambdas.length);
+			int students_left = _students.get(current_day).size();
+			if (students_left > 0) {
+				try {
+					long wait = (long) Math
+							.ceil(exponentialDistributionGenerator()
+									* StatsService.MILLIS_IN_A_MINUTE
+									/ _stats.speed());
+					sleep(wait);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				int random_student_index = random.nextInt(students_left);
+				Student student = _students.get(current_day).get(
+						random_student_index);
+				add(student);
+				_students.get(current_day).remove(student);
+			}
 		}
-		System.out.println("hola");
 		while (!finished()) {
 			_stats.updateDaytime(_lambdas.length);
 		}
@@ -118,7 +127,18 @@ public class StudentsQueue extends Thread {
 	}
 
 	public boolean finished() {
-		return _queue.size() == 0 && _students.size() == 0;
+		if (_stats.day() >= MAX_MATRICULATION_DAYS) {
+			return true;
+		}
+		return _queue.size() == 0 && !thereAreStudentsLeft();
+	}
+
+	private boolean thereAreStudentsLeft() {
+		boolean more_students = true;
+		for (List<Student> students : _students) {
+			more_students |= students.size() > 0;
+		}
+		return more_students;
 	}
 
 	public Student poll() {
@@ -141,19 +161,17 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		double mean = 60 / (_lambdas[_stats.daytime()] * _students_amount);
+		double mean = 60 / (_lambdas[_stats.daytime()] * _students_amount_per_day);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}
-	
-	//TODO: esto no está bien! hay que reverlo! Seguramente la queue no debería ser un singleton. 
-	
+
 	@Component
 	public static class StudentsQueueInjector {
-		
+
 		@Autowired
 		private StatsService stats;
-		
+
 		@PostConstruct
 		public void postConstruct() {
 			StudentsQueue.createInstance(stats);
