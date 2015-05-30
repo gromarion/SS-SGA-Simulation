@@ -9,6 +9,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import ar.edu.itba.it.ss.sga_simulator.criteria.DelayedStudentsFirst;
+import ar.edu.itba.it.ss.sga_simulator.criteria.OlderStudentsFirst;
+import ar.edu.itba.it.ss.sga_simulator.criteria.OnScheduleStudentsFirst;
+import ar.edu.itba.it.ss.sga_simulator.criteria.YoungerStudentsFirst;
+
 public class SimulationConfiguration {
 
 	private int _speed;
