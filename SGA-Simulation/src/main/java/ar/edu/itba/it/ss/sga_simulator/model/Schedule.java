@@ -14,12 +14,18 @@ public class Schedule {
 		_schedule = new HashMap<String, Timetable>();
 	}
 
-	public Schedule(Map<String, Timetable> schedule) {
-		_schedule = schedule;
+	
+	public void addSchedule(String day, int beginning, int ending) throws IllegalArgumentException {
+		_schedule.put(day, new Timetable(beginning, ending));
 	}
 	
-	public void addSchedule(String day, int beginning, int ending) {
-		_schedule.put(day, new Timetable(beginning, ending));
+	public int duration() {
+		int duration = 0;
+		for (String day : _schedule.keySet()) {
+			Timetable timetable = _schedule.get(day);
+			duration += timetable.ending() - timetable.beginning();
+		}
+		return duration;
 	}
 
 	public boolean overlaps(Schedule schedule) {

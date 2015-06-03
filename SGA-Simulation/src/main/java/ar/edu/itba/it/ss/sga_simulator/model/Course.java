@@ -14,14 +14,21 @@ public class Course {
 	private List<Integer> _correlatives;
 
 	public Course(String name, int room, int code, int credits,
-			double repeating_course_probability, List<Integer> correlatives, Schedule schedule) {
+			double repeating_course_probability, List<Integer> correlatives,
+			Schedule schedule) throws IllegalArgumentException {
 		_name = name;
 		_room = room;
 		_code = code;
 		_credits = credits;
 		_repeating_course_probability = repeating_course_probability;
 		_correlatives = correlatives;
-		_schedule = schedule;
+		int duration = schedule.duration();
+		if (duration == 0 || duration == _credits) {
+			_schedule = schedule;
+		} else {
+			throw new IllegalArgumentException(
+					"Credits amount must be equal to toal week duration of the course");
+		}
 	}
 
 	public String name() {
@@ -47,7 +54,7 @@ public class Course {
 	public int credits() {
 		return _credits;
 	}
-	
+
 	public boolean overlaps(Course course) {
 		return _schedule.overlaps(course._schedule);
 	}
