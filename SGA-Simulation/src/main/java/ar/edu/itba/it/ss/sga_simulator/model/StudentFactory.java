@@ -28,6 +28,7 @@ public enum StudentFactory {
 			if (i % 10 == 0) {
 				System.out.print(".");
 			}
+			System.out.println(i);
 		}
 		System.out.println("\n" + carreer.studentsAmount()
 				+ " alumnos creados.");

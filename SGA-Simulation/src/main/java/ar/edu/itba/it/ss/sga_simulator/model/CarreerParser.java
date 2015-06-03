@@ -82,12 +82,37 @@ public class CarreerParser {
 													.getAttribute("id")));
 								}
 							}
+							NodeList carreer_course_days = ((Element) course_element
+									.getElementsByTagName("schedule").item(0))
+									.getElementsByTagName("day");
+
+							Schedule schedule = new Schedule();
+							for (int cd = 0; cd < carreer_course_days
+									.getLength(); cd++) {
+								Node day = carreer_course_days.item(cd);
+
+								if (course.getNodeType() == Node.ELEMENT_NODE) {
+									Element day_element = (Element) day;
+									String week_day = day_element
+											.getAttribute("id");
+									int beginning = Integer
+											.parseInt(day_element
+													.getElementsByTagName(
+															"beginning")
+													.item(0).getTextContent());
+									int ending = Integer.parseInt(day_element
+											.getElementsByTagName("ending")
+											.item(0).getTextContent());
+									schedule.addSchedule(week_day, beginning,
+											ending);
+								}
+							}
 							Course carreer_course = new Course(
 									carreer_course_name, 0,
 									carreer_course_code,
 									carreer_course_credits,
 									repeating_course_probability,
-									carreer_course_correlatives);
+									carreer_course_correlatives, schedule);
 							quarter_courses.put(carreer_course_code,
 									carreer_course);
 						}

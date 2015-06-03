@@ -31,10 +31,12 @@ public class SimulatorController {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
 		List<Student> students = Student.getFactory().create(carreer);
 		_matriculationService.prepareDesiredCourses(carreer, students);
-		SimulationConfiguration sc = new SimulationConfiguration("SimulationConfiguration.xml");
+		SimulationConfiguration sc = new SimulationConfiguration(
+				"SimulationConfiguration.xml");
 		List<List<Student>> divided_students = divideStudentsByCriteria(
 				students, sc.criteria(), sc.matriculationDays());
 		_stats.setSpeed(sc.speed());
+		_stats.setTotalStudents(students.size());
 		StudentsQueue queue = StudentsQueue.getInstance();
 		queue.initialize("QueueConfiguration.xml", divided_students);
 		new Server(_stats, "ServerConfiguration.xml", sc.speed()).start();
@@ -43,16 +45,16 @@ public class SimulatorController {
 
 	private List<List<Student>> divideStudentsByCriteria(
 			List<Student> students, Comparator<Student> criteria,
-			int carreer_years) {
+			int matriculation_days) {
 		List<List<Student>> ans = new ArrayList<List<Student>>();
-		int batch_size = students.size() / carreer_years;
+		int batch_size = students.size() / matriculation_days;
 		Collections.sort(students, criteria);
-		for (int i = 0; i < carreer_years; i++) {
-			List<Student> students_in_year_i = new ArrayList<Student>();
+		for (int i = 0; i < matriculation_days; i++) {
+			List<Student> students_in_day_i = new ArrayList<Student>();
 			for (int j = 0; j < batch_size; j++) {
-				students_in_year_i.add(students.get(i + j));
+				students_in_day_i.add(students.get(i*batch_size + j));
 			}
-			ans.add(students_in_year_i);
+			ans.add(students_in_day_i);
 		}
 		return ans;
 	}

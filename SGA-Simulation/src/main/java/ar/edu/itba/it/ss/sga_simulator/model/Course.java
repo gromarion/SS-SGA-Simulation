@@ -14,13 +14,14 @@ public class Course {
 	private List<Integer> _correlatives;
 
 	public Course(String name, int room, int code, int credits,
-			double repeating_course_probability, List<Integer> correlatives) {
+			double repeating_course_probability, List<Integer> correlatives, Schedule schedule) {
 		_name = name;
 		_room = room;
 		_code = code;
 		_credits = credits;
 		_repeating_course_probability = repeating_course_probability;
 		_correlatives = correlatives;
+		_schedule = schedule;
 	}
 
 	public String name() {
@@ -48,8 +49,7 @@ public class Course {
 	}
 	
 	public boolean overlaps(Course course) {
-		return false;
-//		return _schedule.overlaps(course._schedule);
+		return _schedule.overlaps(course._schedule);
 	}
 
 	public String toString() {

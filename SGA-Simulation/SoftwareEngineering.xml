@@ -35,6 +35,8 @@
 				<credits>6</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9358">
 				<name>Algebra</name>
@@ -43,6 +45,8 @@
 				<credits>9</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9424">
 				<name>Metodologia del Aprendizaje</name>
@@ -51,6 +55,8 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -91,6 +97,8 @@
 					<correlative id="9358">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9341">
 				<name>Fisica I</name>
@@ -101,6 +109,8 @@
 					<correlative id="9326">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9359">
 				<name>Matematica Discreta</name>
@@ -111,6 +121,8 @@
 					<correlative id="9358">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 	</year>
@@ -123,6 +135,8 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="7232">
 				<name>Diseño y Procesamiento de Doc Xml</name>
@@ -169,6 +183,8 @@
 					<correlative id="9358">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9343">
 				<name>Fisica III</name>
@@ -181,6 +197,8 @@
 					<correlative id="9341">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -235,6 +253,8 @@
 					<correlative id="9328">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9342">
 				<name>Fisica II</name>
@@ -245,6 +265,8 @@
 					<correlative id="9328">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 	</year>
@@ -415,6 +437,8 @@
 					<correlative id="9328">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9421">
 				<name>Formacion General I</name>
@@ -423,6 +447,8 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 	</year>
@@ -437,6 +463,8 @@
 					<correlative id="9324">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="6132">
 				<name>Derecho para Ingenieros</name>
@@ -445,6 +473,8 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="7240">
 				<name>Ingenieria del Software II</name>
@@ -497,6 +527,8 @@
 					<correlative id="7202">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="9375">
 				<name>Metodos Numericos Avanzados</name>
@@ -507,6 +539,8 @@
 					<correlative id="9307">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -603,6 +637,8 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 			<course id="7245">
 				<name>Proyecto Final</name>

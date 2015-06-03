@@ -1,8 +1,6 @@
 package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,12 +18,10 @@ public class Server extends Thread {
 	private long _timeout;
 	private boolean _log_enabled;
 	private int _speed;
-	private List<Student> _matriculated_students;
 
 	public Server(StatsService stats, String xml_path, int speed) {
 		_speed = speed;
 		parseConfigurationFile(xml_path);
-		_matriculated_students = new ArrayList<Student>();
 		_queue = StudentsQueue.getInstance();
 		_stats = stats;
 	}
@@ -42,10 +38,11 @@ public class Server extends Thread {
 			}
 		}
 		log("SERVER> Matriculación SGA completada.");
-		log("SERVER> Alumnos matriculados: " + _matriculated_students.size());
+		log("SERVER> Alumnos matriculados: " + _stats.matriculatedStudents());
 		log("SERVER> Timeouts: " + _stats.timeouts());
 		_stats.setDuration((System.currentTimeMillis() - start) * _speed);
 		_stats.printDuration();
+		log("SERVER> Alumnos satisfechos: " + _stats.satisfiedStudentsAmount());
 	}
 
 	private void attendRequest() throws InterruptedException {
@@ -53,16 +50,16 @@ public class Server extends Thread {
 			return;
 		} else {
 			Student student = _queue.poll();
-			log("SERVER> Atendiendo legajo:" + student.id());
-			sleep(_time_per_request);// Demora un tiempo _time_per_request
-										// en
-			// atender la solicitud
-			// del estudiante
 			if (System.currentTimeMillis() - student.queueTime() > _timeout) {
 				_queue.add(student);
 				_stats.addTimeout();
 				log("SERVER> Legajo:" + student.id() + " >> TIMEOUT--");
 			} else {
+				log("SERVER> Atendiendo legajo:" + student.id());
+				sleep(_time_per_request);// Demora un tiempo _time_per_request
+				// en
+				// atender la solicitud
+				// del estudiante
 				attend(student);
 			}
 		}
@@ -93,9 +90,11 @@ public class Server extends Thread {
 	}
 
 	private void addMatriculatedStudent(Student student) {
-		_matriculated_students.add(student);
 		log("SERVER> Legajo:" + student.id() + " >> TERMINO--");
 		_stats.addMatriculatedStudent();
+		if (student.isSatisfied()) {
+			_stats.addStatisfiedStudent();
+		}
 	}
 
 	private void parseConfigurationFile(String xml_path) {

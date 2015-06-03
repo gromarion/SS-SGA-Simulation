@@ -17,6 +17,10 @@ public class Schedule {
 	public Schedule(Map<String, Timetable> schedule) {
 		_schedule = schedule;
 	}
+	
+	public void addSchedule(String day, int beginning, int ending) {
+		_schedule.put(day, new Timetable(beginning, ending));
+	}
 
 	public boolean overlaps(Schedule schedule) {
 		for (String week_day : _schedule.keySet()) {

@@ -1,16 +1,14 @@
 package ar.edu.itba.it.ss.sga_simulator.service;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.springframework.stereotype.Service;
 
 @Service
 public class StatsService {
 
-	private AtomicInteger _total_students;
-	private AtomicInteger _matriculated_students;
-	private AtomicInteger _not_matriculated_students;
-	private AtomicInteger _timeouts; // self explained
+	private int _total_students;
+	private int _matriculated_students;
+	private int _not_matriculated_students;
+	private int _timeouts; // self explained
 	private long _duration; // time since the simulation started
 	private long _start; // time when the simluation started
 	private int _daytime; // a moment of time during the day [0,1,2,3,....,23]
@@ -18,45 +16,42 @@ public class StatsService {
 	private static final int MILLIS_IN_AN_HOUR = 3600000;
 	public static final int MILLIS_IN_A_MINUTE = 60000;
 	private int _speed;
+	private int _satisfied_students_amount;
 
 	public void setSpeed(int speed) {
-		_total_students = new AtomicInteger();
-		_matriculated_students = new AtomicInteger();
-		_not_matriculated_students = new AtomicInteger();
-		_timeouts = new AtomicInteger();
 		_speed = speed;
 	}
 
 	public void setTotalStudents(int total_students) {
-		_total_students.set(total_students);
+		_total_students = total_students;
 	}
 
 	public void addMatriculatedStudent() {
-		_matriculated_students.incrementAndGet();
+		_matriculated_students++;
 	}
 
 	public void addNotMatriculatedStudent() {
-		_not_matriculated_students.incrementAndGet();
+		_not_matriculated_students++;
 	}
 
 	public int totalStudents() {
-		return _total_students.intValue();
+		return _total_students;
 	}
 
 	public int matriculatedStudents() {
-		return _matriculated_students.intValue();
+		return _matriculated_students;
 	}
 
 	public int notMatriculatedStudents() {
-		return _not_matriculated_students.intValue();
+		return _not_matriculated_students;
 	}
 
 	public int timeouts() {
-		return _timeouts.get();
+		return _timeouts;
 	}
 
 	public void addTimeout() {
-		_timeouts.incrementAndGet();
+		_timeouts++;
 	}
 
 	public void setDuration(long millis) {
@@ -121,5 +116,17 @@ public class StatsService {
 		int seconds = (int) seconds() % 60;
 		ans += " S: " + seconds;
 		System.out.println(ans);
+	}
+
+	public void addStatisfiedStudent() {
+		_satisfied_students_amount++;
+	}
+
+	public int satisfiedStudentsAmount() {
+		return _satisfied_students_amount;
+	}
+
+	public int insatisfiedStudentsAmount() {
+		return _total_students - _satisfied_students_amount;
 	}
 }

@@ -39,7 +39,6 @@ public class StudentsQueue extends Thread {
 		_students = students;
 		_students_amount_per_day = students.get(0).size();
 		parseConfigurationFile(xml_file);
-		_stats.setTotalStudents(_students.size());
 	}
 
 	private void parseConfigurationFile(String xml_file) {

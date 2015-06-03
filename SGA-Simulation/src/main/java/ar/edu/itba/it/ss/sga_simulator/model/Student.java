@@ -16,7 +16,7 @@ public class Student {
 	private int _current_quarter;
 	private int _id;
 	private long _queue_time;
-	
+
 	public static StudentFactory getFactory() {
 		return StudentFactory.STUDENT_FACTORY;
 	}
@@ -39,6 +39,17 @@ public class Student {
 	public boolean hasFinishedMatriculating() {
 		return _matriculated_courses.size() + _not_matriculated_courses.size() == _desired_courses
 				.size();
+	}
+
+	public float satisfactionLevel() {
+		if (_desired_courses.size() == 0) {
+			return 1.0f;
+		}
+		return ((float) _desired_courses.size()) / _matriculated_courses.size();
+	}
+
+	public boolean isSatisfied() {
+		return _matriculated_courses.size() == _desired_courses.size();
 	}
 
 	public int currentYear() {
@@ -77,7 +88,7 @@ public class Student {
 		}
 		return student_passed_course;
 	}
-	
+
 	public int repeatedCoursesAmount() {
 		return _repeated_courses_amount;
 	}
@@ -155,11 +166,13 @@ public class Student {
 		for (Course desired_course : _desired_courses) {
 			ans += desired_course.code() + "\n\t\t\t\t";
 		}
-		ans += "\nMaterias matriculadas: " + _matriculated_courses.size() + "\t";
+		ans += "\nMaterias matriculadas: " + _matriculated_courses.size()
+				+ "\t";
 		for (Integer matriculated_course : _matriculated_courses) {
 			ans += matriculated_course + "\n\t\t\t\t";
 		}
-		ans += "\nMaterias no matriculadas: " + _not_matriculated_courses.size() + "\t";
+		ans += "\nMaterias no matriculadas: "
+				+ _not_matriculated_courses.size() + "\t";
 		for (Integer not_matriculated_course : _not_matriculated_courses) {
 			ans += not_matriculated_course + "\n\t\t\t\t";
 		}
