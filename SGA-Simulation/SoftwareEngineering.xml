@@ -11,12 +11,7 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
-					<day id="lu">
-						<beginning>
-						</beginning>
-						<ending>
-						</ending>
-					</day>
+					<!-- NO FIGURABA EN LA PLANILLA -->
 				</schedule>
 			</course>
 			<course id="7203">
@@ -26,6 +21,12 @@
 				<credits>3</credits>
 				<correlatives>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="9326">
 				<name>Analisis Matematico I</name>
@@ -64,6 +65,20 @@
 					<correlative id="9358">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>13</beginning>
+						<ending>17</ending>
+					</day>
+					<day id="wed">
+						<beginning>10</beginning>
+						<ending>13</ending>
+					</day>
+					<day id="fri">
+						<beginning>10</beginning>
+						<ending>12</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="9328">
 				<name>Analisis Matematico II</name>
@@ -118,6 +133,12 @@
 					<correlative id="7231">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="wed">
+						<beginning>10</beginning>
+						<ending>13</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7233">
 				<name>Programacion Orientada a Objetos</name>
@@ -128,6 +149,16 @@
 					<correlative id="7231">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
+					<day id="thu">
+						<beginning>18</beginning>
+						<ending>21</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="9335">
 				<name>Logica Computacional</name>
@@ -162,6 +193,16 @@
 					<correlative id="7231">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+					<day id="wed">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7234">
 				<name>Estructura de Datos y Algoritmos</name>
@@ -174,6 +215,16 @@
 					<correlative id="9359">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>14</beginning>
+						<ending>16</ending>
+					</day>
+					<day id="tue">
+						<beginning>18</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="9324">
 				<name>Probabil. y Estadistica</name>
@@ -210,6 +261,16 @@
 					<correlative id="7208">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+					<day id="wed">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7235">
 				<name>Ingenieria del Software I</name>
@@ -220,6 +281,16 @@
 					<correlative id="7233">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>17</beginning>
+						<ending>20</ending>
+					</day>
+					<day id="wed">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7236">
 				<name>Interaccion Hombre-computadora (HCI)</name>
@@ -232,6 +303,16 @@
 					<correlative id="7232">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+					<day id="thu">
+						<beginning>18</beginning>
+						<ending>21</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7237">
 				<name>Base de Datos I</name>
@@ -244,6 +325,16 @@
 					<correlative id="9335">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>14</beginning>
+						<ending>17</ending>
+					</day>
+					<day id="thu">
+						<beginning>14</beginning>
+						<ending>17</ending>
+					</day>
+				</schedule>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -258,6 +349,16 @@
 					<correlative id="7211">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+					<day id="wed">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7238">
 				<name>Proyecto de Aplicaciones Web</name>
@@ -274,6 +375,16 @@
 					<correlative id="7235">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+					<day id="thu">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7239">
 				<name>Automatas, Teoria de Lenguajes y Compiladores</name>
@@ -284,6 +395,16 @@
 					<correlative id="7234">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="thu">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+					<day id="fri">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="9307">
 				<name>Metodos Numericos</name>
@@ -336,6 +457,12 @@
 					<correlative id="7235">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="thu">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7241">
 				<name>Base de Datos II</name>
@@ -348,6 +475,16 @@
 					<correlative id="7211">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>18</beginning>
+						<ending>21</ending>
+					</day>
+					<day id="tue">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7242">
 				<name>Programacion de Objetos Distribuidos</name>
@@ -382,6 +519,16 @@
 					<correlative id="9375">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
+					<day id="thu">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7227">
 				<name>Sistemas de Inteligencia Artificial</name>
@@ -394,6 +541,16 @@
 					<correlative id="9324">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="tue">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+					<day id="wed">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7243">
 				<name>Gestion de Proyectos Informaticos</name>
@@ -406,6 +563,12 @@
 					<correlative id="7240">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="wed">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 			<course id="7244">
 				<name>Criptografia y Seguridad</name>
@@ -418,6 +581,16 @@
 					<correlative id="7207">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
+					<day id="thu">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+				</schedule>
 			</course>
 		</quarter>
 	</year>
@@ -440,6 +613,8 @@
 					<correlative id="7243">
 					</correlative>
 				</correlatives>
+				<schedule>
+				</schedule>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -454,6 +629,16 @@
 					<correlative id="9343">
 					</correlative>
 				</correlatives>
+				<schedule>
+					<day id="mon">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+					<day id="wed">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
+				</schedule>
 			</course>
 		</quarter>
 	</year>
