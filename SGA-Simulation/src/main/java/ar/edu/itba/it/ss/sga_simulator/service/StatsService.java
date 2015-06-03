@@ -10,10 +10,10 @@ public class StatsService {
 	private AtomicInteger _total_students;
 	private AtomicInteger _matriculated_students;
 	private AtomicInteger _not_matriculated_students;
-	private AtomicInteger _timeouts;
-	private long _duration;
-	private long _start;
-	private int _daytime;
+	private AtomicInteger _timeouts; // self explained
+	private long _duration; // time since the simulation started
+	private long _start; // time when the simluation started
+	private int _daytime; // a moment of time during the day [0,1,2,3,....,23]
 	private int _day;
 	private static final int MILLIS_IN_AN_HOUR = 3600000;
 	public static final int MILLIS_IN_A_MINUTE = 60000;

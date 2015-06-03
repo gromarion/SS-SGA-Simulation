@@ -26,7 +26,7 @@ public class StudentsQueue extends Thread {
 	private List<List<Student>> _students;
 	private int _students_amount_per_day;
 	private boolean _log_enabled;
-	private double[] _lambdas;
+	private double[] _lambdas; // distribution of students per hour
 
 	private static final int MAX_MATRICULATION_DAYS = 5;
 

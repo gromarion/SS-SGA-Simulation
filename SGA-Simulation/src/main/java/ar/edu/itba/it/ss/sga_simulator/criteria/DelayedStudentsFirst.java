@@ -1,6 +1,8 @@
-package ar.edu.itba.it.ss.sga_simulator.model;
+package ar.edu.itba.it.ss.sga_simulator.criteria;
 
 import java.util.Comparator;
+
+import ar.edu.itba.it.ss.sga_simulator.model.Student;
 
 public class DelayedStudentsFirst implements Comparator<Student> {
 	@Override
