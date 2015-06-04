@@ -7,3 +7,4 @@ TODO:
 * Diseñar horarios faltantes para materias dictadas en el 1er cuatrimestre tales que no se solapen con materias dictadas el mismo cuatri.
 * Ajustar probabilidad de recursada de cada materia.
 * Agregar nivel de impaciencia de los alumnos.
+* Agregar materias optativas.

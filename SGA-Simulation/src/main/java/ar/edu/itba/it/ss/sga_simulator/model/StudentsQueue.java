@@ -177,17 +177,19 @@ public class StudentsQueue extends Thread {
 		System.out.println("DAYTIME = " + _stats.daytime());
 		double percentage = _lambdas.get(_stats.dayName())
 				.get(_stats.daytime()) * _students_amount_per_day;
-		if (percentage < EPSYLON) {
-			int hours = 0;
-			int current_daytime = _stats.daytime();
-			while (percentage < EPSYLON) {
-				percentage = _lambdas.get(_stats.dayName()).get(
-						current_daytime + hours)
-						* _students_amount_per_day;
-				hours++;
-			}
-			return ONE_HOUR * hours;
-		}
+//		if (percentage < EPSYLON) {
+//			long start = System.currentTimeMillis();
+//			int hours = 0;
+//			int current_daytime = _stats.daytime();
+//			while (percentage < EPSYLON) {
+//				hours++;
+//				percentage = _lambdas.get(_stats.dayName()).get(
+//						current_daytime + hours)
+//						* _students_amount_per_day;
+//			}
+//			System.out.println("Waiting " + ONE_HOUR * hours + " minutes for next student.");
+//			return ONE_HOUR * hours - ((System.currentTimeMillis() - start)/1000)/60;
+//		}
 		double mean = 60 / (percentage);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);

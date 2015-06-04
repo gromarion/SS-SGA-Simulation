@@ -29,9 +29,7 @@ public class SimulatorController {
 	@RequestMapping("/start")
 	public void start() {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
-		System.out.println(carreer);
 		List<Student> students = Student.getFactory().create(carreer);
-		System.out.println(students.get(0));
 		_matriculationService.prepareDesiredCourses(carreer, students);
 		SimulationConfiguration sc = new SimulationConfiguration(
 				"SimulationConfiguration.xml");

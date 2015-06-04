@@ -14,11 +14,11 @@ public class Schedule {
 		_schedule = new HashMap<String, Timetable>();
 	}
 
-	
-	public void addSchedule(String day, int beginning, int ending) throws IllegalArgumentException {
+	public void addSchedule(String day, int beginning, int ending)
+			throws IllegalArgumentException {
 		_schedule.put(day, new Timetable(beginning, ending));
 	}
-	
+
 	public int duration() {
 		int duration = 0;
 		for (String day : _schedule.keySet()) {
@@ -32,27 +32,17 @@ public class Schedule {
 		for (String week_day : _schedule.keySet()) {
 			Timetable self_day_timetable = _schedule.get(week_day);
 			Timetable other_day_timetable = schedule._schedule.get(week_day);
-			if (other_day_timetable != null
-					&& overlapsBeginnings(self_day_timetable,
-							other_day_timetable)
-					&& overlapsEndings(self_day_timetable, other_day_timetable)) {
-				return true;
-			}
+			return other_day_timetable != null
+					&& (self_day_timetable.beginning() == other_day_timetable
+							.beginning()
+							|| self_day_timetable.ending() == other_day_timetable
+									.ending()
+							|| (self_day_timetable.beginning() < other_day_timetable
+									.ending() && self_day_timetable.beginning() > other_day_timetable
+									.beginning()) || (self_day_timetable
+							.ending() > other_day_timetable.beginning() && self_day_timetable
+							.ending() < other_day_timetable.ending()));
 		}
 		return false;
-	}
-
-	private boolean overlapsBeginnings(Timetable self_day_timetable,
-			Timetable other_day_timetable) {
-		return self_day_timetable.beginning() <= other_day_timetable
-				.beginning()
-				|| self_day_timetable.beginning() >= other_day_timetable
-						.beginning();
-	}
-
-	private boolean overlapsEndings(Timetable self_day_timetable,
-			Timetable other_day_timetable) {
-		return self_day_timetable.ending() <= other_day_timetable.ending()
-				|| self_day_timetable.ending() >= other_day_timetable.ending();
 	}
 }

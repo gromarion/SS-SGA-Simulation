@@ -134,6 +134,17 @@ public class Student {
 		return null;
 	}
 
+	public boolean mayCourse(Course course) {
+		boolean passed_correlatives = true;
+		for (int correlative : course.correlatives()) {
+			passed_correlatives &= _passed_courses.contains(correlative);
+			if (passed_correlatives == false) {
+				return false;
+			}
+		}
+		return !passedCourse(course.code()) && passed_correlatives;
+	}
+
 	public boolean canCourse(Course course) {
 		boolean passed_correlatives = true;
 		for (int correlative : course.correlatives()) {
@@ -142,8 +153,9 @@ public class Student {
 				return false;
 			}
 		}
-		return !passedCourse(course.code()) && course.isDictatingThisQuarter()
-				&& passed_correlatives && !overlaps(course);
+		return !passedCourse(course.code())
+				&& course.isBeingDictatedThisQuarter() && passed_correlatives
+				&& !overlaps(course);
 	}
 
 	private boolean overlaps(Course course) {

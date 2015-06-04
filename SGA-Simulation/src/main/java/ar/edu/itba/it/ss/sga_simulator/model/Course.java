@@ -30,7 +30,8 @@ public class Course {
 			_schedule = schedule;
 		} else {
 			throw new IllegalArgumentException(
-					"Credits amount must be equal to toal week duration of the course");
+					_name
+							+ ": Credits amount must be equal to toal week duration of the course");
 		}
 	}
 
@@ -75,7 +76,7 @@ public class Course {
 		return course + "\n";
 	}
 
-	public boolean isDictatingThisQuarter() {
+	public boolean isBeingDictatedThisQuarter() {
 		if (_schedule.duration() == 0) {
 			return _is_final_project;
 		}

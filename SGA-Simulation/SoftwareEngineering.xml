@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <carreer>
-	<students>1000</students>
+	<students>2500</students>
 	<year id="1">
 		<quarter id="1">
 			<course id="3108">
@@ -11,7 +11,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
-					<!-- NO FIGURABA EN LA PLANILLA -->
+					<day id="mon">
+						<beginning>11</beginning>
+						<ending>14</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -38,6 +41,14 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="wed">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
+					<day id="thu">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -49,6 +60,14 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="tue">
+						<beginning>8</beginning>
+						<ending>13</ending>
+					</day>
+					<day id="fri">
+						<beginning>8</beginning>
+						<ending>12</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -60,6 +79,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="fri">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -104,6 +127,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
+					<day id="thu">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -117,6 +148,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="tue">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
+					<day id="thu">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -130,6 +169,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
+					<day id="fri">
+						<beginning>13</beginning>
+						<ending>16</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -145,6 +192,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="tue">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -196,6 +247,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>11</beginning>
+						<ending>14</ending>
+					</day>
+					<day id="thu">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -211,6 +270,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="wed">
+						<beginning>14</beginning>
+						<ending>17</ending>
+					</day>
+					<day id="fri">
+						<beginning>8</beginning>
+						<ending>11</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -270,6 +337,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>9</beginning>
+						<ending>12</ending>
+					</day>
+					<day id="wed">
+						<beginning>9</beginning>
+						<ending>12</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -283,6 +358,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="tue">
+						<beginning>9</beginning>
+						<ending>12</ending>
+					</day>
+					<day id="thu">
+						<beginning>9</beginning>
+						<ending>12</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -463,6 +546,10 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="wed">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -474,6 +561,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="fri">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -491,6 +582,10 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -502,6 +597,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="tue">
+						<beginning>12</beginning>
+						<ending>15</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -572,6 +671,14 @@
 					</correlative>
 				</correlatives>
 				<schedule>
+					<day id="thu">
+						<beginning>16</beginning>
+						<ending>19</ending>
+					</day>
+					<day id="fri">
+						<beginning>15</beginning>
+						<ending>18</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>
@@ -675,6 +782,10 @@
 				<correlatives>
 				</correlatives>
 				<schedule>
+					<day id="mon">
+						<beginning>19</beginning>
+						<ending>22</ending>
+					</day>
 				</schedule>
 				<final-project>false</final-project>
 			</course>

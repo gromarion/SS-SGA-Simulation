@@ -36,7 +36,7 @@ public class MatriculationService {
 					current_year).get(current_quarter);
 			for (Integer course_code : possible_courses.keySet()) {
 				Course possible_course = possible_courses.get(course_code);
-				if (student.canCourse(possible_course)) {
+				if (student.mayCourse(possible_course)) {
 					courses.add(possible_course);
 					credits += possible_course.credits();
 				}
