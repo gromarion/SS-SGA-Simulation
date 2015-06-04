@@ -17,12 +17,17 @@ public class StatsService {
 	public static final int MILLIS_IN_A_MINUTE = 60000;
 	private int _speed;
 	private int _satisfied_students_amount;
+	private boolean _log_enabled;
+	
+	public void logEnabled(boolean value) {
+		_log_enabled = value;
+	}
 
-	public void setSpeed(int speed) {
+	public void speed(int speed) {
 		_speed = speed;
 	}
 
-	public void setTotalStudents(int total_students) {
+	public void totalStudents(int total_students) {
 		_total_students = total_students;
 	}
 
@@ -54,7 +59,7 @@ public class StatsService {
 		_timeouts++;
 	}
 
-	public void setDuration(long millis) {
+	public void duration(long millis) {
 		_duration = millis;
 	}
 
@@ -88,6 +93,13 @@ public class StatsService {
 		if (current_daytime != _daytime) {
 			_day = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR) / 24;
 			_daytime = current_daytime;
+			log("DAY: " + dayName() + ", TIME: " + _daytime);
+		}
+	}
+	
+	private void log(String message) {
+		if (_log_enabled) {
+			System.out.println(message);
 		}
 	}
 
@@ -97,6 +109,28 @@ public class StatsService {
 
 	public int day() {
 		return _day;
+	}
+	
+	public String dayName() {
+		int day = day() % 7;
+		switch (day) {
+		case 0:
+			return "mon";
+		case 1:
+			return "tue";
+		case 2:
+			return "wed";
+		case 3:
+			return "thu";
+		case 4:
+			return "fri";
+		case 5:
+			return "sat";
+		case 6:
+			return "sun";
+		default:
+			return null;
+		}
 	}
 
 	public int speed() {

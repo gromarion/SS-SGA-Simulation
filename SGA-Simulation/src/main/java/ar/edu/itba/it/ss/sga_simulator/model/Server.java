@@ -40,7 +40,7 @@ public class Server extends Thread {
 		log("SERVER> Matriculación SGA completada.");
 		log("SERVER> Alumnos matriculados: " + _stats.matriculatedStudents());
 		log("SERVER> Timeouts: " + _stats.timeouts());
-		_stats.setDuration((System.currentTimeMillis() - start) * _speed);
+		_stats.duration((System.currentTimeMillis() - start) * _speed);
 		_stats.printDuration();
 		log("SERVER> Alumnos satisfechos: " + _stats.satisfiedStudentsAmount());
 	}

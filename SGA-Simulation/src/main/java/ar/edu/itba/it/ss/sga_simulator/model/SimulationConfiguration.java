@@ -20,6 +20,7 @@ public class SimulationConfiguration {
 	private int _matriculation_days;
 	private Comparator<Student> _criteria;
 	private static final int DEFAULT_INT_VALUE = 1;
+	private boolean _log_enabled;
 
 	public SimulationConfiguration(String xml_file) {
 		try {
@@ -27,6 +28,7 @@ public class SimulationConfiguration {
 			_speed = parseInt(simulation, "speed");
 			_matriculation_days = parseInt(simulation, "matriculation-days");
 			_criteria = parseCriteria(simulation);
+			_log_enabled = parseBoolean(simulation);
 		} catch (Exception e) {
 			_speed = DEFAULT_INT_VALUE;
 			_matriculation_days = DEFAULT_INT_VALUE;
@@ -36,6 +38,10 @@ public class SimulationConfiguration {
 
 	public int speed() {
 		return _speed;
+	}
+	
+	public boolean logEnabled() {
+		return _log_enabled;
 	}
 
 	public int matriculationDays() {
@@ -76,5 +82,10 @@ public class SimulationConfiguration {
 		default:
 			return new OlderStudentsFirst();
 		}
+	}
+
+	private static boolean parseBoolean(Element element) {
+		return Boolean.parseBoolean(element.getElementsByTagName("log-enabled")
+				.item(0).getTextContent());
 	}
 }

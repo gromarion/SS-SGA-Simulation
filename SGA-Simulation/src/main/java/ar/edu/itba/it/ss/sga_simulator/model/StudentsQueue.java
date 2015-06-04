@@ -1,7 +1,10 @@
 package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -26,18 +29,24 @@ public class StudentsQueue extends Thread {
 	private List<List<Student>> _students;
 	private int _students_amount_per_day;
 	private boolean _log_enabled;
-	private double[] _lambdas; // distribution of students per hour
+	private Map<String, List<Double>> _lambdas; // distribution of students per
+												// day, per hour
+	private int _matriculation_days;
 
-	private static final int MAX_MATRICULATION_DAYS = 5;
+	private static final int ONE_HOUR = 60;
+	private static final double EPSYLON = 0.001;
 
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
 	}
 
-	public void initialize(String xml_file, List<List<Student>> students) {
+	public void initialize(String xml_file, List<List<Student>> students,
+			int matriculation_days) {
 		_queue = new ConcurrentLinkedQueue<Student>();
 		_students = students;
 		_students_amount_per_day = students.get(0).size();
+		_lambdas = new HashMap<String, List<Double>>();
+		_matriculation_days = matriculation_days;
 		parseConfigurationFile(xml_file);
 	}
 
@@ -52,21 +61,25 @@ public class StudentsQueue extends Thread {
 			doc.getDocumentElement().normalize();
 			Element queue = (Element) doc.getElementsByTagName("queue").item(0);
 			_log_enabled = getBoolValue(queue, "log-enabled");
-			_lambdas = parseLambdas(queue);
+			NodeList days = queue.getElementsByTagName("day");
+			for (int i = 0; i < days.getLength(); i++) {
+				parseLambdas((Element) days.item(i));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private double[] parseLambdas(Element element) {
+	private void parseLambdas(Element element) {
+		String day_name = element.getAttribute("id");
 		NodeList lambdas = ((Element) (element.getElementsByTagName("means")
 				.item(0))).getElementsByTagName("mean");
-		int lambdas_amount = lambdas.getLength();
-		double[] ans = new double[lambdas_amount];
-		for (int i = 0; i < lambdas_amount; i++) {
-			ans[i] = Double.parseDouble(lambdas.item(i).getTextContent());
+		List<Double> lambas_per_day = new ArrayList<Double>();
+		for (int i = 0; i < lambdas.getLength(); i++) {
+			lambas_per_day.add(Double.parseDouble(lambdas.item(i)
+					.getTextContent()));
 		}
-		return ans;
+		_lambdas.put(day_name, lambas_per_day);
 	}
 
 	public static StudentsQueue getInstance() {
@@ -92,12 +105,12 @@ public class StudentsQueue extends Thread {
 	// exponencial.
 	public void run() {
 		Random random = new Random();
-		while (_stats.day() < MAX_MATRICULATION_DAYS && thereAreStudentsLeft()) {
+		while (_stats.day() < _matriculation_days && thereAreStudentsLeft()) {
 			int current_day = _stats.day();
-			if (current_day >= MAX_MATRICULATION_DAYS) {
+			if (current_day >= _matriculation_days) {
 				break;
 			}
-			_stats.updateDaytime(_lambdas.length);
+			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
 			int students_left = _students.get(current_day).size();
 			if (students_left > 0) {
 				try {
@@ -117,7 +130,7 @@ public class StudentsQueue extends Thread {
 			}
 		}
 		while (!finished()) {
-			_stats.updateDaytime(_lambdas.length);
+			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
 		}
 	}
 
@@ -126,7 +139,7 @@ public class StudentsQueue extends Thread {
 	}
 
 	public boolean finished() {
-		if (_stats.day() >= MAX_MATRICULATION_DAYS) {
+		if (_stats.day() >= _matriculation_days) {
 			return true;
 		}
 		return _queue.size() == 0 && !thereAreStudentsLeft();
@@ -135,7 +148,7 @@ public class StudentsQueue extends Thread {
 	private boolean thereAreStudentsLeft() {
 		boolean more_students = true;
 		for (List<Student> students : _students) {
-			more_students |= students.size() > 0;
+			more_students = more_students || students.size() > 0;
 		}
 		return more_students;
 	}
@@ -160,7 +173,22 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		double mean = 60 / (_lambdas[_stats.daytime()] * _students_amount_per_day);
+		System.out.println("DAYNAME = " + _stats.dayName());
+		System.out.println("DAYTIME = " + _stats.daytime());
+		double percentage = _lambdas.get(_stats.dayName())
+				.get(_stats.daytime()) * _students_amount_per_day;
+		if (percentage < EPSYLON) {
+			int hours = 0;
+			int current_daytime = _stats.daytime();
+			while (percentage < EPSYLON) {
+				percentage = _lambdas.get(_stats.dayName()).get(
+						current_daytime + hours)
+						* _students_amount_per_day;
+				hours++;
+			}
+			return ONE_HOUR * hours;
+		}
+		double mean = 60 / (percentage);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}
