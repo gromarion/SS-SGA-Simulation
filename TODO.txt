@@ -1,0 +1,9 @@
+TODO:
+=====
+
+* Modificar Queue.xml para que tenga distribuciones por días en particular en lugar de una genérica para todos los días.
+* Agregar cupos a los cursos en la carrera.
+* Agregar comportamiento multi-tasking al server.
+* Diseñar horarios faltantes para materias dictadas en el 1er cuatrimestre tales que no se solapen con materias dictadas el mismo cuatri.
+* Ajustar probabilidad de recursada de cada materia.
+* Agregar nivel de impaciencia de los alumnos.

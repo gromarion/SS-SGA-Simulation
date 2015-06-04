@@ -142,8 +142,8 @@ public class Student {
 				return false;
 			}
 		}
-		return !passedCourse(course.code()) && passed_correlatives
-				&& !overlaps(course);
+		return !passedCourse(course.code()) && course.isDictatingThisQuarter()
+				&& passed_correlatives && !overlaps(course);
 	}
 
 	private boolean overlaps(Course course) {

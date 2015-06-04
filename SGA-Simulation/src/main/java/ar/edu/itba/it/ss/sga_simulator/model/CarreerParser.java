@@ -66,6 +66,11 @@ public class CarreerParser {
 									.parseInt(course_element
 											.getElementsByTagName("credits")
 											.item(0).getTextContent());
+							boolean is_final_project = Boolean
+									.parseBoolean(course_element
+											.getElementsByTagName(
+													"final-project").item(0)
+											.getTextContent());
 							NodeList correlatives = ((Element) course_element
 									.getElementsByTagName("correlatives").item(
 											0))
@@ -112,7 +117,8 @@ public class CarreerParser {
 									carreer_course_code,
 									carreer_course_credits,
 									repeating_course_probability,
-									carreer_course_correlatives, schedule);
+									carreer_course_correlatives,
+									is_final_project, schedule);
 							quarter_courses.put(carreer_course_code,
 									carreer_course);
 						}

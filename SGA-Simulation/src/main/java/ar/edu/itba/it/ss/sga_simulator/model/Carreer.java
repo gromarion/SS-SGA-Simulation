@@ -36,7 +36,7 @@ public class Carreer {
 
 	public String toString() {
 		String ans = _name + "\nMaterias: " + _courses_amount + "\n";
-		for (int i = 1; i < years(); i++) {
+		for (int i = 1; i <= years(); i++) {
 			Map<Integer, Map<Integer, Course>> quarters = courses(i);
 			for (Integer quarter : quarters.keySet()) {
 				ans += "CUATRIMESTRE " + quarter + "\n";

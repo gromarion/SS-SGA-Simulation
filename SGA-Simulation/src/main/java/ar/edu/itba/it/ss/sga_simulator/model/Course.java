@@ -12,16 +12,19 @@ public class Course {
 	private double _repeating_course_probability;
 	private Schedule _schedule;
 	private List<Integer> _correlatives;
+	private boolean _is_final_project;
 
 	public Course(String name, int room, int code, int credits,
 			double repeating_course_probability, List<Integer> correlatives,
-			Schedule schedule) throws IllegalArgumentException {
+			boolean isFinalProject, Schedule schedule)
+			throws IllegalArgumentException {
 		_name = name;
 		_room = room;
 		_code = code;
 		_credits = credits;
 		_repeating_course_probability = repeating_course_probability;
 		_correlatives = correlatives;
+		_is_final_project = isFinalProject;
 		int duration = schedule.duration();
 		if (duration == 0 || duration == _credits) {
 			_schedule = schedule;
@@ -64,10 +67,18 @@ public class Course {
 				+ "\nCreditos:\t\t\t" + _credits + "\nCupo:\t\t\t\t" + _room
 				+ "\nAlumnos: \t\t\t" + _enrolled_students
 				+ "\nProbabilidad de Recursar: \t"
-				+ _repeating_course_probability + "\nCorrelativas:\t\t\t";
+				+ _repeating_course_probability + "\nEs proyecto final: \t\t"
+				+ _is_final_project + "\nCorrelativas:\t\t\t";
 		for (Integer correlative : _correlatives) {
 			course += correlative + "\n\t\t\t\t";
 		}
 		return course + "\n";
+	}
+
+	public boolean isDictatingThisQuarter() {
+		if (_schedule.duration() == 0) {
+			return _is_final_project;
+		}
+		return true;
 	}
 }

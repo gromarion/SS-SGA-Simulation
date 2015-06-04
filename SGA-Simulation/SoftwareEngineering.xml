@@ -13,6 +13,7 @@
 				<schedule>
 					<!-- NO FIGURABA EN LA PLANILLA -->
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7203">
 				<name>Introduccion a la Informatica</name>
@@ -27,6 +28,7 @@
 						<ending>11</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9326">
 				<name>Analisis Matematico I</name>
@@ -37,6 +39,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9358">
 				<name>Algebra</name>
@@ -47,6 +50,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9424">
 				<name>Metodologia del Aprendizaje</name>
@@ -57,6 +61,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -85,6 +90,7 @@
 						<ending>12</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9328">
 				<name>Analisis Matematico II</name>
@@ -99,6 +105,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9341">
 				<name>Fisica I</name>
@@ -111,6 +118,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9359">
 				<name>Matematica Discreta</name>
@@ -123,6 +131,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 	</year>
@@ -137,6 +146,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7232">
 				<name>Diseño y Procesamiento de Doc Xml</name>
@@ -153,6 +163,7 @@
 						<ending>13</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7233">
 				<name>Programacion Orientada a Objetos</name>
@@ -173,6 +184,7 @@
 						<ending>21</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9335">
 				<name>Logica Computacional</name>
@@ -185,6 +197,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9343">
 				<name>Fisica III</name>
@@ -199,6 +212,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -221,6 +235,7 @@
 						<ending>19</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7234">
 				<name>Estructura de Datos y Algoritmos</name>
@@ -243,6 +258,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9324">
 				<name>Probabil. y Estadistica</name>
@@ -255,6 +271,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9342">
 				<name>Fisica II</name>
@@ -267,6 +284,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 	</year>
@@ -293,6 +311,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7235">
 				<name>Ingenieria del Software I</name>
@@ -313,6 +332,7 @@
 						<ending>19</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7236">
 				<name>Interaccion Hombre-computadora (HCI)</name>
@@ -335,6 +355,7 @@
 						<ending>21</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7237">
 				<name>Base de Datos I</name>
@@ -357,6 +378,7 @@
 						<ending>17</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -381,6 +403,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7238">
 				<name>Proyecto de Aplicaciones Web</name>
@@ -407,6 +430,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7239">
 				<name>Automatas, Teoria de Lenguajes y Compiladores</name>
@@ -427,6 +451,7 @@
 						<ending>18</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9307">
 				<name>Metodos Numericos</name>
@@ -439,6 +464,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9421">
 				<name>Formacion General I</name>
@@ -449,6 +475,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 	</year>
@@ -465,6 +492,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="6132">
 				<name>Derecho para Ingenieros</name>
@@ -475,6 +503,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7240">
 				<name>Ingenieria del Software II</name>
@@ -493,6 +522,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7241">
 				<name>Base de Datos II</name>
@@ -515,6 +545,7 @@
 						<ending>18</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7242">
 				<name>Programacion de Objetos Distribuidos</name>
@@ -529,6 +560,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="9375">
 				<name>Metodos Numericos Avanzados</name>
@@ -541,6 +573,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -563,6 +596,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7227">
 				<name>Sistemas de Inteligencia Artificial</name>
@@ -585,6 +619,7 @@
 						<ending>18</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7243">
 				<name>Gestion de Proyectos Informaticos</name>
@@ -603,6 +638,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7244">
 				<name>Criptografia y Seguridad</name>
@@ -625,6 +661,7 @@
 						<ending>19</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 	</year>
@@ -639,6 +676,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 			<course id="7245">
 				<name>Proyecto Final</name>
@@ -651,6 +689,7 @@
 				</correlatives>
 				<schedule>
 				</schedule>
+				<final-project>True</final-project>
 			</course>
 		</quarter>
 		<quarter id="2">
@@ -675,6 +714,7 @@
 						<ending>22</ending>
 					</day>
 				</schedule>
+				<final-project>false</final-project>
 			</course>
 		</quarter>
 	</year>
