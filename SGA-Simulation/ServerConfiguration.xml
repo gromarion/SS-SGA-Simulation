@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server>
-	<time-per-request>500</time-per-request>
+	<time-per-request>250</time-per-request>
 	<timeout>30000</timeout>
 	<log-enabled>true</log-enabled>
 </server>

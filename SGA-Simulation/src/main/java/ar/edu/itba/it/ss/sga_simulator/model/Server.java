@@ -72,18 +72,28 @@ public class Server extends Thread {
 	}
 
 	private void attend(Student student) {
-		Course course = student.getADesiredCourse();
-		if (course != null) {
-			if (student.canCourse(course)) {
-				student.addMatriculatedCourse(course);
-			} else {
-				student.addNotMatriculatedCourse(course);
-			}
-			if (!student.hasFinishedMatriculating()) {
-				_queue.add(student);
+		Action student_action = student.getAction();
+		if (student_action != null && !student_action.isClickAction()) {
+			Course course = student_action.course();
+			if (course != null) {
+				if (student.canCourse(course)) {
+					student.addMatriculatedCourse(course);
+				} else {
+					student.addNotMatriculatedCourse(course);
+				}
+				checkFinishedMatriculating(student);
 			} else {
 				addMatriculatedStudent(student);
 			}
+			student.consumeAction();
+		} else {
+			checkFinishedMatriculating(student);
+		}
+	}
+	
+	private void checkFinishedMatriculating(Student student) {
+		if (!student.hasFinishedMatriculating()) {
+			_queue.add(student);
 		} else {
 			addMatriculatedStudent(student);
 		}

@@ -16,6 +16,8 @@ public class Student {
 	private int _current_quarter;
 	private int _id;
 	private long _queue_time;
+	private List<Action> _actions;
+	private static final int CLICKS_PER_ACTION = 2;
 
 	public static StudentFactory getFactory() {
 		return StudentFactory.STUDENT_FACTORY;
@@ -31,14 +33,19 @@ public class Student {
 		_passed_courses = new ArrayList<Integer>();
 		_matriculated_courses = new ArrayList<Integer>();
 		_not_matriculated_courses = new ArrayList<Integer>();
+		_actions = new ArrayList<Action>();
 		_current_year = current_year;
 		_current_quarter = current_quarter;
 		_id = id;
+		prepareActionList();
+	}
+	
+	public List<Action> actionList() {
+		return _actions;
 	}
 
 	public boolean hasFinishedMatriculating() {
-		return _matriculated_courses.size() + _not_matriculated_courses.size() == _desired_courses
-				.size();
+		return _actions.size() == 0;
 	}
 
 	public float satisfactionLevel() {
@@ -122,6 +129,7 @@ public class Student {
 
 	public void addDesiredCourses(List<Course> courses) {
 		_desired_courses = courses;
+		prepareActionList();
 	}
 
 	public Course getADesiredCourse() {
@@ -132,6 +140,10 @@ public class Student {
 			}
 		}
 		return null;
+	}
+	
+	public void consumeAction() {
+		_actions.remove(0);
 	}
 
 	public boolean mayCourse(Course course) {
@@ -206,5 +218,21 @@ public class Student {
 
 	public long queueTime() {
 		return _queue_time;
+	}
+	
+	private void prepareActionList() {
+		for (Course course : _desired_courses) {
+			for (int i = 0; i < CLICKS_PER_ACTION; i++) {
+				_actions.add(new Action());		
+			}
+			_actions.add(new Action(course));
+		}
+	}
+
+	public Action getAction() {
+		if (_actions.size() > 0) {
+			return _actions.get(0); 
+		}
+		return null;
 	}
 }
