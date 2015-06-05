@@ -15,10 +15,11 @@ public class StatsService {
 	private int _day;
 	private static final int MILLIS_IN_AN_HOUR = 3600000;
 	public static final int MILLIS_IN_A_MINUTE = 60000;
+	public static final int HOURS_IN_A_DAY = 24;
 	private int _speed;
 	private int _satisfied_students_amount;
 	private boolean _log_enabled;
-	
+
 	public void logEnabled(boolean value) {
 		_log_enabled = value;
 	}
@@ -87,16 +88,16 @@ public class StatsService {
 		_start = System.currentTimeMillis();
 	}
 
-	public void updateDaytime(int hours_in_a_day) {
+	public void updateDaytime() {
 		int current_daytime = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR)
-				% hours_in_a_day;
+				% HOURS_IN_A_DAY;
 		if (current_daytime != _daytime) {
 			_day = (int) ((elapsedTime(_start)) / MILLIS_IN_AN_HOUR) / 24;
 			_daytime = current_daytime;
 			log("DAY: " + dayName() + ", TIME: " + _daytime);
 		}
 	}
-	
+
 	private void log(String message) {
 		if (_log_enabled) {
 			System.out.println(message);
@@ -110,7 +111,7 @@ public class StatsService {
 	public int day() {
 		return _day;
 	}
-	
+
 	public String dayName() {
 		int day = day() % 7;
 		switch (day) {

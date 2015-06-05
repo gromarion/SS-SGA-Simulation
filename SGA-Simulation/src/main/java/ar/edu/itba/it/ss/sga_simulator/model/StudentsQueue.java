@@ -33,9 +33,6 @@ public class StudentsQueue extends Thread {
 												// day, per hour
 	private int _matriculation_days;
 
-	private static final int ONE_HOUR = 60;
-	private static final double EPSYLON = 0.001;
-
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
 	}
@@ -106,31 +103,41 @@ public class StudentsQueue extends Thread {
 	public void run() {
 		Random random = new Random();
 		while (_stats.day() < _matriculation_days && thereAreStudentsLeft()) {
+			_stats.updateDaytime();
 			int current_day = _stats.day();
 			if (current_day >= _matriculation_days) {
 				break;
 			}
-			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
-			int students_left = _students.get(current_day).size();
-			if (students_left > 0) {
-				try {
-					long wait = (long) Math
-							.ceil(exponentialDistributionGenerator()
-									* StatsService.MILLIS_IN_A_MINUTE
-									/ _stats.speed());
-					sleep(wait);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+			int matriculation_duration_per_day = _lambdas.get(_stats.dayName())
+					.size();
+			int matriculation_starting_time = StatsService.HOURS_IN_A_DAY
+					- matriculation_duration_per_day;
+			if (_stats.daytime() >= matriculation_starting_time
+					&& _stats.daytime() < matriculation_starting_time
+							+ matriculation_duration_per_day) {
+
+				_stats.updateDaytime();
+				int students_left = _students.get(current_day).size();
+				if (students_left > 0) {
+					try {
+						long wait = (long) Math
+								.ceil(exponentialDistributionGenerator()
+										* StatsService.MILLIS_IN_A_MINUTE
+										/ _stats.speed());
+						sleep(wait);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					int random_student_index = random.nextInt(students_left);
+					Student student = _students.get(current_day).get(
+							random_student_index);
+					add(student);
+					_students.get(current_day).remove(student);
 				}
-				int random_student_index = random.nextInt(students_left);
-				Student student = _students.get(current_day).get(
-						random_student_index);
-				add(student);
-				_students.get(current_day).remove(student);
 			}
 		}
 		while (!finished()) {
-			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
+			_stats.updateDaytime();
 		}
 	}
 
@@ -173,23 +180,12 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		System.out.println("DAYNAME = " + _stats.dayName());
-		System.out.println("DAYTIME = " + _stats.daytime());
+		int matriculation_duration_per_day = _lambdas.get(_stats.dayName())
+				.size();
 		double percentage = _lambdas.get(_stats.dayName())
-				.get(_stats.daytime()) * _students_amount_per_day;
-//		if (percentage < EPSYLON) {
-//			long start = System.currentTimeMillis();
-//			int hours = 0;
-//			int current_daytime = _stats.daytime();
-//			while (percentage < EPSYLON) {
-//				hours++;
-//				percentage = _lambdas.get(_stats.dayName()).get(
-//						current_daytime + hours)
-//						* _students_amount_per_day;
-//			}
-//			System.out.println("Waiting " + ONE_HOUR * hours + " minutes for next student.");
-//			return ONE_HOUR * hours - ((System.currentTimeMillis() - start)/1000)/60;
-//		}
+				.get(-(StatsService.HOURS_IN_A_DAY
+						- matriculation_duration_per_day - _stats.daytime()))
+				* _students_amount_per_day;
 		double mean = 60 / (percentage);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
