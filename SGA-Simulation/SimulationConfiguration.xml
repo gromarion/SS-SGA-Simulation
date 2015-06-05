@@ -2,6 +2,7 @@
 <simulation>
 	<speed>10000</speed>
 	<matriculation-days>5</matriculation-days>
+	<matriculation-starting-time>10</matriculation-starting-time>
 	<!-- younger, older, onschedule, delayed -->
 	<criteria>older</criteria>
 	<log-enabled>true</log-enabled>

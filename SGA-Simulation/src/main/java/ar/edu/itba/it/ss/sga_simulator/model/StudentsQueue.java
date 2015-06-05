@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
@@ -32,9 +33,7 @@ public class StudentsQueue extends Thread {
 	private Map<String, List<Double>> _lambdas; // distribution of students per
 												// day, per hour
 	private int _matriculation_days;
-
-	private static final int ONE_HOUR = 60;
-	private static final double EPSYLON = 0.001;
+	private int[] _matriculation_starting_times;
 
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
@@ -47,6 +46,7 @@ public class StudentsQueue extends Thread {
 		_students_amount_per_day = students.get(0).size();
 		_lambdas = new HashMap<String, List<Double>>();
 		_matriculation_days = matriculation_days;
+		_matriculation_starting_times = new int[matriculation_days];
 		parseConfigurationFile(xml_file);
 	}
 
@@ -62,12 +62,22 @@ public class StudentsQueue extends Thread {
 			Element queue = (Element) doc.getElementsByTagName("queue").item(0);
 			_log_enabled = getBoolValue(queue, "log-enabled");
 			NodeList days = queue.getElementsByTagName("day");
-			for (int i = 0; i < days.getLength(); i++) {
-				parseLambdas((Element) days.item(i));
+			for (int i = 0; i < _matriculation_days; i++) {
+				Element day = (Element) days.item(i);
+				parseLambdas(day);
+				parseMatriculationStartingTime(i,
+						day.getElementsByTagName("matriculation-starting-time")
+								.item(0));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void parseMatriculationStartingTime(int day, Node day_node) {
+		_matriculation_starting_times[day] = Integer.parseInt(day_node
+				.getTextContent());
+
 	}
 
 	private void parseLambdas(Element element) {
@@ -106,31 +116,36 @@ public class StudentsQueue extends Thread {
 	public void run() {
 		Random random = new Random();
 		while (_stats.day() < _matriculation_days && thereAreStudentsLeft()) {
+			_stats.updateDaytime();
 			int current_day = _stats.day();
 			if (current_day >= _matriculation_days) {
 				break;
 			}
-			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
-			int students_left = _students.get(current_day).size();
-			if (students_left > 0) {
-				try {
-					long wait = (long) Math
-							.ceil(exponentialDistributionGenerator()
-									* StatsService.MILLIS_IN_A_MINUTE
-									/ _stats.speed());
-					sleep(wait);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+			int starting_time = _matriculation_starting_times[current_day];
+			if (_stats.daytime() >= starting_time
+					&& _stats.daytime() < starting_time
+							+ _lambdas.get(_stats.dayName()).size()) {
+				int students_left = _students.get(current_day).size();
+				if (students_left > 0) {
+					try {
+						long wait = (long) Math
+								.ceil(exponentialDistributionGenerator()
+										* StatsService.MILLIS_IN_A_MINUTE
+										/ _stats.speed());
+						sleep(wait);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					int random_student_index = random.nextInt(students_left);
+					Student student = _students.get(current_day).get(
+							random_student_index);
+					add(student);
+					_students.get(current_day).remove(student);
 				}
-				int random_student_index = random.nextInt(students_left);
-				Student student = _students.get(current_day).get(
-						random_student_index);
-				add(student);
-				_students.get(current_day).remove(student);
 			}
 		}
 		while (!finished()) {
-			_stats.updateDaytime(_lambdas.get(_stats.dayName()).size());
+			_stats.updateDaytime();
 		}
 	}
 
@@ -173,23 +188,12 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		System.out.println("DAYNAME = " + _stats.dayName());
-		System.out.println("DAYTIME = " + _stats.daytime());
-		double percentage = _lambdas.get(_stats.dayName())
-				.get(_stats.daytime()) * _students_amount_per_day;
-//		if (percentage < EPSYLON) {
-//			long start = System.currentTimeMillis();
-//			int hours = 0;
-//			int current_daytime = _stats.daytime();
-//			while (percentage < EPSYLON) {
-//				hours++;
-//				percentage = _lambdas.get(_stats.dayName()).get(
-//						current_daytime + hours)
-//						* _students_amount_per_day;
-//			}
-//			System.out.println("Waiting " + ONE_HOUR * hours + " minutes for next student.");
-//			return ONE_HOUR * hours - ((System.currentTimeMillis() - start)/1000)/60;
-//		}
+		System.out.println("INDEX = "
+				+ (_stats.daytime() - _matriculation_starting_times[_stats
+						.day()]));
+		double percentage = _lambdas.get(_stats.dayName()).get(
+				_stats.daytime() - _matriculation_starting_times[_stats.day()])
+				* _students_amount_per_day;
 		double mean = 60 / (percentage);
 		double lambda = 1 / mean;
 		return Math.log(1 - random.nextDouble()) / (-lambda);

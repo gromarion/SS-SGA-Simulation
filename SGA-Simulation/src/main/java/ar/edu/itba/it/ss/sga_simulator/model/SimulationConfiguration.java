@@ -47,7 +47,7 @@ public class SimulationConfiguration {
 	public int matriculationDays() {
 		return _matriculation_days;
 	}
-
+	
 	public Comparator<Student> criteria() {
 		return _criteria;
 	}

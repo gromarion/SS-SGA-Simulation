@@ -2,199 +2,164 @@
 <queue>
 	<log-enabled>false</log-enabled>
 	<day id="mon">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="tue">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="wed">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="thu">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="fri">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="sat">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 	<day id="sun">
+		<matriculation-starting-time>10</matriculation-starting-time>
 		<means>
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-<!-- 			<mean>0.0</mean> -->
-			<mean>0.4</mean>
-			<mean>0.2</mean>
-			<mean>0.1</mean>
-			<mean>0.03</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
-			<mean>0.027</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+			<mean>0.25</mean>
+<!-- 			<mean>0.4</mean> -->
+<!-- 			<mean>0.2</mean> -->
+<!-- 			<mean>0.1</mean> -->
+<!-- 			<mean>0.03</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
+<!-- 			<mean>0.027</mean> -->
 		</means>
 	</day>
 </queue>
