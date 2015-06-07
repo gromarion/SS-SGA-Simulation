@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <server>
-	<time-per-request>250</time-per-request>
-	<timeout>30000</timeout>
+	<!-- Valores medidos en milisegundos -->
+	<minimum-time-per-request>250</minimum-time-per-request>
+	<maximum-time-per-request>1000</maximum-time-per-request>
+	<minimum-student-waiting-time>5000</minimum-student-waiting-time>
+	<maximum-student-waiting-time>5000</maximum-student-waiting-time>
+	<timeout>10000</timeout>
 	<log-enabled>true</log-enabled>
 </server>

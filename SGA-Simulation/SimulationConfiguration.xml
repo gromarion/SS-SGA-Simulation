@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <simulation>
-	<speed>10000</speed>
+	<!-- Maximum speed allowed: 1000 -->
+	<speed>1000</speed>
 	<matriculation-days>5</matriculation-days>
+	<divide-students-in-groups>true</divide-students-in-groups>
 	<!-- younger, older, onschedule, delayed -->
 	<criteria>older</criteria>
 	<log-enabled>true</log-enabled>

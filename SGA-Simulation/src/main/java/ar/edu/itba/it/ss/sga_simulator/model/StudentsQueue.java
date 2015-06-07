@@ -27,23 +27,25 @@ public class StudentsQueue extends Thread {
 	private ConcurrentLinkedQueue<Student> _queue;
 	private StatsService _stats;
 	private List<List<Student>> _students;
-	private int _students_amount_per_day;
 	private boolean _log_enabled;
 	private Map<String, List<Double>> _lambdas; // distribution of students per
 												// day, per hour
 	private int _matriculation_days;
+	private int _max_students_in_queue;
+	private long _lesser_wait = Long.MAX_VALUE;
+	private boolean _students_divided_in_groups;
 
 	private static void createInstance(StatsService stats) {
 		_instance = new StudentsQueue(stats);
 	}
 
 	public void initialize(String xml_file, List<List<Student>> students,
-			int matriculation_days) {
+			int matriculation_days, boolean students_divided_in_groups) {
 		_queue = new ConcurrentLinkedQueue<Student>();
 		_students = students;
-		_students_amount_per_day = students.get(0).size();
 		_lambdas = new HashMap<String, List<Double>>();
 		_matriculation_days = matriculation_days;
+		_students_divided_in_groups = students_divided_in_groups;
 		parseConfigurationFile(xml_file);
 	}
 
@@ -69,8 +71,8 @@ public class StudentsQueue extends Thread {
 
 	private void parseLambdas(Element element) {
 		String day_name = element.getAttribute("id");
-		NodeList lambdas = ((Element) (element.getElementsByTagName("means")
-				.item(0))).getElementsByTagName("mean");
+		NodeList lambdas = ((Element) (element.getElementsByTagName("times")
+				.item(0))).getElementsByTagName("time");
 		List<Double> lambas_per_day = new ArrayList<Double>();
 		for (int i = 0; i < lambdas.getLength(); i++) {
 			lambas_per_day.add(Double.parseDouble(lambdas.item(i)
@@ -103,8 +105,15 @@ public class StudentsQueue extends Thread {
 	public void run() {
 		Random random = new Random();
 		while (_stats.day() < _matriculation_days && thereAreStudentsLeft()) {
+			// log("Students in queue = " + _queue.size());
 			_stats.updateDaytime();
 			int current_day = _stats.day();
+			int student_group;
+			if (_students_divided_in_groups) {
+				student_group = current_day;
+			} else {
+				student_group = 0;
+			}
 			if (current_day >= _matriculation_days) {
 				break;
 			}
@@ -115,30 +124,33 @@ public class StudentsQueue extends Thread {
 			if (_stats.daytime() >= matriculation_starting_time
 					&& _stats.daytime() < matriculation_starting_time
 							+ matriculation_duration_per_day) {
-
 				_stats.updateDaytime();
-				int students_left = _students.get(current_day).size();
+				int students_left = _students.get(student_group).size();
 				if (students_left > 0) {
 					try {
 						long wait = (long) Math
-								.ceil(exponentialDistributionGenerator()
-										* StatsService.MILLIS_IN_A_MINUTE
+								.ceil(exponentialDistributionGenerator() * 1000
 										/ _stats.speed());
+						if (wait < _lesser_wait) {
+							_lesser_wait = wait;
+						}
 						sleep(wait);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
 					int random_student_index = random.nextInt(students_left);
-					Student student = _students.get(current_day).get(
+					Student student = _students.get(student_group).get(
 							random_student_index);
 					add(student);
-					_students.get(current_day).remove(student);
+					_students.get(student_group).remove(student);
 				}
 			}
 		}
 		while (!finished()) {
 			_stats.updateDaytime();
 		}
+		log("Max students in queue = " + _max_students_in_queue);
+		log("Lesser wait = " + _lesser_wait);
 	}
 
 	public boolean isEmpty() {
@@ -153,9 +165,9 @@ public class StudentsQueue extends Thread {
 	}
 
 	private boolean thereAreStudentsLeft() {
-		boolean more_students = true;
+		boolean more_students = false;
 		for (List<Student> students : _students) {
-			more_students = more_students || students.size() > 0;
+			more_students = more_students || (students.size() > 0);
 		}
 		return more_students;
 	}
@@ -166,11 +178,17 @@ public class StudentsQueue extends Thread {
 
 	public boolean add(Student student) {
 		student.setQueueTime(System.currentTimeMillis());
-		if (_log_enabled) {
-			System.out.println("QUEUE> Legajo:" + student.id()
-					+ " Agregado a la cola.");
+//		log("QUEUE> Legajo:" + student.id() + " Agregado a la cola.");
+		if (_queue.size() > _max_students_in_queue) {
+			_max_students_in_queue = _queue.size();
 		}
 		return _queue.add(student);
+	}
+
+	private void log(String message) {
+		if (_log_enabled) {
+			System.out.println(message);
+		}
 	}
 
 	private boolean getBoolValue(Element queue, String attribute) {
@@ -182,18 +200,15 @@ public class StudentsQueue extends Thread {
 		Random random = new Random();
 		int matriculation_duration_per_day = _lambdas.get(_stats.dayName())
 				.size();
-		double percentage = _lambdas.get(_stats.dayName())
+		double time = _lambdas.get(_stats.dayName())
 				.get(-(StatsService.HOURS_IN_A_DAY
-						- matriculation_duration_per_day - _stats.daytime()))
-				* _students_amount_per_day;
-		double mean = 60 / (percentage);
-		double lambda = 1 / mean;
+						- matriculation_duration_per_day - _stats.daytime()));
+		double lambda = 1 / time;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}
 
 	@Component
 	public static class StudentsQueueInjector {
-
 		@Autowired
 		private StatsService stats;
 
@@ -201,5 +216,13 @@ public class StudentsQueue extends Thread {
 		public void postConstruct() {
 			StudentsQueue.createInstance(stats);
 		}
+	}
+
+	public void restoreStudentToPool(Student student) {
+		int group_number = 0;
+		if (_students_divided_in_groups) {
+			group_number = _stats.day();
+		}
+		_students.get(group_number).add(student);
 	}
 }

@@ -33,14 +33,20 @@ public class SimulatorController {
 		_matriculationService.prepareDesiredCourses(carreer, students);
 		SimulationConfiguration sc = new SimulationConfiguration(
 				"SimulationConfiguration.xml");
-		List<List<Student>> divided_students = divideStudentsByCriteria(
-				students, sc.criteria(), sc.matriculationDays());
+		List<List<Student>> divided_students = null;
+		if (sc.divideStudentsInGroups()) {
+			 divided_students = divideStudentsByCriteria(
+					students, sc.criteria(), sc.matriculationDays());			
+		} else {
+			divided_students = new ArrayList<List<Student>>();
+			divided_students.add(students);
+		}
 		_stats.speed(sc.speed());
 		_stats.totalStudents(students.size());
 		_stats.logEnabled(sc.logEnabled());
 		StudentsQueue queue = StudentsQueue.getInstance();
 		queue.initialize("QueueConfiguration.xml", divided_students,
-				sc.matriculationDays());
+				sc.matriculationDays(), sc.divideStudentsInGroups());
 		new Server(_stats, "ServerConfiguration.xml", sc.speed()).start();
 		queue.start();
 	}

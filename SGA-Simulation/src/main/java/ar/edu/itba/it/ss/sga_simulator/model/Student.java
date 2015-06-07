@@ -17,7 +17,9 @@ public class Student {
 	private int _id;
 	private long _queue_time;
 	private List<Action> _actions;
-	private static final int CLICKS_PER_ACTION = 2;
+	private int _consecutive_timeouts;
+	private static final int CLICKS_PER_ACTION = 4;
+	public static final int MAX_CONSECUTIVE_TIMEOUTS = 5;
 
 	public static StudentFactory getFactory() {
 		return StudentFactory.STUDENT_FACTORY;
@@ -25,6 +27,18 @@ public class Student {
 
 	public Student(int id) {
 		this(new ArrayList<Course>(), 1, 1, id);
+	}
+	
+	public void timeout() {
+		_consecutive_timeouts++;
+	}
+	
+	public void resetTimeouts() {
+		_consecutive_timeouts = 0;
+	}
+	
+	public int consecutiveTimeouts() {
+		return _consecutive_timeouts;
 	}
 
 	public Student(List<Course> desired_courses, int current_year,

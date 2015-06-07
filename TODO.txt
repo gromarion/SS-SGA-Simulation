@@ -1,10 +1,21 @@
+DONE:
+=====
+* Modificar Queue.xml para que tenga distribuciones por días en particular en lugar de una genérica para todos los días. ==> DONE
+* Diseñar horarios faltantes para materias dictadas en el 1er cuatrimestre tales que no se solapen con materias dictadas el mismo cuatri. ==> DONE
+* Agregar la posibilidad de que la matriculación en N días no divida a los alumnos en N grupos, si no que sea como ocurre ahora. ==> DONE
+* Agregar desvío estándar al tiempo de atención del servidor. ==> DONE
+
+
 TODO:
 =====
-
-* Modificar Queue.xml para que tenga distribuciones por días en particular en lugar de una genérica para todos los días.
 * Agregar cupos a los cursos en la carrera.
 * Agregar comportamiento multi-tasking al server.
-* Diseñar horarios faltantes para materias dictadas en el 1er cuatrimestre tales que no se solapen con materias dictadas el mismo cuatri.
 * Ajustar probabilidad de recursada de cada materia.
 * Agregar nivel de impaciencia de los alumnos.
 * Agregar materias optativas.
+* Si no hay más alumnos en un día, viajar al siguiente día inmediatamente (habilitado por parámetro).
+* Agregar timeouts por hora por cada día.
+* Agregar la probabilidad de que un alumno ya matriculado vuelva a entrar al sistema para consultar materias y horarios.
+* Hacer que absolutamente todas las configuraciones de la simulación (servidor, cola, comportamiento de alumnos, etc) se encuentre centralizada en un solo objeto, y en un solo arvhivo.
+* Concentrar la función de aceleración de tiempo en una clase, y cada vez que se divida por la velocidad, calcular el Math.ceil() de la división entre floats.
+* Configurar para correr simulación con sistema actual sin mejoras, y con mejoras particulares (división de días, 

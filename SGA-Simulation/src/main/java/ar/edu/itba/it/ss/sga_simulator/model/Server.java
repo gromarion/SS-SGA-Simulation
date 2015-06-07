@@ -1,6 +1,7 @@
 package ar.edu.itba.it.ss.sga_simulator.model;
 
 import java.io.File;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -14,16 +15,19 @@ public class Server extends Thread {
 
 	private StudentsQueue _queue;
 	private StatsService _stats;
-	private long _time_per_request;
+	private int _minimum_time_per_request;
+	private int _maximum_time_per_request;
 	private long _timeout;
 	private boolean _log_enabled;
 	private int _speed;
+	private Random _random;
 
 	public Server(StatsService stats, String xml_path, int speed) {
 		_speed = speed;
 		parseConfigurationFile(xml_path);
 		_queue = StudentsQueue.getInstance();
 		_stats = stats;
+		_random = new Random();
 	}
 
 	public void run() {
@@ -51,15 +55,25 @@ public class Server extends Thread {
 		} else {
 			Student student = _queue.poll();
 			if (System.currentTimeMillis() - student.queueTime() > _timeout) {
-				_queue.add(student);
 				_stats.addTimeout();
-				log("SERVER> Legajo:" + student.id() + " >> TIMEOUT--");
+				student.timeout();
+				log("SERVER> Legajo: " + student.id() + " >> TIMEOUT--");
+				if (student.consecutiveTimeouts() == Student.MAX_CONSECUTIVE_TIMEOUTS) {
+					_queue.restoreStudentToPool(student);
+				} else {
+					_queue.add(student);
+				}
 			} else {
-				log("SERVER> Atendiendo legajo:" + student.id());
-				sleep(_time_per_request);// Demora un tiempo _time_per_request
+				log("SERVER> Atendiendo legajo: " + student.id());
+				int time_per_request = _random
+						.nextInt(_maximum_time_per_request
+								- _minimum_time_per_request + 1)
+						- _minimum_time_per_request;
+				sleep(time_per_request);// Demora un tiempo _time_per_request
 				// en
 				// atender la solicitud
 				// del estudiante
+				student.resetTimeouts();
 				attend(student);
 			}
 		}
@@ -73,7 +87,7 @@ public class Server extends Thread {
 
 	private void attend(Student student) {
 		Action student_action = student.getAction();
-		if (student_action != null && !student_action.isClickAction()) {
+		if (student_action != null) {
 			Course course = student_action.course();
 			if (course != null) {
 				if (student.canCourse(course)) {
@@ -81,16 +95,12 @@ public class Server extends Thread {
 				} else {
 					student.addNotMatriculatedCourse(course);
 				}
-				checkFinishedMatriculating(student);
-			} else {
-				addMatriculatedStudent(student);
 			}
 			student.consumeAction();
-		} else {
-			checkFinishedMatriculating(student);
 		}
+		checkFinishedMatriculating(student);
 	}
-	
+
 	private void checkFinishedMatriculating(Student student) {
 		if (!student.hasFinishedMatriculating()) {
 			_queue.add(student);
@@ -119,8 +129,10 @@ public class Server extends Thread {
 			Element server = (Element) doc.getElementsByTagName("server").item(
 					0);
 			_timeout = getIntValue(server, "timeout") / _speed;
-			_time_per_request = getIntValue(server, "time-per-request")
-					/ _speed;
+			_minimum_time_per_request = getIntValue(server,
+					"minimum-time-per-request") / _speed;
+			_maximum_time_per_request = getIntValue(server,
+					"maximum-time-per-request") / _speed;
 			_log_enabled = getBoolValue(server, "log-enabled");
 		} catch (Exception e) {
 			e.printStackTrace();

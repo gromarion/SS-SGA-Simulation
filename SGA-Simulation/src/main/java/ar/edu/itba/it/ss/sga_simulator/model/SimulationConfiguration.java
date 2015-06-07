@@ -21,6 +21,7 @@ public class SimulationConfiguration {
 	private Comparator<Student> _criteria;
 	private static final int DEFAULT_INT_VALUE = 1;
 	private boolean _log_enabled;
+	private boolean _divide_students_in_groups;
 
 	public SimulationConfiguration(String xml_file) {
 		try {
@@ -28,7 +29,9 @@ public class SimulationConfiguration {
 			_speed = parseInt(simulation, "speed");
 			_matriculation_days = parseInt(simulation, "matriculation-days");
 			_criteria = parseCriteria(simulation);
-			_log_enabled = parseBoolean(simulation);
+			_log_enabled = parseBoolean(simulation, "log-enabled");
+			_divide_students_in_groups = parseBoolean(simulation,
+					"divide-students-in-groups");
 		} catch (Exception e) {
 			_speed = DEFAULT_INT_VALUE;
 			_matriculation_days = DEFAULT_INT_VALUE;
@@ -39,9 +42,13 @@ public class SimulationConfiguration {
 	public int speed() {
 		return _speed;
 	}
-	
+
 	public boolean logEnabled() {
 		return _log_enabled;
+	}
+	
+	public boolean divideStudentsInGroups() {
+		return _divide_students_in_groups;
 	}
 
 	public int matriculationDays() {
@@ -84,8 +91,8 @@ public class SimulationConfiguration {
 		}
 	}
 
-	private static boolean parseBoolean(Element element) {
-		return Boolean.parseBoolean(element.getElementsByTagName("log-enabled")
-				.item(0).getTextContent());
+	private static boolean parseBoolean(Element element, String tag) {
+		return Boolean.parseBoolean(element.getElementsByTagName(tag).item(0)
+				.getTextContent());
 	}
 }
