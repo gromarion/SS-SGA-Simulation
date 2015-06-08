@@ -173,7 +173,11 @@ public class StudentsQueue extends Thread {
 	}
 
 	public Student poll() {
-		return _queue.poll();
+		Student s = _queue.poll();
+		if (s != null) {
+			_stats.decreaseStudentsCurrentlyMatriculating();
+		}
+		return s;
 	}
 
 	public boolean add(Student student) {
@@ -182,6 +186,7 @@ public class StudentsQueue extends Thread {
 		if (_queue.size() > _max_students_in_queue) {
 			_max_students_in_queue = _queue.size();
 		}
+		_stats.increaseStudentsCurrentlyMatriculating();
 		return _queue.add(student);
 	}
 

@@ -8,6 +8,7 @@ public class StatsService {
 	private int _total_students;
 	private int _matriculated_students;
 	private int _not_matriculated_students;
+	private int _students_currently_matriculating;
 	private int _timeouts; // self explained
 	private long _duration; // time since the simulation started
 	private long _start; // time when the simluation started
@@ -163,5 +164,17 @@ public class StatsService {
 
 	public int insatisfiedStudentsAmount() {
 		return _total_students - _satisfied_students_amount;
+	}
+	
+	public int studentsCurrentlyMatriculating() {
+		return _students_currently_matriculating;
+	}
+	
+	public int increaseStudentsCurrentlyMatriculating() {
+		return ++_students_currently_matriculating;
+	}
+	
+	public int decreaseStudentsCurrentlyMatriculating() {
+		return --_students_currently_matriculating;
 	}
 }
