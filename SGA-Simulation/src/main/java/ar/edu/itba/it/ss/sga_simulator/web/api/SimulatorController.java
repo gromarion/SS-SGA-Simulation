@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.edu.itba.it.ss.sga_simulator.model.Carreer;
@@ -26,7 +27,7 @@ public class SimulatorController {
 	@Autowired
 	private StatsService _stats;
 
-	@RequestMapping("/start")
+	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	public void start() {
 		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
 		List<Student> students = Student.getFactory().create(carreer);
