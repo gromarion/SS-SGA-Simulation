@@ -1,5 +1,8 @@
 package ar.edu.itba.it.ss.sga_simulator.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -8,6 +11,7 @@ public class StatsService {
 	private int _total_students;
 	private int _matriculated_students;
 	private int _not_matriculated_students;
+	private Map<Integer, Map<Integer, Integer>> _timeouts_per_day_per_hour;
 	private int _students_currently_matriculating;
 	private int _timeouts; // self explained
 	private long _duration; // time since the simulation started
@@ -20,6 +24,56 @@ public class StatsService {
 	private int _speed;
 	private int _satisfied_students_amount;
 	private boolean _log_enabled;
+
+	public StatsService() {
+		_timeouts_per_day_per_hour = new HashMap<Integer, Map<Integer, Integer>>();
+	}
+
+	public int timeoutsOnDay(int day) {
+		if (_timeouts_per_day_per_hour.size() < day) {
+			return 0;
+		}
+		int ans = 0;
+		for (int each_day : _timeouts_per_day_per_hour.keySet()) {
+			for (int timeouts : _timeouts_per_day_per_hour.get(each_day)
+					.keySet()) {
+				ans += timeouts;
+			}
+		}
+		return ans;
+	}
+
+	public int timeoutsOnDayAtTime(int day, int hour) {
+		if (_timeouts_per_day_per_hour.size() < day) {
+			return 0;
+		} else {
+			int day_hours_amount = _timeouts_per_day_per_hour.get(day).size();
+			if (day_hours_amount > hour || day_hours_amount < hour) {
+				return 0;
+			}
+		}
+		return _timeouts_per_day_per_hour.get(day).get(hour);
+	}
+
+	private void addTimeout(int day, int hour) {
+		if (_timeouts_per_day_per_hour.containsKey(day)) {
+			addTimeoutAtDayAtHour(day, hour);
+		} else {
+			Map<Integer, Integer> timeouts_in_a_day = new HashMap<Integer, Integer>();
+			timeouts_in_a_day.put(hour, 1);
+			_timeouts_per_day_per_hour.put(day, timeouts_in_a_day);
+		}
+	}
+
+	private void addTimeoutAtDayAtHour(int day, int hour) {
+		Map<Integer, Integer> timeouts_in_a_day = _timeouts_per_day_per_hour
+				.get(day);
+		if (timeouts_in_a_day.containsKey(hour)) {
+			timeouts_in_a_day.put(hour, timeouts_in_a_day.get(hour) + 1);
+		} else {
+			timeouts_in_a_day.put(hour, 1);
+		}
+	}
 
 	public void logEnabled(boolean value) {
 		_log_enabled = value;
@@ -59,6 +113,7 @@ public class StatsService {
 
 	public void addTimeout() {
 		_timeouts++;
+		addTimeout(day(), daytime());
 	}
 
 	public void duration(long millis) {
