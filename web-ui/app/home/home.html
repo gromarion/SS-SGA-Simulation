@@ -1,23 +1,38 @@
 <div class="home-main">
     <div class="home-top">
-        <button class="primary-btn">Run simulation</button>
+        <button class="primary-btn"
+                ng-click="startSimulation()">Empezar Simulación</button>
     </div>
 
     <div class="simulator">
         <div class="days-graph">
-            <div ng-repeat="day in snapshot.days"
+            <div ng-repeat="day in stats.days"
                  class="day"
-                 ng-class="{selected: selected === day.title}">{{day.title}}</div>
+                 ng-class="{selected: stats.currentDay === day.dayNumber}">{{getDayTitle(day.dayNumber)}}</div>
+            <div class="current-hour"
+                 ng-class="{visible: stats.currentDay === day.dayNumber}"
+                 ng-repeat="day in stats.days">{{stats.currentHour}}:00</div>
         </div>
         <div class="students-graph">
-            <div class="matriculation-success-reference">Successed matriculations</div>
-            <div class="matriculation-fail-reference">Failed matriculations</div>
-            <div class="matriculation-conflict-reference">Confliced matriculations</div>
-            <div ng-repeat="day in snapshot.days"
+            <div class="matriculation-info-reference">
+                <div class="title">Total de alumnos</div>
+                <div class="value">{{stats.totalStudents}}</div>
+            </div>
+            <div class="matriculation-success-reference">
+                <div class="title">Matriculaciones exitosas</div>
+                <div class="value">{{stats.alumnsMatriculated}}</div>
+            </div>
+            <div class="matriculation-fail-reference">
+                <div class="title">Timeouts</div>
+                <div class="value">{{stats.totalsServerTimeouts}}</div>
+            </div>
+            <div ng-repeat="day in stats.days"
                  class="students-per-day">
-                 <div ng-attr-id="{{'#' + day.title + '-fail'}}" class="matriculation-fail"></div>
-                 <div ng-attr-id="{{'#' + day.title + '-conflict'}}" class="matriculation-conflict"></div>
-                 <div ng-attr-id="{{'#' + day.title + '-success'}}" class="matriculation-success"></div>
+                <div class="column-wrapper">
+                    <div ng-attr-id="{{'#' + getDayTitle(day.dayNumber) + '-fail'}}" class="matriculation-fail"></div>
+                    <div ng-attr-id="{{'#' + getDayTitle(day.dayNumber) + '-conflict'}}" class="matriculation-conflict"></div>
+                    <div ng-attr-id="{{'#' + getDayTitle(day.dayNumber) + '-success'}}" class="matriculation-success"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@
   @totalWidth: 490px;
 
   margin: auto;
-  margin-top: 40px;
+  margin-top: 70px;
 
   width: @totalWidth;
   font-size: 13px;
@@ -44,6 +44,18 @@
           }
         }
     }
+
+    .current-hour {
+      display: inline-block;
+      width: @totalWidth / 7;
+      visibility: hidden;
+      padding-top: 27px;
+      color: @red;
+
+      &.visible {
+        visibility: visible;
+      }
+    }
   }
 
   .students-graph {
@@ -57,79 +69,113 @@
     padding-top: 30px;
     height: @max-height;
     width: 100%;
+    border-bottom: 1px solid black;
 
     @reference-top-base: 130px;
     @reference-left-base: -250px;
 
     @margin-reference-top: 10px;
 
-    @reference-width: 160px;
-    @reference-height: 40px;
+    @reference-width: 215px;
+    @reference-height: 45px;
 
     .matriculation-fail-reference {
       background-color: @red;
       color: white;
        position: absolute;
-       top: @reference-top-base;
+      top: @reference-top-base + 2* @margin-reference-top + 2* @reference-height;
        left: @reference-left-base;
        width: @reference-width;
        height: @reference-height;
-       padding-top: 7px;
+       padding-top: 10px;
+      border-radius: 3px;
     }
 
-    .matriculation-conflict-reference {
-      background-color: @yellow;
-      color: white;
+    .matriculation-info-reference {
+      background-color: transparent;
+      color: @darkBlue;
        position: absolute;
-       top: @reference-top-base + @margin-reference-top + @reference-height;
+      top: @reference-top-base;
        left: @reference-left-base;
        width: @reference-width;
        height: @reference-height;
-       padding-top: 7px;
+      border-radius: 3px;
+      padding-top: 10px;
+
+      .title {
+        border-right: 1px solid @darkBlue;
+      }
     }
 
     .matriculation-success-reference {
       background-color: @green;
       color: white;
-       position: absolute;
-       top: @reference-top-base + 2* @margin-reference-top + 2* @reference-height;
-       left: @reference-left-base;
-       width: @reference-width;
-       height: @reference-height;
-       padding-top: 7px;
+      position: absolute;
+      top: @reference-top-base + @margin-reference-top + @reference-height;
+      left: @reference-left-base;
+      width: @reference-width;
+      height: @reference-height;
+      padding-top: 10px;
+      border-radius: 3px;
+    }
+
+    .title {
+      width: 130px;
+      display: inline-block;
+      text-align: -webkit-right;
+      margin-left: -14px;
+      border-right: 1px solid white;
+      padding-right: 3px;
+    }
+
+    .value {
+      display: inline-block;
+      font-size: x-large;
     }
 
     .students-per-day {
 
-      margin-left: 2px;
-      margin-right: 2px;
-      width: @totalWidth / 7 - 4px;
+      @intercolumns-padding: 2px;
+
+      margin-left: @intercolumns-padding;
+      margin-right: @intercolumns-padding;
+      width: @totalWidth / 7 - 2 * @intercolumns-padding;
       display: inline-block;
+      position: relative;
+      height: 100%;
 
       @animation-time: 300ms;
 
-      .matriculation-fail {
-        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        background-color: @red; //#D9534F
-      }
+      .column-wrapper {
+        position: absolute;
+        bottom: 0;
+        left: @intercolumns-padding;
+        right: @intercolumns-padding;
+        width: @totalWidth / 7 - 2 * @intercolumns-padding;
 
-      .matriculation-success {
-        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        background-color: @green; //#26B178
-      }
+        .matriculation-fail {
+          -webkit-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -moz-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -o-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          background-color: @red; //#D9534F
+        }
 
-      .matriculation-conflict {
-        -webkit-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -moz-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        -o-transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        transition:width @animation-time ease-in-out, height @animation-time ease-in-out;
-        background-color: @yellow;
+        .matriculation-success {
+          -webkit-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -moz-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -o-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          background-color: @green; //#26B178
+        }
+
+        .matriculation-conflict {
+          -webkit-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -moz-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          -o-transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          transition: width @animation-time ease-in-out, height @animation-time ease-in-out;
+          background-color: @yellow;
+        }
       }
     }
   }
