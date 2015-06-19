@@ -3,7 +3,7 @@ package ar.edu.itba.it.ss.sga_simulator.web.beans;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StatsMessage {
+public class Snapshot {
 	
 	private Map<Integer, Integer> unmatriculatedAlumnsByPendingCourses = new HashMap<Integer, Integer>();
 	private Map<Integer, Integer> matriculatedAlumnsByPeningCourses = new HashMap<Integer, Integer>();
@@ -16,7 +16,7 @@ public class StatsMessage {
 	private int currentlyMatriculating = 0;
 	private int totalsServerTimeouts = 0;
 	
-	public StatsMessage() { }
+	public Snapshot() { }
 
 	public Map<Integer, Integer> getUnmatriculatedAlumnsByPendingCourses() {
 		return unmatriculatedAlumnsByPendingCourses;
