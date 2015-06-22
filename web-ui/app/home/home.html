@@ -2,6 +2,8 @@
     <div class="home-top">
         <button class="primary-btn"
                 ng-click="startSimulation()">Empezar Simulación</button>
+        <button class="primary-btn"
+                ng-click="openConfigModal()">Configuración</button>
     </div>
 
     <div class="simulator">
@@ -35,5 +37,13 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="studentsDetailsGraph">
+        <div id="studentsUnmatriculatedGraph"></div>
+        <div id="arrowContainer" ng-if="stats.unmatriculatedAlumnsByPendingCourses">
+            <div class="arrow-right"></div>
+        </div>
+        <div id="studentsMatriculatedGraph"></div>
     </div>
 </div>

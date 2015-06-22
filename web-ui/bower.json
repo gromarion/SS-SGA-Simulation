@@ -12,6 +12,7 @@
     "underscore": "*",
     "jquery": "*",
     "bootstrap": "*",
-    "angular-bootstrap": "*"
+    "angular-bootstrap": "*",
+    "highcharts-release": "^4.1.6"
   }
 }

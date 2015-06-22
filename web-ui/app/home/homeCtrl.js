@@ -2,10 +2,12 @@
 
 angular.module('sgaSimulator.controllers')
 
-.controller('HomeCtrl', ['$scope', '$state', '$timeout', '$interval', 'simulationService', function($scope, $state, $timeout, $interval, simulationService) {
+.controller('HomeCtrl', ['$scope', '$state', '$timeout', '$interval', '$modal', 'simulationService', function($scope, $state, $timeout, $interval, $modal, simulationService) {
 
     var maxPx = jQuery(document.getElementsByClassName('students-graph')[0]).height(),
-        POLLER_INTERVAL_MILLIS = 1000;
+        POLLER_INTERVAL_MILLIS = 1000,
+        studentsUnmatriculatedGraph,
+        studentsMatriculatedGraph;
 
     simulationService.initStats();
     $scope.stats = simulationService.getStats();
@@ -57,6 +59,7 @@ angular.module('sgaSimulator.controllers')
                 simulationService.fetchStats().then(function() {
                     $scope.stats = simulationService.getStats();
                     $scope.updateMatriculationGraph();
+                    $scope.updateDetailsStudentsGraph();
                     if (simulationService.simulationHasFinished()) {
                         $interval.cancel(promise);
                     }
@@ -64,6 +67,94 @@ angular.module('sgaSimulator.controllers')
             }, POLLER_INTERVAL_MILLIS);
         });
     };
+
+    $scope.openConfigModal = function() {
+        $modal.open({
+            templateUrl: 'configuration/configuration.html',
+            controller: 'ConfigurationCtrl'
+        });
+    };
+
+    $scope.updateDetailsStudentsGraph = function() {
+        if (!studentsMatriculatedGraph) {
+            createStudentsMatriculatedGraph();
+        }
+
+        if (!studentsUnmatriculatedGraph) {
+            createStudentsUnmatriculatedGraph();
+        }
+
+        studentsMatriculatedGraph.highcharts().get('matriculated').setData(formatSerie($scope.stats.matriculatedAlumnsByPeningCourses));
+        studentsUnmatriculatedGraph.highcharts().get('unmatriculated').setData(formatSerie($scope.stats.unmatriculatedAlumnsByPendingCourses));
+    };
+
+    function createStudentsUnmatriculatedGraph() {
+        studentsUnmatriculatedGraph = $('#studentsUnmatriculatedGraph').highcharts({
+            chart: {
+                backgroundColor: '#FAFAFA'
+            },
+            title: {
+                text: 'Alumnos sin matricular',
+                x: -20 //center
+            },
+            xAxis: {
+                title: {
+                    text: 'Cant. de materias pendientes'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Cant. de alumnos'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: [{
+                showInLegend: false,
+                id: 'unmatriculated',
+                data: []
+            }]
+        });
+    }
+
+    function createStudentsMatriculatedGraph() {
+        studentsMatriculatedGraph = $('#studentsMatriculatedGraph').highcharts({
+            chart: {
+                backgroundColor: '#FAFAFA'
+            },
+            title: {
+                text: 'Alumnos matriculados',
+                x: -20 //center
+            },
+            xAxis: {
+                title: {
+                    text: 'Cant. de materias pendientes'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Cant. de alumnos'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            series: [{
+                showInLegend: false,
+                id: 'matriculated',
+                data: []
+            }]
+        });
+    }
+
+    function formatSerie(serie) {
+        return _.map(serie, function(students, credits) { return [credits, students]; });
+    }
 
     $timeout(function() {
         $scope.updateMatriculationGraph();
