@@ -15,8 +15,9 @@ public class Snapshot {
 	private int hourOfDay;
 	private int currentlyMatriculating = 0;
 	private int totalsServerTimeouts = 0;
-	
-	public Snapshot() { }
+    private int satisfiedStudentsAmount;
+
+    public Snapshot() { }
 
 	public Map<Integer, Integer> getUnmatriculatedAlumnsByPendingCourses() {
 		return unmatriculatedAlumnsByPendingCourses;
@@ -99,4 +100,12 @@ public class Snapshot {
 	public void setDayOfWeek(int dayOfWeek) {
 		this.dayOfWeek = dayOfWeek;
 	}
+
+    public void setSatisfiedStudentsAmount(int satisfiedStudentsAmount) {
+        this.satisfiedStudentsAmount = satisfiedStudentsAmount;
+    }
+
+    public int getSatisfiedStudentsAmount() {
+        return satisfiedStudentsAmount;
+    }
 }

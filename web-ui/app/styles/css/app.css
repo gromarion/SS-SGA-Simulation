@@ -82,6 +82,17 @@ button.primary-btn:focus {
   background-color: #ff3366;
   color: white;
   position: absolute;
+  top: 165px;
+  left: -250px;
+  width: 215px;
+  height: 45px;
+  padding-top: 10px;
+  border-radius: 3px;
+}
+.simulator .students-graph .satisfied-students-reference {
+  background-color: #53b778;
+  color: white;
+  position: absolute;
   top: 110px;
   left: -250px;
   width: 215px;

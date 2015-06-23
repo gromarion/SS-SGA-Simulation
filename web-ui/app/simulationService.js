@@ -36,6 +36,7 @@ angular.module('sgaSimulator.services')
             stats.totalsServerTimeouts = newStats.totalsServerTimeouts;
             stats.matriculatedAlumnsByPeningCourses = newStats.matriculatedAlumnsByPeningCourses;
             stats.unmatriculatedAlumnsByPendingCourses = newStats.unmatriculatedAlumnsByPendingCourses;
+            stats.satisfiedStudentsAmount = newStats.satisfiedStudentsAmount;
 
             return stats;
         }

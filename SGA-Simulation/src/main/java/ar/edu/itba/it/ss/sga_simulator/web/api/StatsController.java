@@ -29,6 +29,7 @@ public class StatsController {
 		stats.setHourOfDay(statsService.daytime());
 		stats.setCurrentlyMatriculating(statsService.studentsCurrentlyMatriculating());
 		stats.setTotalsServerTimeouts(statsService.timeouts());
+        stats.setSatisfiedStudentsAmount(statsService.satisfiedStudentsAmount());
 		return stats;
 	}
 }
