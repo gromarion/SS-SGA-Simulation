@@ -89,6 +89,25 @@ button.primary-btn:focus {
   padding-top: 10px;
   border-radius: 3px;
 }
+.simulator .students-graph .cirteria-reference {
+  background-color: transparent;
+  color: #072f38;
+  position: absolute;
+  top: 165px;
+  left: 500px;
+  width: 330px;
+  border-radius: 3px;
+  padding-top: 10px;
+}
+.simulator .students-graph .cirteria-reference .title {
+  border-right: 1px solid #072f38;
+  display: block;
+}
+.simulator .students-graph .cirteria-reference .value {
+  display: block;
+  font-size: large;
+  margin-top: 8px;
+}
 .simulator .students-graph .matriculation-fail-reference-by-student {
   background-color: #ff3366;
   color: white;

@@ -54,6 +54,10 @@ angular.module('sgaSimulator.controllers')
     };
 
     $scope.startSimulation = function() {
+        simulationService.getConfiguration().then(function(config) {
+            $scope.config = config;
+        });
+
         simulationService.startSimulation().then(function() {
             var promise = $interval(function() {
                 simulationService.fetchStats().then(function() {
@@ -155,6 +159,15 @@ angular.module('sgaSimulator.controllers')
     function formatSerie(serie) {
         return _.map(serie, function(students, credits) { return [credits, students]; });
     }
+
+    $scope.formatCriteria = function(criteria) {
+        switch(criteria) {
+            case 'older': return 'Alumnos más jóvenes último';
+            case 'younger': return 'Alumnos más jóvenes primero';
+            case 'onschedule': return 'Alumnos al día primero';
+            case 'delayed': return 'Alumnos al día último';
+        }
+    };
 
     $timeout(function() {
         $scope.updateMatriculationGraph();

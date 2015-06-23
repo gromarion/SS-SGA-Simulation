@@ -16,6 +16,10 @@
                  ng-repeat="day in stats.days">{{stats.currentHour}}:00</div>
         </div>
         <div class="students-graph">
+            <div class="cirteria-reference" ng-if="config.criteria">
+                <div class="title">Criterio</div>
+                <div class="value">{{formatCriteria(config.criteria)}}</div>
+            </div>
             <div class="matriculation-info-reference">
                 <div class="title">Total de alumnos</div>
                 <div class="value">{{stats.totalStudents || 0}}</div>
