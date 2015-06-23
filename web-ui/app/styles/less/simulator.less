@@ -71,8 +71,8 @@
     width: 100%;
     border-bottom: 1px solid black;
 
-    @reference-top-base: 0px;
-    @reference-left-base: -250px;
+    @reference-top-base: -50px;
+    @reference-left-base: -300px;
 
     @margin-reference-top: 10px;
 
@@ -88,6 +88,18 @@
        width: @reference-width;
        height: @reference-height;
        padding-top: 10px;
+      border-radius: 3px;
+    }
+
+    .matriculation-fail-reference-by-student {
+      background-color: @red;
+      color: white;
+      position: absolute;
+      top: @reference-top-base + 4* @margin-reference-top + 4* @reference-height;
+      left: @reference-left-base;
+      width: @reference-width;
+      height: @reference-height;
+      padding-top: 10px;
       border-radius: 3px;
     }
 

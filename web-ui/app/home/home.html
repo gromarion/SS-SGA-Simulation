@@ -18,19 +18,23 @@
         <div class="students-graph">
             <div class="matriculation-info-reference">
                 <div class="title">Total de alumnos</div>
-                <div class="value">{{stats.totalStudents}}</div>
+                <div class="value">{{stats.totalStudents || 0}}</div>
             </div>
             <div class="matriculation-success-reference">
                 <div class="title">Matriculaciones exitosas</div>
-                <div class="value">{{stats.alumnsMatriculated}}</div>
+                <div class="value">{{stats.alumnsMatriculated || 0}}</div>
             </div>
             <div class="satisfied-students-reference">
                 <div class="title">Alumnos satisfechos</div>
-                <div class="value">{{stats.satisfiedStudentsAmount}}</div>
+                <div class="value">{{stats.satisfiedStudentsAmount || 0}}</div>
             </div>
             <div class="matriculation-fail-reference">
                 <div class="title">Timeouts</div>
-                <div class="value">{{stats.totalsServerTimeouts}}</div>
+                <div class="value">{{stats.totalsServerTimeouts || 0}}</div>
+            </div>
+            <div class="matriculation-fail-reference-by-student">
+                <div class="title">Timeouts x alumno</div>
+                <div class="value">{{stats.totalsServerTimeouts / stats.totalStudents | number:2 || 0}}</div>
             </div>
             <div ng-repeat="day in stats.days"
                  class="students-per-day">
