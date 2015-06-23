@@ -25,7 +25,8 @@ public class StudentsQueue extends Thread {
 	private static StudentsQueue _instance;
 
 	private ConcurrentLinkedQueue<Student> _queue;
-	private StatsService _stats;
+	private ConfigurationService _configService;
+	private StatsService _statService;
 	private List<List<Student>> _students;
 	private boolean _log_enabled;
 	private Map<String, List<Double>> _lambdas; // distribution of students per
@@ -35,8 +36,9 @@ public class StudentsQueue extends Thread {
 	private long _lesser_wait = Long.MAX_VALUE;
 	private boolean _students_divided_in_groups;
 
-	private static void createInstance(StatsService stats) {
-		_instance = new StudentsQueue(stats);
+
+	private static void createInstance(StatsService statService, ConfigurationService configService) {
+		_instance = new StudentsQueue(statService, configService);
 	}
 
 	public void initialize(String xml_file, List<List<Student>> students,
@@ -88,8 +90,9 @@ public class StudentsQueue extends Thread {
 		return _instance;
 	}
 
-	private StudentsQueue(StatsService stats) {
-		_stats = stats;
+	private StudentsQueue(StatsService statService, ConfigurationService configService) {
+		_statService = statService;
+		_configService = configService;
 	}
 
 	// Las medias están puestas en el archivo de configuración en unidades de
@@ -104,10 +107,10 @@ public class StudentsQueue extends Thread {
 	// exponencial.
 	public void run() {
 		Random random = new Random();
-		while (_stats.day() < _matriculation_days && thereAreStudentsLeft()) {
+		while (_statService.day() < _matriculation_days && thereAreStudentsLeft()) {
 			// log("Students in queue = " + _queue.size());
-			_stats.updateDaytime();
-			int current_day = _stats.day();
+			_statService.updateDaytime();
+			int current_day = _statService.day();
 			int student_group;
 			if (_students_divided_in_groups) {
 				student_group = current_day;
@@ -117,20 +120,20 @@ public class StudentsQueue extends Thread {
 			if (current_day >= _matriculation_days) {
 				break;
 			}
-			int matriculation_duration_per_day = _lambdas.get(_stats.dayName())
+			int matriculation_duration_per_day = _lambdas.get(_statService.dayName())
 					.size();
 			int matriculation_starting_time = StatsService.HOURS_IN_A_DAY
 					- matriculation_duration_per_day;
-			if (_stats.daytime() >= matriculation_starting_time
-					&& _stats.daytime() < matriculation_starting_time
+			if (_statService.daytime() >= matriculation_starting_time
+					&& _statService.daytime() < matriculation_starting_time
 							+ matriculation_duration_per_day) {
-				_stats.updateDaytime();
+				_statService.updateDaytime();
 				int students_left = _students.get(student_group).size();
 				if (students_left > 0) {
 					try {
 						long wait = (long) Math
 								.ceil(exponentialDistributionGenerator() * 1000
-										/ _stats.speed());
+										/ _configService.speed());
 						if (wait < _lesser_wait) {
 							_lesser_wait = wait;
 						}
@@ -147,7 +150,7 @@ public class StudentsQueue extends Thread {
 			}
 		}
 		while (!finished()) {
-			_stats.updateDaytime();
+			_statService.updateDaytime();
 		}
 		log("Max students in queue = " + _max_students_in_queue);
 		log("Lesser wait = " + _lesser_wait);
@@ -158,7 +161,7 @@ public class StudentsQueue extends Thread {
 	}
 
 	public boolean finished() {
-		if (_stats.day() >= _matriculation_days) {
+		if (_statService.day() >= _matriculation_days) {
 			return true;
 		}
 		return _queue.size() == 0 && !thereAreStudentsLeft();
@@ -175,7 +178,7 @@ public class StudentsQueue extends Thread {
 	public Student poll() {
 		Student s = _queue.poll();
 		if (s != null) {
-			_stats.decreaseStudentsCurrentlyMatriculating();
+			_statService.decreaseStudentsCurrentlyMatriculating();
 		}
 		return s;
 	}
@@ -186,7 +189,7 @@ public class StudentsQueue extends Thread {
 		if (_queue.size() > _max_students_in_queue) {
 			_max_students_in_queue = _queue.size();
 		}
-		_stats.increaseStudentsCurrentlyMatriculating();
+		_statService.increaseStudentsCurrentlyMatriculating();
 		return _queue.add(student);
 	}
 
@@ -203,11 +206,11 @@ public class StudentsQueue extends Thread {
 
 	private double exponentialDistributionGenerator() {
 		Random random = new Random();
-		int matriculation_duration_per_day = _lambdas.get(_stats.dayName())
+		int matriculation_duration_per_day = _lambdas.get(_statService.dayName())
 				.size();
-		double time = _lambdas.get(_stats.dayName())
+		double time = _lambdas.get(_statService.dayName())
 				.get(-(StatsService.HOURS_IN_A_DAY
-						- matriculation_duration_per_day - _stats.daytime()));
+						- matriculation_duration_per_day - _statService.daytime()));
 		double lambda = 1 / time;
 		return Math.log(1 - random.nextDouble()) / (-lambda);
 	}
@@ -215,18 +218,21 @@ public class StudentsQueue extends Thread {
 	@Component
 	public static class StudentsQueueInjector {
 		@Autowired
-		private StatsService stats;
+		private StatsService statService;
+		
+		@Autowired
+		private ConfigurationService configService;
 
 		@PostConstruct
 		public void postConstruct() {
-			StudentsQueue.createInstance(stats);
+			StudentsQueue.createInstance(statService, configService);
 		}
 	}
 
 	public void restoreStudentToPool(Student student) {
 		int group_number = 0;
 		if (_students_divided_in_groups) {
-			group_number = _stats.day();
+			group_number = _statService.day();
 		}
 		_students.get(group_number).add(student);
 	}

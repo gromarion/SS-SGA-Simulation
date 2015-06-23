@@ -6,17 +6,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
-import ar.edu.itba.it.ss.sga_simulator.web.beans.StatsMessage;
+import ar.edu.itba.it.ss.sga_simulator.service.StudentService;
+import ar.edu.itba.it.ss.sga_simulator.web.beans.Snapshot;
 
 @RestController
 public class StatsController {
 
 	@Autowired
 	private StatsService statsService;
+	@Autowired
+	private StudentService studentService;
 	
 	@RequestMapping(value = "/stats", method = RequestMethod.GET)
-	public StatsMessage stats() {
-		StatsMessage stats = new StatsMessage();
+	public Snapshot stats() {
+		Snapshot stats = new Snapshot();
+		stats.setUnmatriculatedAlumnsByPendingCourses(studentService.getUnmatriculatedAlumnsByPendingCourses());
+		stats.setMatriculatedAlumnsByPeningCourses(studentService.getMatriculatedAlumnsByPendingCourses());
 		stats.setTotalStudents(statsService.totalStudents());
 		stats.setAlumnsMatriculated(statsService.matriculatedStudents());
 		stats.setAlumnsNotMatriculated(statsService.notMatriculatedStudents());
@@ -24,6 +29,7 @@ public class StatsController {
 		stats.setHourOfDay(statsService.daytime());
 		stats.setCurrentlyMatriculating(statsService.studentsCurrentlyMatriculating());
 		stats.setTotalsServerTimeouts(statsService.timeouts());
+        stats.setSatisfiedStudentsAmount(statsService.satisfiedStudentsAmount());
 		return stats;
 	}
 }

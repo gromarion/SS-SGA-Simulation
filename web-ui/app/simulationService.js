@@ -2,7 +2,7 @@
 
 angular.module('sgaSimulator.services')
 
-    .factory('simulationService', ['$q', 'simulationStarter', 'simulationStats', function ($q, simulationStarter, simulationStats) {
+    .factory('simulationService', ['$q', 'simulationStarter', 'simulationStats', 'simulationConfig', function ($q, simulationStarter, simulationStats, simulationConfig) {
 
         var DAYS_AMOUNT = 7,
             stats = {
@@ -34,6 +34,9 @@ angular.module('sgaSimulator.services')
             stats.currentDay = newStats.dayOfWeek;
             stats.currentHour = newStats.hourOfDay;
             stats.totalsServerTimeouts = newStats.totalsServerTimeouts;
+            stats.matriculatedAlumnsByPeningCourses = newStats.matriculatedAlumnsByPeningCourses;
+            stats.unmatriculatedAlumnsByPendingCourses = newStats.unmatriculatedAlumnsByPendingCourses;
+            stats.satisfiedStudentsAmount = newStats.satisfiedStudentsAmount;
 
             return stats;
         }
@@ -57,6 +60,14 @@ angular.module('sgaSimulator.services')
 
             simulationHasFinished: function() {
                 return stats.totalStudents > 0 && stats.alumnsMatriculated == stats.totalStudents;
+            },
+
+            getConfiguration: function() {
+                return simulationConfig.get().$promise;
+            },
+
+            setConfiguration: function(config) {
+                return simulationConfig.save(config).$promise;
             },
 
             initStats: initStats

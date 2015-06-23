@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h3 class="modal-title">Configuración</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Criterio</label>
+            <div class="col-sm-6">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        {{formatCriteria(config.criteria)}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a ng-click="config.criteria = 'younger'">{{formatCriteria('younger')}}</a></li>
+                        <li><a ng-click="config.criteria = 'older'">{{formatCriteria('older')}}</a></li>
+                        <li><a ng-click="config.criteria = 'onschedule'">{{formatCriteria('onschedule')}}</a></li>
+                        <li><a ng-click="config.criteria = 'delayed'">{{formatCriteria('delayed')}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Días de matriculación</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" ng-model="config.matriculationDays">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Velocidad de la simulación</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" ng-model="config.speed">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-6">
+                <div class="checkbox">
+                    <label>
+                        <input ng-model="config.divideStudentsInGroups" type="checkbox"> Dividir estudiantes por grupos
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-6">
+                <div class="checkbox">
+                    <label>
+                        <input ng-model="config.logEnabled" type="checkbox"> Logs habilitado
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="submit()">Guardar</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancelar</button>
+</div>

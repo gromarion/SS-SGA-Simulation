@@ -74,7 +74,7 @@ button.primary-btn:focus {
   text-align: center;
   margin-top: 1px;
   padding-top: 30px;
-  height: 400px;
+  height: 250px;
   width: 100%;
   border-bottom: 1px solid black;
 }
@@ -82,7 +82,18 @@ button.primary-btn:focus {
   background-color: #ff3366;
   color: white;
   position: absolute;
-  top: 240px;
+  top: 165px;
+  left: -250px;
+  width: 215px;
+  height: 45px;
+  padding-top: 10px;
+  border-radius: 3px;
+}
+.simulator .students-graph .satisfied-students-reference {
+  background-color: #53b778;
+  color: white;
+  position: absolute;
+  top: 110px;
   left: -250px;
   width: 215px;
   height: 45px;
@@ -93,7 +104,7 @@ button.primary-btn:focus {
   background-color: transparent;
   color: #072f38;
   position: absolute;
-  top: 130px;
+  top: 0px;
   left: -250px;
   width: 215px;
   height: 45px;
@@ -107,7 +118,7 @@ button.primary-btn:focus {
   background-color: #53b778;
   color: white;
   position: absolute;
-  top: 185px;
+  top: 55px;
   left: -250px;
   width: 215px;
   height: 45px;
@@ -162,6 +173,36 @@ button.primary-btn:focus {
   transition: width 300ms ease-in-out, height 300ms ease-in-out;
   background-color: #f0ad4e;
 }
+#studentsDetailsGraph {
+  height: 170px;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 50px;
+}
+#studentsDetailsGraph #studentsUnmatriculatedGraph {
+  width: 45%;
+  display: inline-block;
+}
+#studentsDetailsGraph #arrowContainer {
+  width: 4%;
+  display: inline-block;
+  position: relative;
+}
+#studentsDetailsGraph #arrowContainer .arrow-right {
+  position: absolute;
+  top: -244px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-top: 40px solid transparent;
+  border-bottom: 40px solid transparent;
+  border-left: 40px solid #B9C0C2;
+}
+#studentsDetailsGraph #studentsMatriculatedGraph {
+  width: 45%;
+  display: inline-block;
+}
 html,
 body,
 .main-view {
@@ -213,5 +254,5 @@ html .home-main .home-top button,
 body .home-main .home-top button,
 .main-view .home-main .home-top button {
   margin-top: 12px;
-  display: inline-block;
+  display: block;
 }

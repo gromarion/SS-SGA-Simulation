@@ -10,4 +10,8 @@ angular.module('sgaSimulator.services')
 
     .factory('simulationStats', function ($resource) {
         return $resource(SIMULATION_API_BASE_URI + 'stats');
+    })
+
+    .factory('simulationConfig', function ($resource) {
+        return $resource(SIMULATION_API_BASE_URI + 'config');
     });

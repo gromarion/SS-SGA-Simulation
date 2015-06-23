@@ -3,11 +3,17 @@ package ar.edu.itba.it.ss.sga_simulator.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import ar.edu.itba.it.ss.sga_simulator.model.ConfigurationService;
 
 @Service
 public class StatsService {
 
+	@Autowired
+	private ConfigurationService _configService;
+	
 	private int _total_students;
 	private int _matriculated_students;
 	private int _not_matriculated_students;
@@ -21,9 +27,7 @@ public class StatsService {
 	private static final int MILLIS_IN_AN_HOUR = 3600000;
 	public static final int MILLIS_IN_A_MINUTE = 60000;
 	public static final int HOURS_IN_A_DAY = 24;
-	private int _speed;
 	private int _satisfied_students_amount;
-	private boolean _log_enabled;
 
 	public StatsService() {
 		_timeouts_per_day_per_hour = new HashMap<Integer, Map<Integer, Integer>>();
@@ -73,14 +77,6 @@ public class StatsService {
 		} else {
 			timeouts_in_a_day.put(hour, 1);
 		}
-	}
-
-	public void logEnabled(boolean value) {
-		_log_enabled = value;
-	}
-
-	public void speed(int speed) {
-		_speed = speed;
 	}
 
 	public void totalStudents(int total_students) {
@@ -155,7 +151,7 @@ public class StatsService {
 	}
 
 	private void log(String message) {
-		if (_log_enabled) {
+		if (_configService.logEnabled()) {
 			System.out.println(message);
 		}
 	}
@@ -190,12 +186,8 @@ public class StatsService {
 		}
 	}
 
-	public int speed() {
-		return _speed;
-	}
-
 	private long elapsedTime(long start) {
-		return (System.currentTimeMillis() - start) * _speed;
+		return (System.currentTimeMillis() - start) * _configService.speed();
 	}
 
 	public void printDuration() {

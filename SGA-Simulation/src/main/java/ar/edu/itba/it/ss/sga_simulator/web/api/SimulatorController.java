@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import ar.edu.itba.it.ss.sga_simulator.model.Carreer;
-import ar.edu.itba.it.ss.sga_simulator.model.CarreerParser;
 import ar.edu.itba.it.ss.sga_simulator.model.Server;
-import ar.edu.itba.it.ss.sga_simulator.model.SimulationConfiguration;
+import ar.edu.itba.it.ss.sga_simulator.model.ConfigurationService;
 import ar.edu.itba.it.ss.sga_simulator.model.Student;
 import ar.edu.itba.it.ss.sga_simulator.model.StudentsQueue;
+import ar.edu.itba.it.ss.sga_simulator.service.CarrerService;
 import ar.edu.itba.it.ss.sga_simulator.service.MatriculationService;
 import ar.edu.itba.it.ss.sga_simulator.service.StatsService;
+import ar.edu.itba.it.ss.sga_simulator.service.StudentService;
 
 @RestController
 public class SimulatorController {
@@ -25,30 +26,32 @@ public class SimulatorController {
 	@Autowired
 	private MatriculationService _matriculationService;
 	@Autowired
-	private StatsService _stats;
-
+	private StatsService _statsService;
+	@Autowired
+	private CarrerService _carrersService;
+	@Autowired
+	private StudentService _studentService;
+	@Autowired
+	private ConfigurationService _configService;
+	
 	@RequestMapping(value = "/start", method = RequestMethod.POST)
 	public void start() {
-		Carreer carreer = CarreerParser.parse("SoftwareEngineering.xml");
-		List<Student> students = Student.getFactory().create(carreer);
+		Carreer carreer = _carrersService.fetch("SoftwareEngineering.xml");
+		List<Student> students = _studentService.createForCarreer(carreer);
 		_matriculationService.prepareDesiredCourses(carreer, students);
-		SimulationConfiguration sc = new SimulationConfiguration(
-				"SimulationConfiguration.xml");
 		List<List<Student>> divided_students = null;
-		if (sc.divideStudentsInGroups()) {
+		if (_configService.divideStudentsInGroups()) {
 			 divided_students = divideStudentsByCriteria(
-					students, sc.criteria(), sc.matriculationDays());			
+					students, _configService.criteria(), _configService.matriculationDays());			
 		} else {
 			divided_students = new ArrayList<List<Student>>();
 			divided_students.add(students);
 		}
-		_stats.speed(sc.speed());
-		_stats.totalStudents(students.size());
-		_stats.logEnabled(sc.logEnabled());
+		_statsService.totalStudents(students.size());
 		StudentsQueue queue = StudentsQueue.getInstance();
 		queue.initialize("QueueConfiguration.xml", divided_students,
-				sc.matriculationDays(), sc.divideStudentsInGroups());
-		new Server(_stats, "ServerConfiguration.xml", sc.speed()).start();
+				_configService.matriculationDays(), _configService.divideStudentsInGroups());
+		new Server(_statsService, "ServerConfiguration.xml", _configService.speed()).start();
 		queue.start();
 	}
 
