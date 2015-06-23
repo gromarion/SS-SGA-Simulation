@@ -94,8 +94,7 @@ angular.module('sgaSimulator.controllers')
                 backgroundColor: '#FAFAFA'
             },
             title: {
-                text: 'Alumnos sin matricular',
-                x: -20 //center
+                text: 'Alumnos sin matricular'
             },
             xAxis: {
                 title: {
@@ -106,6 +105,7 @@ angular.module('sgaSimulator.controllers')
                 title: {
                     text: 'Cant. de alumnos'
                 },
+                min : 0,
                 plotLines: [{
                     value: 0,
                     width: 1,
@@ -126,8 +126,7 @@ angular.module('sgaSimulator.controllers')
                 backgroundColor: '#FAFAFA'
             },
             title: {
-                text: 'Alumnos matriculados',
-                x: -20 //center
+                text: 'Alumnos matriculados'
             },
             xAxis: {
                 title: {
@@ -138,6 +137,7 @@ angular.module('sgaSimulator.controllers')
                 title: {
                     text: 'Cant. de alumnos'
                 },
+                min : 0,
                 plotLines: [{
                     value: 0,
                     width: 1,
